@@ -1,19 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 
-export const MainScreen = (props) => {
-  const focusState = useIsFocused();
-
-  // if (focusState) {
-  //   props.screenProps.focused = true;
-  // }
-
+export const MainScreen = () => {
   return (
     <View style={styles.center}>
-      <Text style={{ color: "#fff" }}>
-        {focusState ? "Focused" : "Not Focused"}
-      </Text>
+      <Text style={{ color: "#fff" }}>Main Screen</Text>
     </View>
   );
 };
