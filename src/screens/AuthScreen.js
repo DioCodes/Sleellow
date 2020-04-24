@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SecurityImage } from "../../assets/images/SecurityImage";
-// import SvgUri from "expo-svg-uri";
 
 export const AuthScreen = ({ navigation }) => {
   return (
@@ -20,11 +19,6 @@ export const AuthScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.regContent}>
-        {/* <Image
-          width={250}
-          height={300}
-          source={require("../../assets/images/security-icon.png")}
-        /> */}
         <SecurityImage />
         <View style={styles.contentTextWrapper}>
           <Text style={styles.contentText}>

@@ -3,24 +3,24 @@
     "name": "Sleellow",
     "slug": "sleep-breath-app",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.2",
+    "version": "0.0.5",
     "orientation": "portrait",
-    "icon": "./assets/images/icon-1.png",
+    "icon": "./assets/splash.png",
     "splash": {
-      "image": "./assets/images/icon-1.png",
+      "image": "./assets/icon.png",
       "resizemode": "contain",
       "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["assets/images/*"],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.yourcompany.yourappname",
-      "buildNumber": "0.0.2",
+      "bundleIdentifier": "com.diocode.sleellow",
+      "buildNumber": "0.0.5",
       "supportsTablet": true
     },
-    "description": "Sleep Tracker App",
-    "githubUrl": "https://github.com/DioCode/react-native-sleep-app"
+    "description": "Sleellow - sleep & breath",
+    "githubUrl": "https://github.com/DioCode/Sleellow"
   }
 }

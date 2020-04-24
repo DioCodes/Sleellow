@@ -1,6 +1,6 @@
-//fonts & images
 import * as Font from "expo-font";
 
+//preload fonts & SVG images
 export async function bootstrap() {
   await Font.loadAsync({
     "norms-bold": require("../assets/fonts/TT-Norms-Pro-Bold.otf"),
@@ -17,5 +17,12 @@ export async function bootstrap() {
       }
     });
   }
-  cacheImages([require("../assets/images/SecurityImage")]);
+  cacheImages([
+    require("../assets/images/SecurityImage"),
+    require("../assets/images/StatsImage"),
+    require("../assets/images/NotInSyncIcon"),
+    require("../assets/images/InSyncIcon"),
+    require("../assets/images/AppIcon"),
+    require("../assets/images/BreathImage"),
+  ]);
 }

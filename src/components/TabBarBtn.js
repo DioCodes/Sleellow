@@ -20,8 +20,8 @@ export const TabBarBtn = ({ focused, route }) => {
   } else if (route.name === "main") {
     iconName = "main";
     focusSettings();
-  } else if (route.name === "profile") {
-    iconName = "profile";
+  } else if (route.name === "you") {
+    iconName = "you";
     focusSettings();
   }
 

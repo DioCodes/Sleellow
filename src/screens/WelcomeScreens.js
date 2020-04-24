@@ -1,20 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
+import { AppIcon } from "../../assets/images/AppIcon";
+import { StatsImage } from "../../assets/images/StatsImage";
+import { BreathImage } from "../../assets/images/BreathImage";
 
 export const WelcomeScreens = ({ navigation }) => {
   const onDoneHandler = () => {
     navigation.replace("Main");
   };
 
+  const Img = ({ children }) => {
+    return <View style={styles.image}>{children}</View>;
+  };
+
   const renderSliderItem = ({ item }) => {
     return (
       <View style={styles.wrapper}>
-        <Image
-          style={{ ...styles.image, ...item.imageSize }}
-          source={item.image}
-        />
+        <Img>{item.image}</Img>
         <View style={styles.textWrapper}>
+          <Text style={{ ...styles.textHeader }}>{item.header}</Text>
           <Text style={styles.text}>{item.text}</Text>
         </View>
       </View>
@@ -52,26 +57,37 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 100,
     backgroundColor: "#000",
   },
   image: {
-    width: 200,
-    height: 200,
+    position: "absolute",
+    top: Dimensions.get("window").height > 800 ? "30%" : "27%",
   },
   text: {
     fontFamily: "norms-regular",
-    fontSize: 22,
-    color: "white",
+    fontSize: 18,
+    color: "rgba(255, 255, 255, .7)",
     textAlign: "center",
-    paddingVertical: 30,
+    paddingVertical: 5,
+    paddingHorizontal: 23,
+    // backgroundColor: "red",
+  },
+  textHeader: {
+    position: "relative",
+    top: 0,
+    fontSize: 25,
+    fontFamily: "norms-medium",
+    opacity: 1,
+    color: "#fff",
   },
   textWrapper: {
-    height: "5%",
-    justifyContent: "flex-end",
+    marginTop: 15,
+    justifyContent: "flex-start",
     alignItems: "center",
+    position: "relative",
     position: "absolute",
-    bottom: "40%",
+    bottom: Dimensions.get("window").height > 800 ? "31%" : "26%",
+    height: 110,
   },
   buttonContainer: {
     width: 70,
@@ -94,21 +110,22 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key: "s1",
-    text: "Best rest order.",
-    image: require("../../assets/images/pillow.png"),
-    imageSize: {
-      width: 200,
-      height: 215,
-    },
+    header: "Welcome!",
+    text: "I'm Sleellow! Your assistant who will help you improve your sleep.",
+    image: <AppIcon />,
   },
   {
     key: "s2",
-    text: "Tracking, btreathing and statistics",
-    image: require("../../assets/images/stats.png"),
+    header: "How it works?",
+    text:
+      "Sleellow tracks your sleep time and help you sleep better and go to bed on time!",
+    image: <StatsImage />,
   },
   {
     key: "s3",
-    text: "About important things.",
-    image: require("../../assets/images/breath.png"),
+    header: "About important things.",
+    text:
+      "To make it easier for you to fall asleep & feels cheerful in the morning, Sleellow offers to you good breathing practices.",
+    image: <BreathImage />,
   },
 ];
