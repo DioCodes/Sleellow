@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppLoading } from "expo";
-import { StatusBar } from "react-native";
+import { StatusBar, AsyncStorage } from "react-native";
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,6 +10,7 @@ import { MainScreen } from "../screens/MainScreen";
 import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import { StatsScreen } from "../screens/StatsScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
+import { LoginScreen } from "../screens/LoginScreen";
 import { AuthScreen } from "../screens/AuthScreen";
 import { TabBarBtn } from "../components/TabBarBtn";
 import { loginUser } from "../store/actions/userAction";
@@ -19,15 +20,14 @@ import { loginUser } from "../store/actions/userAction";
 export const AppNavigation = ({ navigation }) => {
   const [isLogged, setIsLogged] = useState(false);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  // const login = () => {
-  useEffect(() => {
-    dispatch(loginUser());
-  }, [dispatch]);
-  // };
-  const user = useSelector((state) => state.user.userData);
-  console.log(user);
+  // useEffect(() => {
+  //   dispatch(loginUser());
+  // }, [dispatch]);
+
+  // const user = useSelector((state) => state.user.userData);
+  // console.log(user.firstEnter);
 
   // if (!isLogged) {
   //   return (
@@ -45,7 +45,7 @@ export const AppNavigation = ({ navigation }) => {
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
-  const tabPress = ({ navigation }) => {
+  const tabPress = () => {
     return {
       tabPress: () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -89,13 +89,13 @@ export const AppNavigation = ({ navigation }) => {
     <NavigationContainer>
       <StatusBar barStyle="light-content" />
       <Stack.Navigator
-        initialRouteName={isLogged ? "Main" : "Welcome"}
-        // initialRouteName="Registration"
+        // initialRouteName={isLogged ? "Main" : "Welcome"}
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Welcome" component={WelcomeScreens} />
+        {/* <Stack.Screen name="Welcome" component={WelcomeScreens} /> */}
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="Auth" component={AuthScreen} />
       </Stack.Navigator>

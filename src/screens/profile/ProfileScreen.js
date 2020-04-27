@@ -9,6 +9,7 @@ export const ProfileScreen = ({ navigation }) => {
     <View style={styles.center}>
       <View style={styles.top}>
         <UserLevel />
+
         <View style={styles.topButtons}>
           <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
             <View style={styles.premium}>

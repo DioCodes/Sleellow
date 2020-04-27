@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { AppIcon } from "../../assets/images/AppIcon";
 import { StatsImage } from "../../assets/images/StatsImage";
 import { BreathImage } from "../../assets/images/BreathImage";
 
+import * as firebase from "firebase";
+
 export const WelcomeScreens = ({ navigation }) => {
   const onDoneHandler = () => {
-    navigation.replace("Main");
+    navigation.replace("Login");
   };
 
   const Img = ({ children }) => {

@@ -1,3 +1,4 @@
+import { Image } from "react-native";
 import * as Font from "expo-font";
 
 //preload fonts & SVG images
@@ -12,8 +13,6 @@ export async function bootstrap() {
     return images.map((image) => {
       if (typeof image === "string") {
         return Image.prefetch(image);
-      } else {
-        return Asset.fromModule(image).downloadAsync();
       }
     });
   }
