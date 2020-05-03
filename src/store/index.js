@@ -1,8 +1,10 @@
-import { createStore, combineReducers } from "redux";
-import { userReducer } from "./reducers/userReducer";
+import { syncReducer } from "./reducers/syncReducer";
+import { combineReducers } from "redux";
+import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer } from "react-redux-firebase";
 
-const rootReducer = combineReducers({
-  user: userReducer,
+export const rootReducer = combineReducers({
+  sync: syncReducer,
+  firestore: firestoreReducer,
+  firebase: firebaseReducer,
 });
-
-export default createStore(rootReducer);

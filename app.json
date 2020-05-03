@@ -3,7 +3,7 @@
     "name": "Sleellow",
     "slug": "sleep-breath-app",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.7",
+    "version": "0.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.diocode.sleellow",
-      "buildNumber": "0.0.7",
+      "buildNumber": "0.0.8",
       "supportsTablet": true
     },
     "description": "Sleellow - sleep & breath",

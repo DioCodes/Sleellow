@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions, AsyncStorage } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { AppIcon } from "../../assets/images/AppIcon";
 import { StatsImage } from "../../assets/images/StatsImage";
 import { BreathImage } from "../../assets/images/BreathImage";
 
-import * as firebase from "firebase";
-
 export const WelcomeScreens = ({ navigation }) => {
-  const onDoneHandler = () => {
-    navigation.replace("Login");
+  let onDoneHandler = async () => {
+    try {
+      await AsyncStorage.setItem("@WelcomeScreen:key", "firstEnter");
+      navigation.replace("Main");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const Img = ({ children }) => {
@@ -72,7 +75,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 5,
     paddingHorizontal: 23,
-    // backgroundColor: "red",
   },
   textHeader: {
     position: "relative",

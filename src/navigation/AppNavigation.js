@@ -1,46 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppLoading } from "expo";
 import { StatusBar, AsyncStorage } from "react-native";
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
 import { MainScreen } from "../screens/MainScreen";
-import { ProfileScreen } from "../screens/profile/ProfileScreen";
+// import { ProfileScreen } from "../screens/profile/ProfileScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import AuthScreen from "../screens/profile/AuthScreen";
 import { StatsScreen } from "../screens/StatsScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
-import { LoginScreen } from "../screens/LoginScreen";
-import { AuthScreen } from "../screens/AuthScreen";
 import { TabBarBtn } from "../components/TabBarBtn";
-import { loginUser } from "../store/actions/userAction";
 
 //// сделай отдельный компонент из табБара
 
 export const AppNavigation = ({ navigation }) => {
-  const [isLogged, setIsLogged] = useState(false);
+  const [screen, setScreen] = useState("Welcome");
 
-  // const dispatch = useDispatch();
+  useEffect(() => {
+    getScreen();
+  });
 
-  // useEffect(() => {
-  //   dispatch(loginUser());
-  // }, [dispatch]);
-
-  // const user = useSelector((state) => state.user.userData);
-  // console.log(user.firstEnter);
-
-  // if (!isLogged) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={login}
-  //       onFinish={() => {
-  //         setIsLogged(true);
-  //         console.log(user);
-  //       }}
-  //       onError={(err) => console.log(err)}
-  //     />
-  //   );
-  // }
+  let getScreen = async () => {
+    let value = await AsyncStorage.getItem("@WelcomeScreen:key");
+    try {
+      if (value == "firstEnter") {
+        console.log(value);
+        setScreen("Main");
+      } else {
+        setScreen("Welcome");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -57,7 +50,6 @@ export const AppNavigation = ({ navigation }) => {
     return (
       <Tab.Navigator
         initialRouteName="main"
-        // lazy={false}
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
             return <TabBarBtn focused={focused} route={route} />;
@@ -85,20 +77,40 @@ export const AppNavigation = ({ navigation }) => {
     );
   };
 
-  return (
-    <NavigationContainer>
-      <StatusBar barStyle="light-content" />
+  const WelcomeStack = () => {
+    return (
       <Stack.Navigator
-        // initialRouteName={isLogged ? "Main" : "Welcome"}
+        initialRouteName="Welcome"
         screenOptions={{
           headerShown: false,
         }}
       >
-        {/* <Stack.Screen name="Welcome" component={WelcomeScreens} /> */}
-        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        <Stack.Screen name="Welcome" component={WelcomeScreens} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="Auth" component={AuthScreen} />
       </Stack.Navigator>
+    );
+  };
+
+  const MainStack = () => {
+    return (
+      <Stack.Navigator
+        initialRouteName="Main"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Welcome" component={WelcomeScreens} />
+        <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen name="Auth" component={AuthScreen} />
+      </Stack.Navigator>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <StatusBar barStyle="light-content" />
+      {screen == "Main" ? <MainStack /> : <WelcomeStack />}
     </NavigationContainer>
   );
 };

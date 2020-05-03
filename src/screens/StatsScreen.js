@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
+// import { useIsFocused } from "@react-navigation/native";
 
 export const StatsScreen = ({ navigation }) => {
   // const focused = useIsFocused();
