@@ -1,3 +1,3 @@
 export const USER_DATA = {
-  levelPoints: 0,
+  levelPoints: 3,
 };

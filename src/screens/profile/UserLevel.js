@@ -1,27 +1,37 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  AsyncStorage,
+  Animated,
+} from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+
 import { USER_DATA } from "../../userData";
+import { UserIcon } from "../../../assets/images/UserIcon";
+import { t } from "../../../assets/lang/index";
 
 export const UserLevel = () => {
-  let levelPoints = USER_DATA.levelPoints;
-  let levelName = "beginner";
-  let maxPoints = 7;
   const isFocused = useIsFocused();
+  let levelPoints = USER_DATA.levelPoints;
+  let levelName = t("beginner");
+  let maxPoints = 7;
 
   if (levelPoints >= 7 && levelPoints < 14) {
     maxPoints = 14;
-    levelName = "novice";
+    levelName = t("novice");
   } else if (levelPoints >= 14 && levelPoints < 30) {
     maxPoints = 30;
-    levelName = "intermediate";
+    levelName = t("intermediate");
   } else if (levelPoints >= 30 && levelPoints < 90) {
     maxPoints = 90;
-    levelName = "professional";
+    levelName = t("professional");
   } else if (levelPoints >= 90 && levelPoints < 180) {
     maxPoints = 180;
-    levelName = "expert";
+    levelName = t("expert");
   } else if (levelPoints >= 180 && levelPoints < 240) {
     maxPoints = 240;
     levelName = "master";
@@ -36,41 +46,30 @@ export const UserLevel = () => {
     levelName = "god";
   }
 
+  useEffect(() => {
+    // Alert.alert(`Ура! 🎉 Теперь вы: \n "${levelName}"  `);
+    // привяжи алерт к дате и времени!
+  });
+
   const UserProgress = () => (
     <AnimatedCircularProgress
-      size={130}
+      size={145}
       width={15}
       fill={(100 / maxPoints) * levelPoints}
-      tintColor="#fff"
+      tintColor="rgba(255, 255, 255, 1)"
       backgroundColor="rgba(255,255,255, .1)"
-      arcSweepAngle={183}
+      arcSweepAngle={180}
       lineCap="round"
       rotation={45}
       duration={1000}
     >
-      {() => <Text style={{ ...styles.text, ...styles.header }}>you</Text>}
-    </AnimatedCircularProgress>
-  );
-
-  const UserUnFocusProgress = () => (
-    <AnimatedCircularProgress
-      size={130}
-      width={15}
-      fill={0}
-      tintColor="#fff"
-      backgroundColor="rgba(255,255,255, .15)"
-      arcSweepAngle={183}
-      lineCap="round"
-      rotation={45}
-      duration={800}
-    >
-      {() => <Text style={{ ...styles.text, ...styles.header }}>you</Text>}
+      {() => <UserIcon />}
     </AnimatedCircularProgress>
   );
 
   return (
-    <View style={styles.levelContainer}>
-      {isFocused ? <UserProgress /> : <UserUnFocusProgress />}
+    <Animated.View style={styles.levelContainer}>
+      <UserProgress />
 
       <View style={styles.levelNameWrapper}>
         <Text style={styles.levelText}>{levelName} </Text>
@@ -78,26 +77,21 @@ export const UserLevel = () => {
           {levelPoints}/{maxPoints}{" "}
         </Text>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    color: "#fff",
-    fontFamily: "norms-bold",
-    fontSize: 40,
-  },
   levelContainer: {
-    height: 165,
-    justifyContent: "space-between",
-    alignItems: "center",
+    height: 200,
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
   levelNameWrapper: {
-    position: "absolute",
-    bottom: -20,
+    paddingLeft: 20,
+    paddingTop: 5,
+    flex: 1,
     flexDirection: "column",
-    width: 110,
   },
   levelText: {
     color: "#fff",

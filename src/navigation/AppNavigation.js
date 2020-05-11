@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar, AsyncStorage } from "react-native";
-import { NavigationContainer, TabActions } from "@react-navigation/native";
+import { View, StatusBar, AsyncStorage } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
 import { MainScreen } from "../screens/MainScreen";
-// import { ProfileScreen } from "../screens/profile/ProfileScreen";
-import ProfileScreen from "../screens/profile/ProfileScreen";
-import AuthScreen from "../screens/profile/AuthScreen";
-import { StatsScreen } from "../screens/StatsScreen";
+import { ProfileScreen } from "../screens/profile/ProfileScreen";
+
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
 
@@ -70,7 +68,6 @@ export const AppNavigation = ({ navigation }) => {
           showLabel: false,
         }}
       >
-        <Tab.Screen name="stats" component={StatsScreen} listeners={tabPress} />
         <Tab.Screen name="main" component={MainScreen} listeners={tabPress} />
         <Tab.Screen name="you" component={ProfileScreen} listeners={tabPress} />
       </Tab.Navigator>
@@ -87,7 +84,6 @@ export const AppNavigation = ({ navigation }) => {
       >
         <Stack.Screen name="Welcome" component={WelcomeScreens} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
-        <Stack.Screen name="Auth" component={AuthScreen} />
       </Stack.Navigator>
     );
   };
@@ -102,7 +98,6 @@ export const AppNavigation = ({ navigation }) => {
       >
         <Stack.Screen name="Welcome" component={WelcomeScreens} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
-        <Stack.Screen name="Auth" component={AuthScreen} />
       </Stack.Navigator>
     );
   };
@@ -111,6 +106,7 @@ export const AppNavigation = ({ navigation }) => {
     <NavigationContainer>
       <StatusBar barStyle="light-content" />
       {screen == "Main" ? <MainStack /> : <WelcomeStack />}
+      {/* {screen == "Main" ? <WelcomeStack /> : <WelcomeStack />} */}
     </NavigationContainer>
   );
 };

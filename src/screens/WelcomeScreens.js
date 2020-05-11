@@ -4,6 +4,7 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import { AppIcon } from "../../assets/images/AppIcon";
 import { StatsImage } from "../../assets/images/StatsImage";
 import { BreathImage } from "../../assets/images/BreathImage";
+import { t } from "../../assets/lang/index";
 
 export const WelcomeScreens = ({ navigation }) => {
   let onDoneHandler = async () => {
@@ -47,12 +48,8 @@ export const WelcomeScreens = ({ navigation }) => {
       showSkipButton={true}
       renderNextButton={() => renderSliderButton("next")}
       renderDoneButton={() => renderSliderButton("done")}
-      renderSkipButton={() => renderSliderButton("skip")}
-      dotStyle={{
-        ...styles.dot,
-        backgroundColor: "rgba(255, 255, 255, .2)",
-      }}
-      activeDotStyle={styles.dot}
+      dotStyle={styles.dot}
+      activeDotStyle={{ ...styles.dot, ...styles.activeDot }}
     />
   );
 };
@@ -66,7 +63,7 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    top: Dimensions.get("window").height > 800 ? "30%" : "27%",
+    top: Dimensions.get("window").height > 800 ? "29%" : "30%",
   },
   text: {
     fontFamily: "norms-regular",
@@ -105,31 +102,32 @@ const styles = StyleSheet.create({
     fontFamily: "norms-medium",
   },
   dot: {
-    backgroundColor: "white",
     width: 30,
     height: 3,
+    backgroundColor: "rgba(255, 255, 255, .2)",
+  },
+  activeDot: {
+    backgroundColor: "#fff",
   },
 });
 
 const slides = [
   {
     key: "s1",
-    header: "Welcome!",
-    text: "I'm Sleellow! Your assistant who will help you improve your sleep.",
+    header: t("welcome_one_header"),
+    text: t("welcome_one_text"),
     image: <AppIcon />,
   },
   {
     key: "s2",
-    header: "How it works?",
-    text:
-      "Sleellow tracks your sleep time and help you sleep better and go to bed on time!",
+    header: t("welcome_two_header"),
+    text: t("welcome_two_text"),
     image: <StatsImage />,
   },
   {
     key: "s3",
-    header: "About important things.",
-    text:
-      "To make it easier for you to fall asleep & feels cheerful in the morning, Sleellow offers to you good breathing practices.",
+    header: t("welcome_three_header"),
+    text: t("welcome_three_text"),
     image: <BreathImage />,
   },
 ];

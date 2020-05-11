@@ -15,10 +15,11 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "dark",
     "ios": {
       "bundleIdentifier": "com.diocode.sleellow",
       "buildNumber": "0.0.8",
-      "supportsTablet": true
+      "userInterfaceStyle": "dark"
     },
     "description": "Sleellow - sleep & breath",
     "githubUrl": "https://github.com/DioCode/Sleellow"
