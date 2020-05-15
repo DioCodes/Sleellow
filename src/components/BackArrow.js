@@ -24,7 +24,7 @@ export const BackArrow = ({ nav }) => (
 const styles = StyleSheet.create({
   backArrow: {
     position: "absolute",
-    top: "7%",
+    top: "3%",
     left: "5%",
   },
 });

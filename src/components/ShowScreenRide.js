@@ -59,11 +59,9 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     backgroundColor: "#000",
-    paddingTop: "10%",
+    // paddingTop: "10%",
   },
   screenContainer: {
     flex: 1,
-    height: "100%",
-    width: "100%",
   },
 });

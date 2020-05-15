@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AppLoading } from "expo";
-// import firebase from "firebase/app";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import * as Haptics from "expo-haptics";
 import { UserLevel } from "./UserLevel";
 import { UserIcon } from "../../../assets/images/UserIcon";
@@ -18,6 +18,8 @@ export const ProfileScreen = () => {
   );
 };
 
+const windowHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
   header: {
     color: "#fff",
@@ -25,15 +27,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   top: {
-    width: "100%",
-    paddingHorizontal: "2%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    paddingHorizontal: 20,
+    // paddingTop: 20,
+    paddingTop: windowHeight > 800 ? "15%" : "10%",
   },
   userIcon: {
     width: 100,
-    marginHorizontal: 20,
-    marginTop: 20,
   },
 });

@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-export const Container = ({ children, header }) => {
-  const ContainerHeader = () => {
-    return <Text style={styles.header}>{header}</Text>;
-  };
+export const Container = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={styles.mainContainer}
       activeOpacity={0.9}
-      onPress={() => {}}
+      onPress={onPress}
     >
-      <ContainerHeader />
-      <View>{children}</View>
+      <Text style={styles.header}>Find time to fall asleep</Text>
+      <Ionicons name="ios-arrow-forward" color="rgba(0, 0, 0, .2)" size={30} />
     </TouchableOpacity>
   );
 };
@@ -20,11 +18,14 @@ export const Container = ({ children, header }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
-    height: "25%",
-    backgroundColor: "rgba(255, 255, 255, 1)",
+    backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     margin: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   header: {

@@ -9,6 +9,7 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
+import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
 
 //// сделай отдельный компонент из табБара
 
@@ -62,8 +63,8 @@ export const AppNavigation = ({ navigation }) => {
             alignItems: "center",
             paddingRight: "5%",
             backgroundColor: "black",
-            borderTopColor: "rgba(255, 255, 255, 0.35)",
-            borderTopWidth: 0.5,
+            borderTopColor: "rgba(255, 255, 255, .25)",
+            borderTopWidth: 0.25,
           },
           showLabel: false,
         }}
@@ -84,6 +85,7 @@ export const AppNavigation = ({ navigation }) => {
       >
         <Stack.Screen name="Welcome" component={WelcomeScreens} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
       </Stack.Navigator>
     );
   };
@@ -93,11 +95,24 @@ export const AppNavigation = ({ navigation }) => {
       <Stack.Navigator
         initialRouteName="Main"
         screenOptions={{
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: "#000",
+            shadowColor: "transparent",
+            // shadowColor: "#fff",
+            elevation: 0,
+          },
+          headerBackTitle: "Back",
+          headerTitle: "",
+          headerTintColor: "#fff",
         }}
       >
         <Stack.Screen name="Welcome" component={WelcomeScreens} />
-        <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Main"
+          component={MainTabNavigator}
+        />
+        <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
       </Stack.Navigator>
     );
   };

@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { ShowScreenRide } from "../components/ShowScreenRide";
 import { Container } from "../components/Container";
 
-export const MainScreen = () => {
+export const MainScreen = ({ navigation }) => {
   return (
     <ShowScreenRide>
       <View style={styles.main}>
-        <Container header="Find Sleep Time" />
+        <Container onPress={() => navigation.navigate("FindTime")} />
       </View>
     </ShowScreenRide>
   );
 };
+
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   main: {
@@ -19,6 +21,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: windowHeight > 800 ? "15%" : "10%",
   },
 });
