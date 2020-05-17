@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   Animated,
   Alert,
+  Dimensions,
 } from "react-native";
-import { ShowScreenRide } from "../components/ShowScreenRide";
 import { StyledButton } from "../components/StyledButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
+import theme from "../theme";
 
 export const FindSleepTimeScreen = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -47,9 +48,8 @@ export const FindSleepTimeScreen = ({ navigation }) => {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
           {res1} <Text style={styles.textTimeOr}>or</Text> {res2}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res3}
-          {"\n"}
-          <Text style={styles.textTimeOr}>or</Text> {res4}{" "}
+          <Text style={styles.textTimeOr}>or</Text> {res3}{" "}
+          <Text style={styles.textTimeOr}>or</Text> {"\n"} {res4}{" "}
           <Text style={styles.textTimeOr}>or</Text> {res5}{" "}
           <Text style={styles.textTimeOr}>or</Text> {res6}
         </Text>
@@ -57,8 +57,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     } else if ((res1, res2, res3, res4)) {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
-          {res1} <Text style={styles.textTimeOr}>or</Text> {res2}
-          {"\n"}
+          {res1} <Text style={styles.textTimeOr}>or</Text> {res2}{" "}
           <Text style={styles.textTimeOr}>or</Text> {res3}{" "}
           <Text style={styles.textTimeOr}>or</Text> {res4}
         </Text>
@@ -69,7 +68,6 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         style={{
           alignItems: "center",
           justifyContent: "center",
-          paddingHorizontal: 10,
         }}
       >
         {returnContent}
@@ -254,11 +252,13 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         style={{ ...styles.container, height: changeContainerHeight }}
       >
         <Animated.View style={{ ...styles.inContainer, opacity: showTime }}>
-          <Text style={styles.text}>Time to fall asleep:</Text>
+          <Text style={{ ...styles.text, opacity: 0.6 }}>
+            Time to fall asleep:
+          </Text>
           <View>{timeToFallAsleep}</View>
           <StyledButton
             onPress={() => onBackHandler()}
-            name={<Ionicons name="ios-arrow-back" color="#fff" size={17} />}
+            name={<Ionicons name="ios-arrow-back" color="#fff" size={14} />}
           />
         </Animated.View>
       </Animated.View>
@@ -296,11 +296,11 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         <Animated.View
           style={{ ...styles.inContainer, opacity: showSecondTime }}
         >
-          <Text style={styles.text}>Time to wake up:</Text>
+          <Text style={{ ...styles.text, opacity: 0.6 }}>Time to wake up:</Text>
           <View>{timeToWakeUp}</View>
           <StyledButton
             onPress={() => onBackSleepNowHandler()}
-            name={<Ionicons name="ios-arrow-back" color="#fff" size={17} />}
+            name={<Ionicons name="ios-arrow-back" color="#fff" size={14} />}
           />
         </Animated.View>
       </Animated.View>
@@ -308,40 +308,39 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   };
 
   return (
-    <ShowScreenRide>
-      <View style={styles.main}>
-        {showTimeToSleep ? <ShowTime /> : <ShowCalc />}
-        {showTimeToWakeUp ? <ShowSleepNowTime /> : <SleepNow />}
+    <View style={styles.main}>
+      {showTimeToSleep ? <ShowTime /> : <ShowCalc />}
+      {showTimeToWakeUp ? <ShowSleepNowTime /> : <SleepNow />}
 
-        <DateTimePickerModal
-          headerTextIOS="Choose a time to wake up"
-          mode="time"
-          isVisible={isDatePickerVisible}
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-          isDarkModeEnabled={true}
-          date={pickerDate}
-          cancelTextIOS="Exit"
-          is24Hour={false}
-        />
-      </View>
-    </ShowScreenRide>
+      <DateTimePickerModal
+        headerTextIOS="Choose a time to wake up"
+        mode="time"
+        isVisible={isDatePickerVisible}
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        isDarkModeEnabled={true}
+        date={pickerDate}
+        cancelTextIOS="Exit"
+        is24Hour={false}
+      />
+    </View>
   );
 };
+
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
+    backgroundColor: theme.PRIMARY_COLOR,
+    // backgroundColor: "#000",
   },
   container: {
-    borderColor: "#000",
-    backgroundColor: "#fff",
-    borderWidth: 1,
+    backgroundColor: theme.SECONDARY_COLOR,
     borderRadius: 10,
-    width: "75%",
-    height: 150,
+    width: windowHeight > 800 ? "85%" : "80%",
     paddingVertical: 10,
     paddingHorizontal: 10,
     marginVertical: 10,
@@ -353,24 +352,27 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   text: {
-    color: "#000",
+    color: theme.PRIMARY_COLOR,
     fontFamily: "norms-medium",
-    fontSize: 16,
+    fontSize: 18,
     textAlign: "center",
   },
   textTime: {
+    opacity: 1,
     fontSize: 20,
+    color: theme.TERTIARY_COLOR,
     fontFamily: "norms-bold",
-    textDecorationLine: "underline",
+    // textDecorationLine: "underline",
   },
   textTimeAsleep: {
-    color: "#000",
+    color: theme.TERTIARY_COLOR,
     fontSize: 20,
     textAlign: "center",
     fontFamily: "norms-bold",
     lineHeight: 25,
   },
   textTimeOr: {
-    opacity: 0.35,
+    opacity: 0.25,
+    fontFamily: "norms-regular",
   },
 });

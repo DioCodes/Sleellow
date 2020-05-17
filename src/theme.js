@@ -1,0 +1,6 @@
+export default {
+  PRIMARY_COLOR: "#0C0F12",
+  SECONDARY_COLOR: "#fff",
+  TERTIARY_COLOR: "#5953F5",
+  QUATERNARY_COLOR: "",
+};

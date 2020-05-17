@@ -10,6 +10,7 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
 import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
+import theme from "../theme";
 
 //// сделай отдельный компонент из табБара
 
@@ -62,8 +63,8 @@ export const AppNavigation = ({ navigation }) => {
           style: {
             alignItems: "center",
             paddingRight: "5%",
-            backgroundColor: "black",
-            borderTopColor: "rgba(255, 255, 255, .25)",
+            backgroundColor: theme.PRIMARY_COLOR,
+            borderTopColor: "rgba(255, 255, 255, .1)",
             borderTopWidth: 0.25,
           },
           showLabel: false,
@@ -96,13 +97,12 @@ export const AppNavigation = ({ navigation }) => {
         initialRouteName="Main"
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#000",
+            backgroundColor: theme.PRIMARY_COLOR,
             shadowColor: "transparent",
-            // shadowColor: "#fff",
             elevation: 0,
           },
+          headerTitle: null,
           headerBackTitle: "Back",
-          headerTitle: "",
           headerTintColor: "#fff",
         }}
       >

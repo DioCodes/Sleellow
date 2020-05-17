@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import theme from "../theme";
 
 export const StyledButton = ({ onPress, name }) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
@@ -12,8 +13,8 @@ export const StyledButton = ({ onPress, name }) => (
 const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
-    borderColor: "#000",
-    backgroundColor: "#000",
+    borderColor: "transparent",
+    backgroundColor: theme.PRIMARY_COLOR,
     borderRadius: 5,
     width: 125,
     justifyContent: "center",
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 15,
+    color: theme.SECONDARY_COLOR,
+    fontSize: 14,
     fontFamily: "norms-bold",
     textAlign: "center",
   },

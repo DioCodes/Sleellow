@@ -5,6 +5,7 @@ import { AppIcon } from "../../assets/images/AppIcon";
 import { StatsImage } from "../../assets/images/StatsImage";
 import { BreathImage } from "../../assets/images/BreathImage";
 import { t } from "../../assets/lang/index";
+import theme from "../theme";
 
 export const WelcomeScreens = ({ navigation }) => {
   let onDoneHandler = async () => {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000",
+    backgroundColor: theme.PRIMARY_COLOR,
   },
   image: {
     position: "absolute",
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: "norms-medium",
     opacity: 1,
-    color: "#fff",
+    color: theme.SECONDARY_COLOR,
   },
   textWrapper: {
     marginTop: 15,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: theme.SECONDARY_COLOR,
     fontSize: 18,
     fontFamily: "norms-medium",
   },
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, .2)",
   },
   activeDot: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.SECONDARY_COLOR,
   },
 });
 

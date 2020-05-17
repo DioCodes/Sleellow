@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
+import theme from "../theme";
 
 export const ShowScreenRide = ({ children }) => {
   const isFocused = useIsFocused();
@@ -11,7 +12,7 @@ export const ShowScreenRide = ({ children }) => {
   const showBar = () => {
     Animated.parallel([
       Animated.timing(showScreen, {
-        duration: 1000,
+        duration: 500,
         toValue: 1,
       }),
       Animated.timing(topToBtmRide, {
@@ -24,11 +25,11 @@ export const ShowScreenRide = ({ children }) => {
   const hideBar = () => {
     Animated.parallel([
       Animated.timing(showScreen, {
-        duration: 100,
+        duration: 500,
         toValue: 0,
       }),
       Animated.timing(topToBtmRide, {
-        duration: 100,
+        duration: 600,
         toValue: 50,
       }),
     ]).start();
@@ -58,7 +59,7 @@ export const ShowScreenRide = ({ children }) => {
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: theme.PRIMARY_COLOR,
     // paddingTop: "10%",
   },
   screenContainer: {
