@@ -47,19 +47,29 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     if ((res1, res2, res3, res4, res5, res6)) {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
-          {res1} <Text style={styles.textTimeOr}>or</Text> {res2}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res3}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {"\n"} {res4}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res5}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res6}
+          <Text style={{ opacity: 0.16 }}>{res1} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.32 }}>{res2} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.48 }}>{res3} </Text>
+          <Text style={styles.textTimeOr}>or </Text> {"\n"}
+          <Text style={{ opacity: 0.64 }}>{res4} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.8 }}>{res5} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text>{res6}</Text>
         </Text>
       );
     } else if ((res1, res2, res3, res4)) {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
-          {res1} <Text style={styles.textTimeOr}>or</Text> {res2}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res3}{" "}
-          <Text style={styles.textTimeOr}>or</Text> {res4}
+          <Text style={{ opacity: 1 }}>{res1} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.75 }}>{res2} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.5 }}>{res3} </Text>
+          <Text style={styles.textTimeOr}>or </Text>
+          <Text style={{ opacity: 0.25 }}>{res4}</Text>
         </Text>
       );
     }
@@ -94,7 +104,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
       }),
       Animated.timing(changeContainerHeight, {
         duration: 500,
-        toValue: 175,
+        toValue: 150,
       }),
     ]).start();
   };
@@ -129,7 +139,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
       }),
       Animated.timing(changeSecondContainerHeight, {
         duration: 500,
-        toValue: 175,
+        toValue: 170,
       }),
     ]).start();
   };
@@ -251,10 +261,13 @@ export const FindSleepTimeScreen = ({ navigation }) => {
       <Animated.View
         style={{ ...styles.container, height: changeContainerHeight }}
       >
-        <Animated.View style={{ ...styles.inContainer, opacity: showTime }}>
-          <Text style={{ ...styles.text, opacity: 0.6 }}>
-            Time to fall asleep:
-          </Text>
+        <Animated.View
+          style={{
+            ...styles.inContainer,
+            opacity: showTime,
+          }}
+        >
+          <Text style={styles.text}>Time to fall asleep:</Text>
           <View>{timeToFallAsleep}</View>
           <StyledButton
             onPress={() => onBackHandler()}
@@ -294,9 +307,12 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         style={{ ...styles.container, height: changeSecondContainerHeight }}
       >
         <Animated.View
-          style={{ ...styles.inContainer, opacity: showSecondTime }}
+          style={{
+            ...styles.inContainer,
+            opacity: showSecondTime,
+          }}
         >
-          <Text style={{ ...styles.text, opacity: 0.6 }}>Time to wake up:</Text>
+          <Text style={styles.text}>Time to wake up:</Text>
           <View>{timeToWakeUp}</View>
           <StyledButton
             onPress={() => onBackSleepNowHandler()}
@@ -335,10 +351,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: theme.PRIMARY_COLOR,
-    // backgroundColor: "#000",
   },
   container: {
-    backgroundColor: theme.SECONDARY_COLOR,
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderRadius: 10,
     width: windowHeight > 800 ? "85%" : "80%",
     paddingVertical: 10,
@@ -346,27 +361,28 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inContainer: {
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     height: "100%",
     width: "100%",
+    // backgroundColor: "red",
+    paddingVertical: 5,
   },
   text: {
-    color: theme.PRIMARY_COLOR,
-    fontFamily: "norms-medium",
+    color: theme.SECONDARY_COLOR,
+    fontFamily: "norms-regular",
     fontSize: 18,
     textAlign: "center",
   },
   textTime: {
-    opacity: 1,
-    fontSize: 20,
-    color: theme.TERTIARY_COLOR,
+    fontSize: 24,
+    color: theme.SECONDARY_COLOR,
     fontFamily: "norms-bold",
     // textDecorationLine: "underline",
   },
   textTimeAsleep: {
-    color: theme.TERTIARY_COLOR,
-    fontSize: 20,
+    color: theme.SECONDARY_COLOR,
+    fontSize: 21,
     textAlign: "center",
     fontFamily: "norms-bold",
     lineHeight: 25,

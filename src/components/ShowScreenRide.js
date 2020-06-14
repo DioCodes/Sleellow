@@ -7,7 +7,7 @@ export const ShowScreenRide = ({ children }) => {
   const isFocused = useIsFocused();
 
   let showScreen = useRef(new Animated.Value(0)).current;
-  let topToBtmRide = useRef(new Animated.Value(50)).current;
+  let topToBtmRide = useRef(new Animated.Value(-25)).current;
 
   const showBar = () => {
     Animated.parallel([
@@ -30,7 +30,7 @@ export const ShowScreenRide = ({ children }) => {
       }),
       Animated.timing(topToBtmRide, {
         duration: 600,
-        toValue: 50,
+        toValue: -25,
       }),
     ]).start();
   };

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
-    marginVertical: 10,
+    // marginVertical: 10,
   },
   buttonText: {
     color: theme.SECONDARY_COLOR,

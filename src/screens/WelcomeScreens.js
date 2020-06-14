@@ -26,7 +26,7 @@ export const WelcomeScreens = ({ navigation }) => {
       <View style={styles.wrapper}>
         <Img>{item.image}</Img>
         <View style={styles.textWrapper}>
-          <Text style={{ ...styles.textHeader }}>{item.header}</Text>
+          <Text style={styles.textHeader}>{item.header}</Text>
           <Text style={styles.text}>{item.text}</Text>
         </View>
       </View>
@@ -47,6 +47,7 @@ export const WelcomeScreens = ({ navigation }) => {
       renderItem={renderSliderItem}
       onDone={onDoneHandler}
       showSkipButton={true}
+      renderSkipButton={() => renderSliderButton("skip")}
       renderNextButton={() => renderSliderButton("next")}
       renderDoneButton={() => renderSliderButton("done")}
       dotStyle={styles.dot}

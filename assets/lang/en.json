@@ -2,9 +2,9 @@
   "welcome_one_header": "Welcome!",
   "welcome_two_header": "How it works?",
   "welcome_three_header": "About important things",
-  "welcome_one": "Hi, I'm Sleellow! I will help you improve your sleep.",
-  "welcome_two": "Sleellow tracks your sleep time, helps you sleep better and go to bed on time!",
-  "welcome_three": "To make it easier for you to fall asleep & feels cheerful in the morning, Sleellow offers to you useful breathing practices.",
+  "welcome_one_text": "Hi, I'm Sleellow! I will help you improve your sleep.",
+  "welcome_two_text": "Sleellow tracks your sleep time, helps you sleep better and go to bed on time!",
+  "welcome_three_text": "To make it easier for you to fall asleep & feels cheerful in the morning, Sleellow offers to you useful breathing practices.",
 
   "levelIs": "Cheers! Now you are:",
   "beginner": "Beginner",

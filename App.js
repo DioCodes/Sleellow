@@ -1,36 +1,17 @@
-import React, { useState } from "react";
-import { AppLoading } from "expo";
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
+import React, { useState, useEffect } from "react";
+import { AppLoading, Notifications } from "expo";
+import { createStore } from "redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import {
-  createFirestoreInstance,
-  reduxFirestore,
-  getFirestore,
-} from "redux-firestore";
-import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import { bootstrap } from "./src/bootstrap";
 import { AppNavigation } from "./src/navigation/AppNavigation";
-import { rootReducer } from "./src/store/index";
-import firebase, { fbConfig } from "./src/fbConfig";
+
+import { store, persistor } from "./src/store/store";
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const store = createStore(
-    rootReducer,
-    compose(
-      applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-      reduxFirestore(firebase, fbConfig)
-    )
-  );
-
-  const rrfProps = {
-    firebase,
-    config: fbConfig,
-    dispatch: store.dispatch,
-    createFirestoreInstance,
-  };
+  // const store = createStore(rootReducer);
 
   if (!isLoaded) {
     return (
@@ -46,9 +27,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ReactReduxFirebaseProvider {...rrfProps}>
+      <PersistGate loading={null} persistor={persistor}>
         <AppNavigation />
-      </ReactReduxFirebaseProvider>
+      </PersistGate>
     </Provider>
   );
 }

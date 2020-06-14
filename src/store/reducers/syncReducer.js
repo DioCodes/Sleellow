@@ -7,7 +7,7 @@ import {
 } from "../types";
 
 const initialState = {
-  syncError: null,
+  mins: 0,
 };
 
 export const syncReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ export const syncReducer = (state = initialState, action) => {
       console.log("sync failed");
       return {
         ...state,
-        syncError: "Synchronization failed!",
+
         // userData: action.payload,
       };
     case REGISTRATION_ERROR:

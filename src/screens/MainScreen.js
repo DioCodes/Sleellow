@@ -1,78 +1,189 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Picker } from "react-native";
-import { ShowScreenRide } from "../components/ShowScreenRide";
-import { Container } from "../components/Container";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Picker,
+  TouchableOpacity,
+} from "react-native";
+import * as Permissions from "expo-permissions";
 import { Ionicons } from "@expo/vector-icons";
 import RBSheet from "react-native-raw-bottom-sheet";
 import theme from "../theme";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import moment from "moment";
+import { ShowScreenRide } from "../components/ShowScreenRide";
+import { Container } from "../components/Container";
+import TimerDisp from "../components/Timer/TimerDisp";
+import { connect, useDispatch } from "react-redux";
+import { resetMins } from "../store/actions/minsActions";
+import { DailyMantra } from "../components/DailyMantra";
 
-export const MainScreen = ({ navigation }) => {
-  const [napTime, setNapTime] = useState("20");
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [napIndex, setNapIndex] = useState(0);
-  const [napValue, setNapValue] = useState("20");
-  const [napName, setNapName] = useState("Power nap");
-  const [headerNapName, setHeaderNapName] = useState("Power nap");
+const MainScreen = (props) => {
+  // console.log(typeof props.mins.mins);
+  const [napTime, setNapTime] = useState("45");
+
+  const [napDescription, setNapDescription] = useState(
+    "Boosts alertness and energy"
+  );
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(true);
+
+  const dispatch = useDispatch();
   const bs = useRef();
   const windowHeight = Dimensions.get("window").height;
 
-  const checkHeaderNapName = (index) => {
-    if (index == "0") {
-      setHeaderNapName("Power nap");
-    } else if (index == "1") {
-      setHeaderNapName("Recovery nap");
-    } else if (index == "2") {
-      setHeaderNapName("Full sleep cycle");
+  const isAllowNotifications = async () => {
+    const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      return;
     }
   };
 
-  const onSaveHandler = (index, value) => {
+  useEffect(() => {
+    isAllowNotifications();
+
+    let msTillEndOfDay = moment()
+      .endOf("year")
+      .add(1, "seconds")
+      .diff(moment(), "milliseconds");
+
+    setTimeout(() => {
+      dispatch(resetMins());
+      console.log("reset");
+    }, msTillEndOfDay);
+  }, []);
+
+  const checkNapDescription = (index, value) => {
     if (index == "0") {
-      setNapName("Power nap");
+      setNapDescription("Boosts alertness and energy");
     } else if (index == "1") {
-      setNapName("Recovery nap");
+      setNapDescription("Increase memory and focus");
     } else if (index == "2") {
-      setNapName("Full sleep cycle");
+      setNapDescription("Best for restoration and relaxation");
     }
 
     setNapTime(value);
   };
 
-  const checkIsSaveDisabled = (value) => {
-    if (value == napTime) {
-      console.log(napTime);
-      console.log(value);
-      return setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
+  const AlarmDescription = () => {
+    return (
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.descriptionHeader}>
+          Sleep duration up to {napTime} mins
+        </Text>
+        <Text style={styles.descriptionText}>{napDescription}</Text>
+      </View>
+    );
   };
+
+  const CheckBox = () => {
+    return (
+      <TouchableOpacity
+        style={{
+          borderWidth: 1,
+          borderColor: "rgba(255, 255, 255, .1)",
+          borderRadius: 2,
+          height: 25,
+          width: 25,
+          backgroundColor: toggleCheckBox ? "white" : "transparent",
+        }}
+        activeOpacity={0.9}
+        onPress={() =>
+          toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)
+        }
+      >
+        {toggleCheckBox ? (
+          <View
+            style={{
+              width: 25,
+              height: 25,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Ionicons name="ios-checkmark" size={25} color="black" />
+          </View>
+        ) : null}
+      </TouchableOpacity>
+    );
+  };
+
+  const AlarmSettings = () => (
+    <View style={styles.alarmSettings}>
+      <Text style={styles.alarmSettingsText}>Breathing</Text>
+      <CheckBox />
+    </View>
+  );
+
+  const ShowPicker = () => (
+    <View
+      style={{
+        marginVertical: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <Picker
+        selectedValue={napTime}
+        itemStyle={{ color: "#fff" }}
+        style={{
+          // backgroundColor: "red",
+          // height: 200,
+          width: 250,
+        }}
+        onValueChange={(itemValue, itemIndex) => {
+          AlarmDescription(itemIndex);
+          setNapTime(itemValue);
+          checkNapDescription(itemIndex, itemValue);
+        }}
+      >
+        <Picker.Item label="Power nap" value="20" />
+        <Picker.Item label="Recovery nap" value="45" />
+        <Picker.Item label="Full sleep cycle" value="120" />
+      </Picker>
+    </View>
+  );
 
   return (
     <ShowScreenRide>
       <View style={styles.main}>
+        <DailyMantra />
         <Container
           name="Find time to fall asleep"
           icon={
             <Ionicons
               name="ios-arrow-forward"
-              color="rgba(0, 0, 0, .2)"
-              size={30}
+              color="rgba(255, 255, 255, .25)"
+              size={25}
             />
           }
-          onPress={() => navigation.navigate("FindTime")}
+          onPress={() => props.navigation.navigate("FindTime")}
         />
         <Container
-          name={napName}
-          icon={<Text style={styles.text}>{napTime}:00 mins </Text>}
+          name="Power nap"
+          time={props.mins.mins}
+          icon={
+            <Ionicons
+              name="ios-arrow-forward"
+              color="rgba(255, 255, 255, .25)"
+              size={25}
+            />
+          }
           onPress={() => bs.current.open()}
         />
         <RBSheet
           ref={bs}
           height={windowHeight > 800 ? 735 : 675}
           openDuration={275}
-          onClose={() => setIsDisabled(true)}
           closeDuration={275}
           closeOnDragDown={true}
           closeOnPressMask={true}
@@ -80,68 +191,23 @@ export const MainScreen = ({ navigation }) => {
             wrapper: {
               backgroundColor: "#rgba(0, 0, 0, 0.85)",
             },
-            draggableIcon: {
-              display: "none",
-            },
             container: {
               backgroundColor: theme.PRIMARY_COLOR,
             },
           }}
           animationType="fade"
         >
-          <View>
-            <View style={styles.header}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => {
-                  bs.current.close(),
-                    setTimeout(() => {
-                      setHeaderNapName(napName), setNapValue(napTime);
-                    }, 100);
-                }}
-              >
-                <Text style={styles.headerButton}>Cancel</Text>
-              </TouchableOpacity>
-              <Text style={styles.headerName}>{headerNapName}</Text>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                disabled={isDisabled}
-                onPress={() => {
-                  bs.current.close(), onSaveHandler(napIndex, napValue);
-                }}
-              >
-                <Text
-                  style={{
-                    ...styles.headerButton,
-                    ...styles.headerButtonSave,
-                    color: isDisabled ? "#31353B" : theme.TERTIARY_COLOR,
-                  }}
-                >
-                  Save
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.mainSheetContainer}>
-              <Picker
-                selectedValue={napValue}
-                itemStyle={{ color: "#fff" }}
-                style={{
-                  // backgroundColor: "black",
-                  width: 125,
-                  height: 150,
-                  justifyContent: "center",
-                }}
-                onValueChange={(itemValue, itemIndex) => {
-                  checkIsSaveDisabled(itemValue);
-                  checkHeaderNapName(itemIndex);
-                  setNapValue(itemValue);
-                  setNapIndex(itemIndex);
-                }}
-              >
-                <Picker.Item label="20:00 mins" value="20" />
-                <Picker.Item label="45:00 mins" value="45" />
-                <Picker.Item label="120:00 mins" value="120" />
-              </Picker>
+          <View style={styles.rbSheetContainer}>
+            <View style={styles.sheetContainerContent}>
+              <ShowPicker />
+              <AlarmDescription />
+              <TimerDisp
+                props={props}
+                time={napTime}
+                navigation={props.navigation}
+                onPress={() => bs.current.close()}
+              />
+              <AlarmSettings />
             </View>
           </View>
         </RBSheet>
@@ -165,14 +231,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-  mainSheetContainer: {
-    height: "100%",
-    justifyContent: "flex-start",
+  rbSheetContainer: {
+    height: windowHeight > 800 ? 680 : 620,
+    // justifyContent: "center",
     alignItems: "center",
+    width: "100%",
   },
   header: {
+    // flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 17,
     height: 50,
@@ -192,4 +260,45 @@ const styles = StyleSheet.create({
   headerButtonSave: {
     fontFamily: "norms-bold",
   },
+  sheetContainerContent: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    // backgroundColor: "blue",
+  },
+  descriptionContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  descriptionHeader: {
+    color: "#fff",
+  },
+  descriptionText: {
+    color: "#fff",
+    opacity: 0.4,
+  },
+  alarmSettings: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    borderWidth: 0,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: "rgba(255, 255, 255, .1)",
+  },
+  alarmSettingsText: {
+    color: theme.SECONDARY_COLOR,
+    fontFamily: "norms-regular",
+    fontSize: 18,
+  },
 });
+
+const mapStateToProps = (state) => {
+  const { mins } = state;
+  return { mins };
+};
+
+export default connect(mapStateToProps)(MainScreen);

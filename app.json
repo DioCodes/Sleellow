@@ -2,26 +2,38 @@
   "expo": {
     "name": "Sleellow",
     "slug": "sleep-breath-app",
-    "platforms": ["ios", "android", "web"],
-    "version": "0.0.9",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/icon.png",
       "resizemode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#0C0F12"
+    },
+    "notification": {
+      "icon": "./assets/images/icon.png",
+      "iosDisplayInForeground": true
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "userInterfaceStyle": "dark",
     "ios": {
+      "icon": "./assets/images/icon.png",
+      "backgroundColor": "#0C0F12",
       "bundleIdentifier": "com.diocode.sleellow",
-      "buildNumber": "0.0.9",
+      "buildNumber": "0.1.0",
       "userInterfaceStyle": "dark"
     },
-    "description": "Sleellow - sleep & breath",
+    "description": "Sleellow - sleep app",
     "githubUrl": "https://github.com/DioCode/Sleellow"
   }
 }

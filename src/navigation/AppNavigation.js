@@ -4,12 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
-import { MainScreen } from "../screens/MainScreen";
+import MainScreen from "../screens/MainScreen";
 import { ProfileScreen } from "../screens/profile/ProfileScreen";
-
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
 import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
+import NapScreen from "../screens/NapScreen";
 import theme from "../theme";
 
 //// сделай отдельный компонент из табБара
@@ -79,14 +79,30 @@ export const AppNavigation = ({ navigation }) => {
   const WelcomeStack = () => {
     return (
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName="Main"
         screenOptions={{
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: theme.PRIMARY_COLOR,
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerTitle: null,
+          headerBackTitle: "Back",
+          headerTintColor: "#fff",
         }}
       >
         <Stack.Screen name="Welcome" component={WelcomeScreens} />
-        <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Main"
+          component={MainTabNavigator}
+        />
         <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="NapScreen"
+          component={NapScreen}
+        />
       </Stack.Navigator>
     );
   };
@@ -113,6 +129,11 @@ export const AppNavigation = ({ navigation }) => {
           component={MainTabNavigator}
         />
         <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="NapScreen"
+          component={NapScreen}
+        />
       </Stack.Navigator>
     );
   };
