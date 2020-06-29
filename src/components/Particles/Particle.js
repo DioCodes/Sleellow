@@ -6,6 +6,7 @@ import {
   Text,
   View,
   InteractionManager,
+  Dimensions,
 } from "react-native";
 import { vw, vh } from "react-native-expo-viewport-units";
 import theme from "../../theme";
@@ -29,7 +30,7 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
   };
 
   const randomParticleSize = useRef(
-    new Animated.Value(randomIntFromInterval(15, size))
+    new Animated.Value(randomIntFromInterval(1, size))
   ).current;
   const animatedOpacity = useRef(new Animated.Value(randomFloat(0, 1))).current;
   const animatedTranslateX = useRef(
@@ -41,6 +42,12 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
     new Animated.Value(
       randomIntFromInterval(startHeight, parentHeight - startHeight)
     )
+  ).current;
+  const animatedTranslateShadowX = useRef(
+    new Animated.Value(randomIntFromInterval(-10, 10))
+  ).current;
+  const animatedTranslateShadowY = useRef(
+    new Animated.Value(randomIntFromInterval(-10, 10))
   ).current;
   const animationTiming = randomIntFromInterval(5000, 10000);
 
@@ -62,14 +69,13 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
         useNativeDriver: true,
         easing,
       }),
-
       Animated.timing(animatedOpacity, {
         toValue: reversed ? 0 : 1,
         duration: time,
         useNativeDriver: true,
       }),
       Animated.timing(randomParticleSize, {
-        toValue: reversed ? 10 : randomIntFromInterval(15, size),
+        toValue: reversed ? size : randomIntFromInterval(1, size),
         duration: time,
         useNativeDriver: true,
         easing,
@@ -81,7 +87,7 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
 
   let opacity = animatedOpacity.interpolate({
     inputRange: [0, 1],
-    outputRange: [0.25, 1],
+    outputRange: [0, 0.5],
   });
 
   useEffect(() => {
@@ -103,18 +109,21 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
 
   let randomColor = rc();
 
+  const windowWidth = Dimensions.get("window").width;
+
   return (
     <Animated.View
       style={{
         transform: [
-          { translateX: animatedTranslateX },
+          {
+            translateX: randomIntFromInterval(10, windowWidth - 30),
+          },
           { translateY: animatedTranslateY },
           { scale: randomParticleSize },
         ],
         ...styles.container,
         backgroundColor: "white",
         shadowColor: "white",
-
         opacity: opacity,
       }}
     ></Animated.View>
@@ -124,15 +133,9 @@ const Particle = ({ parentHeight, parentWidth, stopAnim, size }) => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    width: 1,
-    height: 1,
-    borderRadius: 5,
-    shadowOpacity: 1,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowRadius: 0.1,
+    width: 2,
+    height: 2,
+    borderRadius: 50,
   },
 });
 

@@ -12,7 +12,7 @@ const RenderParticles = ({ backgroundColor, particleSize, stopAnim }) => {
   const getParticles = () => {
     const currentParticles = [];
 
-    for (let y = 0; y < 15; y += 1) {
+    for (let y = 0; y < 30; y += 1) {
       currentParticles.push({
         size: particleSize,
         id: y,

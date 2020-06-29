@@ -165,13 +165,11 @@ const styles = StyleSheet.create({
     height: windowHeight > 800 ? 680 : 620,
     width: "100%",
     alignItems: "center",
-    // backgroundColor: "red",
   },
   sheetContainerContent: {
     justifyContent: "center",
     alignItems: "flex-start",
     width: "100%",
-    // backgroundColor: "blue",
     marginVertical: 30,
     paddingHorizontal: 20,
   },

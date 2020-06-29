@@ -47,29 +47,29 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     if ((res1, res2, res3, res4, res5, res6)) {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
-          <Text style={{ opacity: 0.16 }}>{res1} </Text>
+          <Text style={{ opacity: 1 }}>{res6}</Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.32 }}>{res2} </Text>
+          <Text style={{ opacity: 1 }}>{res5} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.48 }}>{res3} </Text>
+          <Text style={{ opacity: 0.6 }}>{res4} </Text>
           <Text style={styles.textTimeOr}>or </Text> {"\n"}
-          <Text style={{ opacity: 0.64 }}>{res4} </Text>
+          <Text style={{ opacity: 0.6 }}>{res3} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.8 }}>{res5} </Text>
+          <Text style={{ opacity: 0.25 }}>{res2} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text>{res6}</Text>
+          <Text style={{ opacity: 0.25 }}>{res1} </Text>
         </Text>
       );
     } else if ((res1, res2, res3, res4)) {
       returnContent = (
         <Text style={{ ...styles.textTimeAsleep }}>
-          <Text style={{ opacity: 1 }}>{res1} </Text>
+          <Text style={{ opacity: 1 }}>{res1}</Text>
           <Text style={styles.textTimeOr}>or </Text>
           <Text style={{ opacity: 0.75 }}>{res2} </Text>
           <Text style={styles.textTimeOr}>or </Text>
           <Text style={{ opacity: 0.5 }}>{res3} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.25 }}>{res4}</Text>
+          <Text style={{ opacity: 0.25 }}>{res4} </Text>
         </Text>
       );
     }

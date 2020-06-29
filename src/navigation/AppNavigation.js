@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, StatusBar, AsyncStorage } from "react-native";
+import { View, StatusBar, AsyncStorage, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
 import MainScreen from "../screens/MainScreen";
@@ -9,8 +12,10 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
 import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
-import NapScreen from "../screens/NapScreen";
+import BreathScreen from "../screens/BreathScreen";
 import theme from "../theme";
+import BreathScreenInfo from "../screens/BreathScreenInfo";
+import { Ionicons } from "@expo/vector-icons";
 
 //// сделай отдельный компонент из табБара
 
@@ -100,8 +105,13 @@ export const AppNavigation = ({ navigation }) => {
         <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="NapScreen"
-          component={NapScreen}
+          name="BreathScreen"
+          component={BreathScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="BreathScreenInfo"
+          component={BreathScreenInfo}
         />
       </Stack.Navigator>
     );
@@ -129,11 +139,8 @@ export const AppNavigation = ({ navigation }) => {
           component={MainTabNavigator}
         />
         <Stack.Screen name="FindTime" component={FindSleepTimeScreen} />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="NapScreen"
-          component={NapScreen}
-        />
+        <Stack.Screen name="BreathScreen" component={BreathScreen} />
+        <Stack.Screen name="BreathScreenInfo" component={BreathScreenInfo} />
       </Stack.Navigator>
     );
   };

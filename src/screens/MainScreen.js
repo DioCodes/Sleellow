@@ -15,12 +15,13 @@ import moment from "moment";
 import { ShowScreenRide } from "../components/ShowScreenRide";
 import { Container } from "../components/Container";
 import TimerDisp from "../components/Timer/TimerDisp";
-import { connect, useDispatch } from "react-redux";
-import { resetMins } from "../store/actions/minsActions";
+import { useDispatch } from "react-redux";
+
 import { DailyMantra } from "../components/DailyMantra";
+import { SleepRoutine } from "../components/SleepRoutine";
+import { ScrollView } from "react-native-gesture-handler";
 
 const MainScreen = (props) => {
-  // console.log(typeof props.mins.mins);
   const [napTime, setNapTime] = useState("45");
 
   const [napDescription, setNapDescription] = useState(
@@ -49,16 +50,6 @@ const MainScreen = (props) => {
 
   useEffect(() => {
     isAllowNotifications();
-
-    let msTillEndOfDay = moment()
-      .endOf("year")
-      .add(1, "seconds")
-      .diff(moment(), "milliseconds");
-
-    setTimeout(() => {
-      dispatch(resetMins());
-      console.log("reset");
-    }, msTillEndOfDay);
   }, []);
 
   const checkNapDescription = (index, value) => {
@@ -95,7 +86,7 @@ const MainScreen = (props) => {
           width: 25,
           backgroundColor: toggleCheckBox ? "white" : "transparent",
         }}
-        activeOpacity={0.9}
+        active={0.9}
         onPress={() =>
           toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)
         }
@@ -157,29 +148,31 @@ const MainScreen = (props) => {
     <ShowScreenRide>
       <View style={styles.main}>
         <DailyMantra />
-        <Container
-          name="Find time to fall asleep"
-          icon={
-            <Ionicons
-              name="ios-arrow-forward"
-              color="rgba(255, 255, 255, .25)"
-              size={25}
-            />
-          }
-          onPress={() => props.navigation.navigate("FindTime")}
-        />
-        <Container
-          name="Power nap"
-          time={props.mins.mins}
-          icon={
-            <Ionicons
-              name="ios-arrow-forward"
-              color="rgba(255, 255, 255, .25)"
-              size={25}
-            />
-          }
-          onPress={() => bs.current.open()}
-        />
+
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Container
+            name="Find time to fall asleep"
+            icon={
+              <Ionicons
+                name="ios-arrow-forward"
+                color="rgba(255, 255, 255, .25)"
+                size={25}
+              />
+            }
+            onPress={() => props.navigation.navigate("FindTime")}
+          />
+          <Container
+            name="Breaths"
+            icon={
+              <Ionicons
+                name="ios-arrow-forward"
+                color="rgba(255, 255, 255, .25)"
+                size={25}
+              />
+            }
+            onPress={() => props.navigation.navigate("BreathScreen")}
+          />
+        </ScrollView>
         <RBSheet
           ref={bs}
           height={windowHeight > 800 ? 735 : 675}
@@ -296,9 +289,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  const { mins } = state;
-  return { mins };
-};
-
-export default connect(mapStateToProps)(MainScreen);
+export default MainScreen;

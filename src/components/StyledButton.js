@@ -2,9 +2,14 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import theme from "../theme";
 
-export const StyledButton = ({ onPress, name }) => (
+export const StyledButton = ({
+  onPress,
+  name,
+  color = theme.PRIMARY_COLOR,
+  borderColor = "transparent",
+}) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-    <View style={styles.button}>
+    <View style={{ ...styles.button, backgroundColor: color, borderColor }}>
       <Text style={styles.buttonText}>{name}</Text>
     </View>
   </TouchableOpacity>
@@ -16,10 +21,10 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     backgroundColor: theme.PRIMARY_COLOR,
     borderRadius: 5,
-    width: 125,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 10,
+    width: 150,
+    height: 45,
     // marginVertical: 10,
   },
   buttonText: {
