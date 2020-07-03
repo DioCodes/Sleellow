@@ -7,12 +7,18 @@ import {
   Animated,
   Easing,
 } from "react-native";
+import * as Haptics from "expo-haptics";
 import theme from "../theme";
 import { useIsFocused } from "@react-navigation/native";
 import { ProgressBar } from "./ProgressBar";
 
 export const BreathAnimation = ({ paused }) => {
-  const [breathText, setBreathText] = useState("Inhale");
+  let isFocused = useIsFocused();
+
+  let intervalHaptics = useRef(null);
+  let timeOutHaptics = useRef(null);
+  let timeOutHaptics2 = useRef(null);
+  let timeOutHaptics3 = useRef(null);
 
   let animatedShowText_Inhale = useRef(new Animated.Value(1)).current;
   let animatedShowText_Hold = useRef(new Animated.Value(0)).current;
@@ -25,100 +31,128 @@ export const BreathAnimation = ({ paused }) => {
   const easingOut = Easing.out;
 
   let r = useRef(
-    Animated.loop(
-      Animated.sequence([
-        Animated.parallel([
-          Animated.timing(animatedSize, {
-            duration: 4000,
-            toValue: 1.2,
-            easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedSizeThree, {
-            duration: 4000,
-            toValue: 1.3,
-            easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedSizeFour, {
-            duration: 4000,
-            toValue: 1.4,
-            easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedShowText_Inhale, {
-            duration: 4000,
-            toValue: 0,
-            easing,
-            useNativeDriver: true,
-          }),
-        ]),
-        Animated.parallel([
-          Animated.delay(7000),
-          Animated.timing(animatedShowText_Hold, {
-            duration: 7000,
-            toValue: 1,
-            easing,
-            useNativeDriver: true,
-          }),
-        ]),
-        Animated.timing(animatedShowText_Hold, {
-          duration: 100,
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(animatedSize, {
+          duration: 4000,
+          toValue: 1.2,
+          easing,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedSizeThree, {
+          duration: 4000,
+          toValue: 1.3,
+          easing,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedSizeFour, {
+          duration: 4000,
+          toValue: 1.4,
+          easing,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedShowText_Inhale, {
+          duration: 4000,
           toValue: 0,
           easing,
           useNativeDriver: true,
         }),
+      ]),
+      Animated.parallel([
+        Animated.delay(7000),
+        Animated.timing(animatedShowText_Hold, {
+          duration: 7000,
+          toValue: 1,
+          easing,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.timing(animatedShowText_Hold, {
+        duration: 100,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedShowText_Exhale, {
+        duration: 100,
+        toValue: 1,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.parallel([
+        Animated.timing(animatedSize, {
+          duration: 8000,
+          toValue: 1,
+          easingOut,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedSizeThree, {
+          duration: 8000,
+          toValue: 1,
+          easingOut,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedSizeFour, {
+          duration: 8000,
+          toValue: 1,
+          easingOut,
+          useNativeDriver: true,
+        }),
         Animated.timing(animatedShowText_Exhale, {
-          duration: 100,
-          toValue: 1,
+          duration: 8000,
+          toValue: 0,
           easing,
           useNativeDriver: true,
         }),
-        Animated.parallel([
-          Animated.timing(animatedSize, {
-            duration: 8000,
-            toValue: 1,
-            easingOut,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedSizeThree, {
-            duration: 8000,
-            toValue: 1,
-            easingOut,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedSizeFour, {
-            duration: 8000,
-            toValue: 1,
-            easingOut,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedShowText_Exhale, {
-            duration: 8000,
-            toValue: 0,
-            easing,
-            useNativeDriver: true,
-          }),
-        ]),
-        Animated.timing(animatedShowText_Inhale, {
-          duration: 100,
-          toValue: 1,
-          easing,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start()
+      ]),
+      Animated.timing(animatedShowText_Inhale, {
+        duration: 100,
+        toValue: 1,
+        easing,
+        useNativeDriver: true,
+      }),
+    ])
   ).current;
 
+  const activateHaptics = () => {
+    timeOutHaptics.current = setTimeout(() => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    }, 4000);
+    timeOutHaptics2.current = setTimeout(() => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    }, 11000);
+    timeOutHaptics3.current = setTimeout(() => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    }, 19000);
+  };
+
   useEffect(() => {
-    if (paused) {
-      animatedSize.stopAnimation();
-      animatedSizeThree.stopAnimation();
-      animatedSizeFour.stopAnimation();
+    if (paused || !isFocused) {
+      animatedSize.setValue(1);
+      animatedSizeThree.setValue(1);
+      animatedSizeFour.setValue(1);
+      animatedShowText_Inhale.setValue(1);
+      animatedShowText_Hold.setValue(0);
+      animatedShowText_Exhale.setValue(0);
+      clearInterval(intervalHaptics.current);
+      clearTimeout(timeOutHaptics.current);
+      clearTimeout(timeOutHaptics2.current);
+      clearTimeout(timeOutHaptics3.current);
     } else if (!paused) {
-      r;
+      Animated.loop(r).start();
+      activateHaptics();
+      intervalHaptics.current = setInterval(() => {
+        activateHaptics();
+      }, 19000);
     }
-  }, [paused]);
+
+    return () => {
+      clearInterval(intervalHaptics.current);
+      clearTimeout(timeOutHaptics.current);
+      clearTimeout(timeOutHaptics2.current);
+      clearTimeout(timeOutHaptics3.current);
+    };
+  }, [paused, isFocused]);
 
   return (
     <View style={styles.main}>
@@ -175,6 +209,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "norms-bold",
     color: theme.PRIMARY_COLOR,
+    // color: theme.SECONDARY_COLOR,
     fontSize: 22,
     zIndex: 1,
     position: "absolute",
@@ -184,7 +219,7 @@ const styles = StyleSheet.create({
     width: 150,
     borderRadius: 200,
     backgroundColor: theme.SECONDARY_COLOR,
-    // borderColor: theme.SECONDARY_COLOR,
+    // borderColor: theme.TERTIARY_COLOR,
     // borderWidth: 2,
     justifyContent: "center",
     alignItems: "center",

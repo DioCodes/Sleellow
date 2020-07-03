@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import { SafeAreaView, View, StyleSheet, Text, Button } from "react-native";
+import * as Haptics from "expo-haptics";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { translate } from "i18n-js";
 
@@ -12,14 +13,14 @@ const BreathScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Breath",
+      headerTitle: "Sleep",
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
           <Item
             title="Breath Info"
-            iconName="md-information-circle-outline"
+            iconName="ios-information-circle-outline"
             onPress={() => {
-              navigation.navigate("BreathScreenInfo");
+              navigation.navigate("BreathScreen_Info");
             }}
           />
         </HeaderButtons>
@@ -34,13 +35,16 @@ const BreathScreen = ({ navigation }) => {
       <View style={styles.breathAnimation}>
         <BreathAnimation paused={paused} />
       </View>
-      <StyledButton
-        onPress={() => {
-          paused ? setPaused(false) : setPaused(true);
-        }}
-        name={paused ? "Start" : "Stop"}
-        borderColor={theme.SECONDARY_COLOR}
-      />
+      <View style={styles.btn}>
+        <StyledButton
+          onPress={() => {
+            paused ? setPaused(false) : setPaused(true);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          }}
+          name={paused ? "Start" : "Stop"}
+          borderColor={theme.SECONDARY_COLOR}
+        />
+      </View>
     </View>
   );
 };
@@ -60,6 +64,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 30,
   },
+  btn: {},
 });
 
 export default BreathScreen;

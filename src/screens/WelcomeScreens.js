@@ -4,6 +4,7 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import { AppIcon } from "../../assets/images/AppIcon";
 import { StatsImage } from "../../assets/images/StatsImage";
 import { BreathImage } from "../../assets/images/BreathImage";
+
 import { t } from "../../assets/lang/index";
 import theme from "../theme";
 

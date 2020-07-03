@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import * as Haptics from "expo-haptics";
 import theme from "../theme";
 
-export const Container = ({ onPress, name, icon, time }) => {
+export const Container = ({ onPress, name, icon }) => {
+  const onPressHandler = () => {
+    onPress();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
   return (
     <TouchableOpacity
       style={styles.mainContainer}
       activeOpacity={theme.ACTIVE_OPACITY}
-      onPress={onPress}
+      onPress={onPressHandler}
     >
       <View style={styles.btnCont}>
         <Text style={styles.header}>{name}</Text>
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize: 20,
+    fontSize: 21,
     fontFamily: "norms-bold",
     color: "#fff",
   },
