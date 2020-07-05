@@ -19,24 +19,26 @@ export const SleepRoutine = ({ alarm, breath, onPress }) => {
             justifyContent: "space-between",
           }}
         >
-          <Text style={styles.header}>Sleep routine</Text>
-          <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
+          <Text style={styles.header}>Breathing practices</Text>
+          {/* <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
             <Text style={styles.headerNotification}>10:00 pm</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
+        {/* <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
           <View style={styles.btnStart}>
             <Text style={styles.btnStartText}>start</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
-      <View>
+      <View style={{ width: "100%" }}>
         <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
           <View style={styles.routineContainer}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={styles.checker}></View>
-              <Text style={styles.header}>Alarm</Text>
+              {/* <View style={styles.checker}></View> */}
+              <Text style={{ ...styles.header, ...styles.headerInCont }}>
+                Before sleep
+              </Text>
             </View>
             <Ionicons
               name="ios-arrow-forward"
@@ -48,8 +50,10 @@ export const SleepRoutine = ({ alarm, breath, onPress }) => {
         <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
           <View style={styles.routineContainer}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={styles.checker}></View>
-              <Text style={styles.header}>Breath</Text>
+              {/* <View style={styles.checker}></View> */}
+              <Text style={{ ...styles.header, ...styles.headerInCont }}>
+                After waking up
+              </Text>
             </View>
             <Ionicons
               name="ios-arrow-forward"
@@ -67,14 +71,13 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   main: {
-    width: "100%",
+    flex: 1,
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderRadius: 10,
     paddingHorizontal: 15,
     paddingVertical: 15,
-    marginHorizontal: 10,
-    marginBottom: 10,
     justifyContent: "space-between",
+    marginBottom: 10,
   },
   top: {
     flexDirection: "row",
@@ -85,6 +88,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "norms-bold",
     color: "#fff",
+  },
+  headerInCont: {
+    fontSize: 18,
   },
   headerNotification: {
     color: "#fff",
@@ -105,7 +111,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   routineContainer: {
-    width: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderRadius: 10,
     paddingHorizontal: 15,
@@ -114,7 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    opacity: 0.25,
   },
   checker: {
     width: 30,
