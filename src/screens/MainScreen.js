@@ -6,8 +6,10 @@ import {
   Dimensions,
   Picker,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import * as Permissions from "expo-permissions";
+import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
 import RBSheet from "react-native-raw-bottom-sheet";
 import theme from "../theme";
@@ -86,7 +88,7 @@ const MainScreen = (props) => {
           width: 25,
           backgroundColor: toggleCheckBox ? "white" : "transparent",
         }}
-        active={0.9}
+        active={theme.ACTIVE_OPACITY}
         onPress={() =>
           toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)
         }
@@ -100,7 +102,7 @@ const MainScreen = (props) => {
               alignItems: "center",
             }}
           >
-            <Ionicons name="ios-checkmark" size={25} color="black" />
+            <Ionicons name="ios-checkmark" size={26} color="black" />
           </View>
         ) : null}
       </TouchableOpacity>
@@ -149,28 +151,32 @@ const MainScreen = (props) => {
       <View style={styles.main}>
         <DailyMantra />
 
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView>
           <Container
-            name="Find time to fall asleep"
+            name="Find sleep time"
             icon={
               <Ionicons
                 name="ios-arrow-forward"
                 color="rgba(255, 255, 255, .25)"
-                size={25}
+                size={26}
               />
             }
-            onPress={() => props.navigation.navigate("FindTime")}
+            onPress={() => {
+              props.navigation.navigate("FindSleepTime");
+            }}
           />
           <Container
-            name="Breaths"
+            name="Breathing practices"
             icon={
               <Ionicons
                 name="ios-arrow-forward"
                 color="rgba(255, 255, 255, .25)"
-                size={25}
+                size={26}
               />
             }
-            onPress={() => props.navigation.navigate("BreathScreen")}
+            onPress={() => {
+              props.navigation.navigate("BreathScreen");
+            }}
           />
         </ScrollView>
         <RBSheet
@@ -214,10 +220,11 @@ const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    width: "100%",
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: windowHeight > 800 ? "15%" : "10%",
+    paddingTop: windowHeight > 800 ? "14%" : "8%",
   },
   text: {
     fontFamily: "norms-regular",
