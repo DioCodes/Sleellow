@@ -37,7 +37,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   const [chosenHours, setChosenHours] = useState();
   const [chosenMinutes, setChosenMinutes] = useState();
 
-  const [chosenDate, setChosenDate] = useState("choose time");
+  const [chosenDate, setChosenDate] = useState("...");
 
   const [timeToFallAsleep, setTimeToFallAsleep] = useState();
   const [timeToWakeUp, setTimeToWakeUp] = useState();
@@ -138,9 +138,9 @@ export const FindSleepTimeScreen = ({ navigation }) => {
           <Text style={styles.textTimeOr}>or </Text>
           <Text style={{ opacity: 1 }}>{res2} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.75 }}>{res3} </Text>
+          <Text style={{ opacity: 0.6 }}>{res3} </Text>
           <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.5 }}>{res4}</Text>
+          <Text style={{ opacity: 0.25 }}>{res4}</Text>
         </Text>
       );
     }
@@ -151,7 +151,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   let showSecondTime = useRef(new Animated.Value(0)).current;
   let showCalc = useRef(new Animated.Value(1)).current;
   let showSecondCalc = useRef(new Animated.Value(1)).current;
-  let changeContainerHeight = useRef(new Animated.Value(150)).current;
+  let changeContainerHeight = useRef(new Animated.Value(100)).current;
   let changeSecondContainerHeight = useRef(new Animated.Value(100)).current;
 
   const showBar = () => {
@@ -224,7 +224,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   };
 
   const onCalculateHandler = () => {
-    if (chosenDate == "choose time") {
+    if (chosenDate == "...") {
       Alert.alert("Please choose time to wake up! ⏰");
     } else {
       let d = new Date();
@@ -244,7 +244,9 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         timeToFallAsleepColors(first, result2, result3, last)
       );
 
-      setTimeout(() => setShowTimeToSleep(true), 500);
+      // setTimeout(() => setShowTimeToSleep(true), 500);
+
+      showTimeToSleep ? setShowTimeToSleep(false) : setShowTimeToSleep(true);
       showBar();
     }
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -304,18 +306,71 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   const ShowCalc = () => {
     return (
       <Animated.View
-        style={{ ...styles.container, height: changeContainerHeight }}
+        style={{
+          ...styles.container,
+        }}
       >
-        <Animated.View style={{ ...styles.inBoxContainer, opacity: showCalc }}>
-          <Text style={styles.text}> I want to wake up at:</Text>
+        <TouchableOpacity
+          activeOpacity={theme.ACTIVE_OPACITY}
+          onPress={() => onCalculateHandler()}
+        >
+          <View
+            style={{
+              ...styles.boxContainer,
+              ...styles.paddingContainer,
+              marginBottom: showTimeToSleep ? 5 : 0,
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
+              <Text style={styles.header}>I want to wake up at</Text>
 
-          <TouchableOpacity onPress={showDatePicker}>
-            <Text style={{ ...styles.text, ...styles.textTime }}>
-              {chosenDate}
+              <TouchableOpacity
+                style={{ marginHorizontal: 5 }}
+                activeOpacity={theme.ACTIVE_OPACITY}
+                onPress={showDatePicker}
+              >
+                <Text
+                  style={{
+                    ...styles.header,
+                    // opacity: chosenDate == "..." ? 0.5 : 1,
+                    textDecorationLine:
+                      chosenDate == "..." ? "underline" : "underline",
+                    textDecorationColor: "rgba(255,255,255,.2)",
+                  }}
+                >
+                  {chosenDate}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <Ionicons
+              name="ios-arrow-down"
+              color="rgba(255, 255, 255, .25)"
+              size={26}
+            />
+          </View>
+        </TouchableOpacity>
+
+        {showTimeToSleep ? (
+          <View style={{ ...styles.timeToWakeUp, ...styles.paddingContainer }}>
+            {/* <Text style={styles.text}>
+              The average person falls asleep after 14 minutes!
+              {"\n"}
+            </Text> */}
+            <Text style={styles.text}>
+              If you want to wake up at {chosenDate}, you should try to fall
+              asleep at one of the following times:
             </Text>
-          </TouchableOpacity>
-          <StyledButton onPress={() => onCalculateHandler()} name="Calculate" />
-        </Animated.View>
+            <View
+              style={{
+                width: "100%",
+                marginTop: 10,
+              }}
+            >
+              {timeToFallAsleep}
+            </View>
+          </View>
+        ) : null}
       </Animated.View>
     );
   };
@@ -328,7 +383,7 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         <Animated.View
           style={{
             ...styles.inBoxContainer,
-            opacity: showTime,
+            // opacity: showTime,
           }}
         >
           <Text style={styles.text}>Time to fall asleep:</Text>
@@ -356,12 +411,11 @@ export const FindSleepTimeScreen = ({ navigation }) => {
           <View
             style={{
               ...styles.boxContainer,
-              // opacity: showSecondCaalc,
               marginBottom: timeToWakeUpOpened ? 5 : 0,
               ...styles.paddingContainer,
             }}
           >
-            <Text style={styles.header}>Time to wake up</Text>
+            <Text style={styles.header}>I want to fall asleep now</Text>
             <Ionicons
               name="ios-arrow-down"
               color="rgba(255, 255, 255, .25)"
@@ -419,11 +473,11 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     <View style={styles.main}>
       <ScrollView>
         <View style={styles.wrapper}>
-          <View style={{ marginBottom: 5 }}>
-            <Text style={styles.featureHeader}>Tips</Text>
+          <View style={{ marginVertical: 5 }}>
             <Slider tips={tips} />
           </View>
           <SleepNow />
+          <ShowCalc />
         </View>
       </ScrollView>
       <DateTimePickerModal
