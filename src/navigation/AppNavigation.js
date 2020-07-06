@@ -15,8 +15,6 @@ import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
 import BreathScreen from "../screens/BreathScreen";
 import theme from "../theme";
 import BreathScreen_Info from "../screens/BreathScreen_Info";
-import { Ionicons } from "@expo/vector-icons";
-import { FindSLeepTimeScreen_Info } from "../screens/FindSleepTimeScreen_Info";
 
 //// сделай отдельный компонент из табБара
 
@@ -104,16 +102,9 @@ export const AppNavigation = ({ navigation }) => {
           component={MainTabNavigator}
         />
         <Stack.Screen name="FindSleepTime" component={FindSleepTimeScreen} />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="BreathScreen"
-          component={BreathScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="BreathScreen_Info"
-          component={BreathScreen_Info}
-        />
+
+        <Stack.Screen name="BreathScreen" component={BreathScreen} />
+        <Stack.Screen name="BreathScreen_Info" component={BreathScreen_Info} />
       </Stack.Navigator>
     );
   };
@@ -140,10 +131,7 @@ export const AppNavigation = ({ navigation }) => {
           component={MainTabNavigator}
         />
         <Stack.Screen name="FindSleepTime" component={FindSleepTimeScreen} />
-        <Stack.Screen
-          name="FindSleepTime_Info"
-          component={FindSLeepTimeScreen_Info}
-        />
+
         <Stack.Screen name="BreathScreen" component={BreathScreen} />
         <Stack.Screen name="BreathScreen_Info" component={BreathScreen_Info} />
       </Stack.Navigator>

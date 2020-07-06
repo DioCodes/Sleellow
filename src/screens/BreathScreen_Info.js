@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   dot: {
-    bottom: -30,
+    bottom: Dimensions.get("window").height > 800 ? -30 : -25,
     width: 8,
     height: 8,
     backgroundColor: "rgba(255, 255, 255, .15)",

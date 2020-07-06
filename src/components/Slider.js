@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: Dimensions.get("window").width - 40,
-    // maxHeight: 65,
     height: 45,
 
     paddingHorizontal: 3,
