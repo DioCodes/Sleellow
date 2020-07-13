@@ -153,7 +153,7 @@ const MainScreen = (props) => {
 
         <ScrollView>
           <Container
-            name="Find sleep time"
+            name="Sleep time"
             icon={
               <Ionicons
                 name="ios-arrow-forward"
@@ -162,7 +162,7 @@ const MainScreen = (props) => {
               />
             }
             onPress={() => {
-              props.navigation.navigate("FindSleepTime");
+              props.navigation.navigate("SleepTime");
             }}
           />
           <Container
@@ -175,7 +175,8 @@ const MainScreen = (props) => {
               />
             }
             onPress={() => {
-              props.navigation.navigate("BreathScreen");
+              // props.navigation.navigate("BreathScreen");
+              props.navigation.navigate("BreathingPractices");
             }}
           />
         </ScrollView>

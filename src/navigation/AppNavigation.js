@@ -7,14 +7,17 @@ import {
 } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
+
+import theme from "../theme";
 import MainScreen from "../screens/MainScreen";
 import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
-import { FindSleepTimeScreen } from "../screens/FindSleepTimeScreen";
-import BreathScreen from "../screens/BreathScreen";
-import theme from "../theme";
-import BreathScreen_Info from "../screens/BreathScreen_Info";
+import { SleepTimeScreen } from "../screens/SleepTimeScreen";
+import SleepScreen from "../screens/BreathingPractices/Sleep/SleepScreen";
+import SleepScreen_Info from "../screens/BreathingPractices/Sleep/SleepScreen_Info";
+import { WakeUpScreen } from "../screens/BreathingPractices/WakeUp/WakeUpScreen";
+import { BreathingPractices } from "../screens/BreathingPractices/BreathingPractices";
 
 //// сделай отдельный компонент из табБара
 
@@ -101,10 +104,17 @@ export const AppNavigation = ({ navigation }) => {
           name="Main"
           component={MainTabNavigator}
         />
-        <Stack.Screen name="FindSleepTime" component={FindSleepTimeScreen} />
+        <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
 
-        <Stack.Screen name="BreathScreen" component={BreathScreen} />
-        <Stack.Screen name="BreathScreen_Info" component={BreathScreen_Info} />
+        <Stack.Screen name="BreathSleepScreen" component={SleepScreen} />
+        <Stack.Screen
+          name="BreathSleepScreen_Info"
+          component={SleepScreen_Info}
+        />
+        <Stack.Screen
+          name="BreathingPractices"
+          component={BreathingPractices}
+        />
       </Stack.Navigator>
     );
   };
@@ -130,10 +140,15 @@ export const AppNavigation = ({ navigation }) => {
           name="Main"
           component={MainTabNavigator}
         />
-        <Stack.Screen name="FindSleepTime" component={FindSleepTimeScreen} />
+        <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
 
-        <Stack.Screen name="BreathScreen" component={BreathScreen} />
-        <Stack.Screen name="BreathScreen_Info" component={BreathScreen_Info} />
+        <Stack.Screen name="SleepScreen" component={SleepScreen} />
+        <Stack.Screen name="WakeUpScreen" component={WakeUpScreen} />
+        <Stack.Screen name="SleepScreen_Info" component={SleepScreen_Info} />
+        <Stack.Screen
+          name="BreathingPractices"
+          component={BreathingPractices}
+        />
       </Stack.Navigator>
     );
   };

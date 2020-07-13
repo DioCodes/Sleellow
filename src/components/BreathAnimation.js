@@ -20,7 +20,7 @@ export const BreathAnimation = ({ paused }) => {
   let timeOutHaptics2 = useRef(null);
   let timeOutHaptics3 = useRef(null);
 
-  let animatedShowText_Inhale = useRef(new Animated.Value(1)).current;
+  let animatedShowText_Inhale = useRef(new Animated.Value(0)).current;
   let animatedShowText_Hold = useRef(new Animated.Value(0)).current;
   let animatedShowText_Exhale = useRef(new Animated.Value(0)).current;
   let animatedSize = useRef(new Animated.Value(1)).current;
@@ -51,35 +51,49 @@ export const BreathAnimation = ({ paused }) => {
           easing,
           useNativeDriver: true,
         }),
-        Animated.timing(animatedShowText_Inhale, {
-          duration: 4000,
-          toValue: 0,
-          easing,
-          useNativeDriver: true,
-        }),
+        Animated.sequence([
+          Animated.timing(animatedShowText_Inhale, {
+            duration: 3800,
+            toValue: 1,
+            easing,
+            useNativeDriver: true,
+          }),
+          Animated.timing(animatedShowText_Inhale, {
+            duration: 100,
+            toValue: 0,
+            easing,
+            useNativeDriver: true,
+          }),
+          Animated.timing(animatedShowText_Hold, {
+            duration: 100,
+            toValue: 1,
+            easing,
+            useNativeDriver: true,
+          }),
+        ]),
       ]),
+      Animated.delay(7000),
       Animated.parallel([
-        Animated.delay(7000),
-        Animated.timing(animatedShowText_Hold, {
-          duration: 7000,
-          toValue: 1,
-          easing,
-          useNativeDriver: true,
-        }),
-      ]),
-      Animated.timing(animatedShowText_Hold, {
-        duration: 100,
-        toValue: 0,
-        easing,
-        useNativeDriver: true,
-      }),
-      Animated.timing(animatedShowText_Exhale, {
-        duration: 100,
-        toValue: 1,
-        easing,
-        useNativeDriver: true,
-      }),
-      Animated.parallel([
+        Animated.sequence([
+          Animated.timing(animatedShowText_Hold, {
+            duration: 100,
+            toValue: 0,
+            easing,
+            useNativeDriver: true,
+          }),
+          Animated.timing(animatedShowText_Exhale, {
+            duration: 100,
+            toValue: 1,
+            easing,
+            useNativeDriver: true,
+          }),
+          Animated.timing(animatedShowText_Exhale, {
+            duration: 7800,
+            toValue: 0,
+            easing,
+            useNativeDriver: true,
+          }),
+        ]),
         Animated.timing(animatedSize, {
           duration: 8000,
           toValue: 1,
@@ -98,19 +112,7 @@ export const BreathAnimation = ({ paused }) => {
           easingOut,
           useNativeDriver: true,
         }),
-        Animated.timing(animatedShowText_Exhale, {
-          duration: 8000,
-          toValue: 0,
-          easing,
-          useNativeDriver: true,
-        }),
       ]),
-      Animated.timing(animatedShowText_Inhale, {
-        duration: 100,
-        toValue: 1,
-        easing,
-        useNativeDriver: true,
-      }),
     ])
   ).current;
 
@@ -131,7 +133,7 @@ export const BreathAnimation = ({ paused }) => {
       animatedSize.setValue(1);
       animatedSizeThree.setValue(1);
       animatedSizeFour.setValue(1);
-      animatedShowText_Inhale.setValue(1);
+      animatedShowText_Inhale.setValue(0);
       animatedShowText_Hold.setValue(0);
       animatedShowText_Exhale.setValue(0);
       clearInterval(intervalHaptics.current);

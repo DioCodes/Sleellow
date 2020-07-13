@@ -12,7 +12,7 @@ export const ShowScreenRide = ({ children }) => {
   const showBar = () => {
     Animated.parallel([
       Animated.timing(showScreen, {
-        duration: 500,
+        duration: 600,
         toValue: 1,
       }),
       Animated.timing(topToBtmRide, {

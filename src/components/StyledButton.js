@@ -8,13 +8,20 @@ export const StyledButton = ({
   name,
   color = theme.PRIMARY_COLOR,
   borderColor = "transparent",
-}) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
-    <View style={{ ...styles.button, backgroundColor: color, borderColor }}>
-      <Text style={styles.buttonText}>{name}</Text>
-    </View>
-  </TouchableOpacity>
-);
+}) => {
+  const onPressHandler = () => {
+    onPress();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
+  return (
+    <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
+      <View style={{ ...styles.button, backgroundColor: color, borderColor }}>
+        <Text style={styles.buttonText}>{name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   button: {

@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { translate } from "i18n-js";
-import theme from "../theme";
 
-import { LeapsIconClosed } from "../../assets/images/LeapsIconClosed";
-import { LeapsIconBreath } from "../../assets/images/LeapsIconBreath";
-import { NoseIconInhale } from "../../assets/images/NoseIconInhale";
-import { SleepBackIcon } from "../../assets/images/SleepBackIcon";
-import { DizzinessIcon } from "../../assets/images/DizzinessIcon";
+import theme from "../../../theme";
+import { LeapsIconClosed } from "../../../../assets/images/LeapsIconClosed";
+import { LeapsIconBreath } from "../../../../assets/images/LeapsIconBreath";
+import { NoseIconInhale } from "../../../../assets/images/NoseIconInhale";
+import { SleepBackIcon } from "../../../../assets/images/SleepBackIcon";
+import { DizzinessIcon } from "../../../../assets/images/DizzinessIcon";
 
-const BreathScreen_Info = ({ navigation }) => {
+const BreathSleepScreen_Info = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -187,4 +187,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BreathScreen_Info;
+export default BreathSleepScreen_Info;

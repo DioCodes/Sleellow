@@ -20,12 +20,13 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import SwiperFlatList from "react-native-swiper-flatlist";
 import { Slider } from "../components/Slider";
 import { color } from "react-native-reanimated";
+import { ShowScreenRide } from "../components/ShowScreenRide";
 
-export const FindSleepTimeScreen = ({ navigation }) => {
+export const SleepTimeScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Find sleep time",
+      headerTitle: "Sleep time",
     });
   }, []);
 
@@ -49,19 +50,6 @@ export const FindSleepTimeScreen = ({ navigation }) => {
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
-  };
-
-  const RenderSliderItem = ({ item }) => {
-    return (
-      <Text
-        style={{
-          ...styles.text,
-          ...styles.textDescription,
-        }}
-      >
-        {item.text}
-      </Text>
-    );
   };
 
   const findTimeToFallAsleep = (timeFirst) => {
@@ -88,11 +76,11 @@ export const FindSleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime }}>5-6 cycles</Text>
+            <Text style={{ ...styles.headerTime }}>6-5 cycles</Text>
             <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 1 }}>{res5}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res6}</Text>
+              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTime, opacity: 1 }}>{res5}</Text>
             </View>
           </View>
 
@@ -103,13 +91,13 @@ export const FindSleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime, opacity: 0.6 }}>
-              3-4 cycles
+            <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
+              4-3 cycles
             </Text>
             <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 0.6 }}>{res3}</Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
               <Text style={{ ...styles.textTimeOr }}> or </Text>
-              <Text style={{ ...styles.textTime, opacity: 0.6 }}>{res4}</Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
             </View>
           </View>
 
@@ -121,52 +109,80 @@ export const FindSleepTimeScreen = ({ navigation }) => {
             }}
           >
             <Text style={{ ...styles.headerTime, opacity: 0.25 }}>
-              1-2 cycles
+              2-1 cycles
             </Text>
             <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res1}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
               <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res2}</Text>
+              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res1}</Text>
             </View>
           </View>
         </View>
       );
     } else if ((res1, res2, res3, res4)) {
       returnContent = (
-        <Text style={{ ...styles.textTimeAsleep }}>
-          <Text style={{ opacity: 1 }}>{res1} </Text>
-          <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 1 }}>{res2} </Text>
-          <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.6 }}>{res3} </Text>
-          <Text style={styles.textTimeOr}>or </Text>
-          <Text style={{ opacity: 0.25 }}>{res4}</Text>
-        </Text>
+        <View
+          style={{
+            // flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Text style={{ ...styles.headerTime }}>6-5 cycles</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ ...styles.textTime, opacity: 1 }}>{res1}</Text>
+              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTime, opacity: 1 }}>{res2}</Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
+              4-3 cycles
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
+              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
+            </View>
+          </View>
+        </View>
       );
     }
     return returnContent;
   };
 
   let showTime = useRef(new Animated.Value(0)).current;
-  let showSecondTime = useRef(new Animated.Value(0)).current;
-  let showCalc = useRef(new Animated.Value(1)).current;
-  let showSecondCalc = useRef(new Animated.Value(1)).current;
-  let changeContainerHeight = useRef(new Animated.Value(100)).current;
-  let changeSecondContainerHeight = useRef(new Animated.Value(100)).current;
+  let showTime_Height = useRef(new Animated.Value(0)).current;
+
+  let containerHeight = showTime_Height.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["0%", "100%"],
+  });
 
   const showBar = () => {
     Animated.parallel([
       Animated.timing(showTime, {
-        duration: 500,
+        duration: 1500,
         toValue: 1,
       }),
-      Animated.timing(showCalc, {
-        duration: 500,
-        toValue: 0,
-      }),
-      Animated.timing(changeContainerHeight, {
-        duration: 500,
-        toValue: 150,
+
+      Animated.timing(showTime_Height, {
+        duration: 2500,
+        toValue: 100,
       }),
     ]).start();
   };
@@ -174,50 +190,11 @@ export const FindSleepTimeScreen = ({ navigation }) => {
   const hideBar = () => {
     Animated.parallel([
       Animated.timing(showTime, {
-        duration: 500,
+        duration: 1500,
         toValue: 0,
       }),
-      Animated.timing(showCalc, {
-        duration: 500,
-        toValue: 1,
-      }),
-
-      Animated.timing(changeContainerHeight, {
-        duration: 500,
-        toValue: 150,
-      }),
-    ]).start();
-  };
-
-  const showSecondBar = () => {
-    Animated.parallel([
-      Animated.timing(showSecondTime, {
-        duration: 500,
-        toValue: 1,
-      }),
-      Animated.timing(showSecondCalc, {
-        duration: 500,
-        toValue: 0,
-      }),
-      Animated.timing(changeSecondContainerHeight, {
-        duration: 500,
-        toValue: 170,
-      }),
-    ]).start();
-  };
-
-  const hideSecondBar = () => {
-    Animated.parallel([
-      Animated.timing(changeSecondContainerHeight, {
-        duration: 500,
-        toValue: 125,
-      }),
-      Animated.timing(showSecondCalc, {
-        duration: 500,
-        toValue: 1,
-      }),
-      Animated.timing(showSecondTime, {
-        duration: 500,
+      Animated.timing(showTime_Height, {
+        duration: 1500,
         toValue: 0,
       }),
     ]).start();
@@ -273,10 +250,8 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     setTimeToWakeUp(timeToFallAsleepColors(res1, res2, res3, res4, res5, res6));
 
     timeToWakeUpOpened
-      ? setTimeToWakeUpOpened(false)
-      : setTimeToWakeUpOpened(true);
-
-    showSecondBar();
+      ? (setTimeToWakeUpOpened(false), hideBar())
+      : (setTimeToWakeUpOpened(true), showBar());
 
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
@@ -289,18 +264,6 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     setChosenMinutes(m);
     setPickerDate(date);
     setChosenDate(`${h}:${m}`);
-  };
-
-  const onBackHandler = () => {
-    hideBar();
-    setTimeout(() => setShowTimeToSleep(false), 500);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-  };
-
-  const onBackSleepNowHandler = () => {
-    hideSecondBar();
-    setTimeout(() => setShowTimeToWakeUp(false), 500);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
   const ShowCalc = () => {
@@ -375,33 +338,12 @@ export const FindSleepTimeScreen = ({ navigation }) => {
     );
   };
 
-  const ShowTime = () => {
-    return (
-      <Animated.View
-        style={{ ...styles.container, height: changeContainerHeight }}
-      >
-        <Animated.View
-          style={{
-            ...styles.inBoxContainer,
-            // opacity: showTime,
-          }}
-        >
-          <Text style={styles.text}>Time to fall asleep:</Text>
-          <View>{timeToFallAsleep}</View>
-          <StyledButton
-            onPress={() => onBackHandler()}
-            name={<Ionicons name="ios-arrow-back" color="#fff" size={14} />}
-          />
-        </Animated.View>
-      </Animated.View>
-    );
-  };
-
   const SleepNow = () => {
     return (
-      <View
+      <Animated.View
         style={{
           ...styles.container,
+          flex: -1,
         }}
       >
         <TouchableOpacity
@@ -425,46 +367,21 @@ export const FindSleepTimeScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         {timeToWakeUpOpened ? (
-          <View style={{ ...styles.timeToWakeUp, ...styles.paddingContainer }}>
+          <Animated.View
+            style={{
+              ...styles.timeToWakeUp,
+              ...styles.paddingContainer,
+              // opacity: showTime,
+              // height: containerHeight,
+            }}
+          >
             <Text style={styles.text}>
               If you go to bed now, you should try to wake up at one of the
               following times:
             </Text>
-            <View
-              style={{
-                width: "100%",
-                marginTop: 10,
-              }}
-            >
-              {timeToWakeUp}
-            </View>
-          </View>
+            <View style={{ marginTop: 10 }}>{timeToWakeUp}</View>
+          </Animated.View>
         ) : null}
-      </View>
-    );
-  };
-
-  const ShowSleepNowTime = () => {
-    return (
-      <Animated.View
-        style={{
-          ...styles.container,
-          // height: changeSecondContainerHeight,
-        }}
-      >
-        <Animated.View
-          style={{
-            ...styles.inBoxContainer,
-            opacity: showSecondTime,
-          }}
-        >
-          <Text style={styles.header}>Time to wake up:</Text>
-          <View>{timeToWakeUp}</View>
-          <StyledButton
-            onPress={() => onBackSleepNowHandler()}
-            name={<Ionicons name="ios-arrow-back" color="#fff" size={14} />}
-          />
-        </Animated.View>
       </Animated.View>
     );
   };
@@ -514,7 +431,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   wrapper: {
-    // flex: 1,
+    flex: 1,
     maxWidth: "100%",
   },
   container: {
@@ -523,6 +440,7 @@ const styles = StyleSheet.create({
     // maxWidth: Dimensions.get("window").width,
     // height: "100%",
     width: "100%",
+    maxWidth: "100%",
     paddingVertical: 15,
     marginVertical: 5,
   },

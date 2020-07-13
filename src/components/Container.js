@@ -8,6 +8,7 @@ export const Container = ({ onPress, name, icon }) => {
     onPress();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
+
   return (
     <TouchableOpacity
       style={styles.mainContainer}
