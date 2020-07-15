@@ -8,7 +8,6 @@ import {
   Alert,
   Picker,
   Animated,
-  Switch,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -45,15 +44,18 @@ const SleepScreen = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [pickerDate, setPickerDate] = useState(new Date());
   // const [chosenDate, setChosenDate] = useState("...");
-  const [napTime, setNapTime] = useState("3");
-  const [napCount, setNapCount] = useState("9");
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [napTime, setNapTime] = useState("5");
+  const [napCount, setNapCount] = useState("15");
 
   const mantraText = useSelector((state) => state.mantra.mantra);
 
+  let animatedBreathContainer = useRef(new Animated.Value(10)).current;
+  let animatedMantraContainer = useRef(new Animated.Value(10)).current;
   let animatedMantra = useRef(new Animated.Value(0)).current;
+  let animatedMantraDescriptionFirst = useRef(new Animated.Value(0)).current;
+  let animatedMantraDescriptionSecond = useRef(new Animated.Value(0)).current;
+  let animatedMantraDescriptionThird = useRef(new Animated.Value(0)).current;
+  let animatedMantraDescriptionLast = useRef(new Animated.Value(0)).current;
   let animatedDescription = useRef(new Animated.Value(0.25)).current;
   let animatedSettings = useRef(new Animated.Value(1)).current;
 
@@ -74,6 +76,70 @@ const SleepScreen = ({ navigation }) => {
           useNativeDriver: true,
         }),
       ]),
+
+      Animated.parallel([
+        Animated.timing(animatedBreathContainer, {
+          duration: 2000,
+          toValue: 30,
+          easing,
+        }),
+        Animated.timing(animatedMantraContainer, {
+          duration: 100,
+          toValue: 60,
+          easing,
+        }),
+        Animated.timing(animatedMantraDescriptionFirst, {
+          duration: 2000,
+          toValue: 0.5,
+          easing,
+          useNativeDriver: true,
+        }),
+      ]),
+
+      Animated.timing(animatedMantraDescriptionFirst, {
+        duration: 1000,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedMantraDescriptionSecond, {
+        duration: 2000,
+        toValue: 0.5,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.delay(4000),
+      Animated.timing(animatedMantraDescriptionSecond, {
+        duration: 1000,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedMantraDescriptionThird, {
+        duration: 2000,
+        toValue: 0.5,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.delay(5000),
+      Animated.timing(animatedMantraDescriptionThird, {
+        duration: 1000,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedMantraDescriptionLast, {
+        duration: 4000,
+        toValue: 0.5,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedMantraDescriptionLast, {
+        duration: 1000,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
       Animated.timing(animatedMantra, {
         duration: 4000,
         toValue: 1,
@@ -87,12 +153,25 @@ const SleepScreen = ({ navigation }) => {
     const easingOut = Easing.out;
 
     Animated.sequence([
-      Animated.timing(animatedMantra, {
-        duration: 500,
-        toValue: 0,
-        easingOut,
-        useNativeDriver: true,
-      }),
+      Animated.parallel([
+        Animated.timing(animatedBreathContainer, {
+          duration: 2000,
+          toValue: 0,
+          easingOut,
+        }),
+        Animated.timing(animatedMantraContainer, {
+          duration: 2000,
+          toValue: 10,
+          easingOut,
+        }),
+        Animated.timing(animatedMantra, {
+          duration: 2000,
+          toValue: 0,
+          easingOut,
+          useNativeDriver: true,
+        }),
+      ]),
+
       Animated.parallel([
         Animated.timing(animatedDescription, {
           duration: 2000,
@@ -123,6 +202,9 @@ const SleepScreen = ({ navigation }) => {
 
   const checkNapDescription = (value) => {
     switch (value) {
+      case "1":
+        setNapCount("4");
+        break;
       case "3":
         setNapCount("9");
         break;
@@ -159,6 +241,7 @@ const SleepScreen = ({ navigation }) => {
           checkNapDescription(itemValue);
         }}
       >
+        <Picker.Item label="1" value="1" />
         <Picker.Item label="3" value="3" />
         <Picker.Item label="5" value="5" />
         <Picker.Item label="8" value="8" />
@@ -170,6 +253,9 @@ const SleepScreen = ({ navigation }) => {
   const startBreathing = () => {
     let time = 54 * 1000;
     switch (napTime) {
+      case "1":
+        time = 19 * 4 * 1000;
+        break;
       case "3":
         time = 19 * ((57 * 3) / 19) * 1000;
         break;
@@ -177,9 +263,10 @@ const SleepScreen = ({ navigation }) => {
         time = 19 * ((57 * 5) / 19) * 1000;
         break;
       case "8":
+        time = 19 * ((57 * 8) / 19) * 1000;
         break;
       default: {
-        time = 19 * ((57 * 8) / 19) * 1000;
+        time = 19 * ((57 * 3) / 19) * 1000;
       }
     }
 
@@ -205,11 +292,16 @@ const SleepScreen = ({ navigation }) => {
         }}
         contentContainerStyle={{ ...styles.wrapper }}
       >
-        <View style={styles.breathContainer}>
+        <Animated.View
+          style={{
+            ...styles.breathContainer,
+            paddingTop: animatedBreathContainer,
+          }}
+        >
           <TouchableOpacity
             activeOpacity={theme.ACTIVE_OPACITY}
             onPress={() => {
-              startBreathing();
+              paused ? startBreathing() : null;
             }}
           >
             <View style={styles.breathAnimation}>
@@ -219,21 +311,53 @@ const SleepScreen = ({ navigation }) => {
           <Animated.Text
             style={{ ...styles.description, opacity: animatedDescription }}
           >
-            Tap to start/stop breathing practice.
+            Tap to start the breathing practice.
           </Animated.Text>
           <Animated.View
             style={{
-              alignItems: "center",
-              opacity: animatedMantra,
-              backgroundColor: "red",
+              ...styles.mantraContainer,
+              height: animatedMantraContainer,
             }}
           >
-            <Text style={styles.mantra}>{mantraText}</Text>
-            <Text style={{ ...styles.mantraDescription }}>
+            <Animated.Text
+              style={{ ...styles.mantra, opacity: animatedMantra }}
+            >
+              {mantraText}
+            </Animated.Text>
+            <Animated.Text
+              style={{
+                ...styles.description,
+                opacity: animatedMantraDescriptionFirst,
+              }}
+            >
+              Close your lips, inhale through your nose.
+            </Animated.Text>
+            <Animated.Text
+              style={{
+                ...styles.description,
+                opacity: animatedMantraDescriptionSecond,
+              }}
+            >
+              Hold your breath for the 7 seconds.
+            </Animated.Text>
+            <Animated.Text
+              style={{
+                ...styles.description,
+                opacity: animatedMantraDescriptionThird,
+              }}
+            >
+              Make a whooshing sound, exhaling completely through your mouth.
+            </Animated.Text>
+            <Animated.Text
+              style={{
+                ...styles.description,
+                opacity: animatedMantraDescriptionLast,
+              }}
+            >
               Relax and repeat your mantra.
-            </Text>
+            </Animated.Text>
           </Animated.View>
-        </View>
+        </Animated.View>
 
         <Animated.View
           style={{
@@ -257,19 +381,6 @@ const SleepScreen = ({ navigation }) => {
                 {napCount} <Text style={styles.timeMin}>reps</Text>
               </Text>
             </TouchableOpacity>
-          </View>
-          <View style={{ ...styles.settingsContainer, borderTopWidth: 0 }}>
-            <Text style={styles.settingsContainerHeader}>Show mantra</Text>
-
-            <Switch
-              trackColor={{
-                false: "rgba(255,255,255, .1)",
-                true: "transparent",
-              }}
-              thumbColor={isEnabled ? "#fff" : "rgba(255,255,255, .5)"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
           </View>
         </Animated.View>
       </ScrollView>
@@ -295,7 +406,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     width: "100%",
-    // justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: theme.PRIMARY_COLOR,
   },
@@ -317,7 +427,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   settings: {
-    minHeight: 150,
+    minHeight: 100,
     width: "100%",
     marginBottom: 30,
   },
@@ -333,40 +443,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   settingsContainerHeader: {
-    fontSize: 20,
+    fontSize: theme.TEXT + 2,
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-medium",
   },
   description: {
     color: theme.SECONDARY_COLOR,
-    fontSize: 18,
+    fontSize: theme.TEXT + 2,
     fontFamily: "norms-medium",
+    opacity: 0.5,
     position: "absolute",
     bottom: 0,
-    opacity: 0.5,
+  },
+  mantraContainer: {
+    height: 10,
+    width: "100%",
+    // backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
   },
   mantra: {
     color: theme.SECONDARY_COLOR,
-    fontSize: 26,
+    fontSize: theme.HEADER,
     fontFamily: "norms-medium",
     position: "absolute",
-    bottom: -70,
-  },
-  mantraDescription: {
-    color: theme.SECONDARY_COLOR,
-    fontSize: 18,
-    fontFamily: "norms-regular",
-    opacity: 0.25,
-    position: "absolute",
-    bottom: -40,
   },
   time: {
-    fontSize: 20,
+    fontSize: theme.TEXT + 2,
     color: "rgba(255, 255, 255, 1)",
     fontFamily: "norms-medium",
   },
   timeMin: {
-    fontSize: 16,
+    fontSize: theme.TEXT,
     color: "rgba(255, 255, 255, .5)",
     fontFamily: "norms-regular",
   },

@@ -105,13 +105,13 @@ const slides = [
     key: "s1",
     image: <SleepBackIcon />,
     text:
-      "Lie on your back. Close your eyes and relax. Breathe in your stomach. Focus on breathing and repeat the mantra in your mind.",
+      "Lie on your back. Relax and focus on breathing. Repeat the mantra in your mind.",
   },
   {
     key: "s2",
     image: <DizzinessIcon />,
     text:
-      "If you feel dizzy, stop the exercise. Your health is above all. Try to take 4 breaths and increase this amount over time.",
+      "If you feel dizzy, stop the exercise.  Try to take 4 breaths and increase this amount over time.",
   },
 ];
 
@@ -135,12 +135,13 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     paddingHorizontal: 20,
     fontFamily: "norms-regular",
-    fontSize: 16,
+    fontSize: theme.TEXT,
+    lineHeight: theme.TEXT_LINEHEIGHT,
   },
   textHeader: {
     color: "#fff",
     fontFamily: "norms-bold",
-    fontSize: 22,
+    fontSize: theme.HEADER,
     marginBottom: 5,
     alignSelf: "center",
   },
@@ -157,12 +158,12 @@ const styles = StyleSheet.create({
   iconText: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-medium",
-    fontSize: 16,
+    fontSize: theme.TEXT,
   },
   iconTextTime: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-regular",
-    fontSize: 14,
+    fontSize: theme.TEXT - 2,
     opacity: 0.5,
     marginBottom: 10,
   },
@@ -173,11 +174,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     flex: 1,
-    height: 230,
+    height: 240,
     width: "100%",
   },
   dot: {
-    bottom: Dimensions.get("window").height > 800 ? -30 : -25,
+    bottom: 0,
     width: 8,
     height: 8,
     backgroundColor: "rgba(255, 255, 255, .15)",

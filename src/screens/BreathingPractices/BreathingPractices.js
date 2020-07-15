@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.PRIMARY_COLOR,
   },
   header: {
-    fontSize: 26,
+    fontSize: theme.HEADER,
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-bold",
     marginBottom: 10,

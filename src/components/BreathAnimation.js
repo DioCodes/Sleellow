@@ -53,7 +53,7 @@ export const BreathAnimation = ({ paused }) => {
         }),
         Animated.sequence([
           Animated.timing(animatedShowText_Inhale, {
-            duration: 3800,
+            duration: 3900,
             toValue: 1,
             easing,
             useNativeDriver: true,
@@ -64,36 +64,24 @@ export const BreathAnimation = ({ paused }) => {
             easing,
             useNativeDriver: true,
           }),
-          Animated.timing(animatedShowText_Hold, {
-            duration: 100,
-            toValue: 1,
-            easing,
-            useNativeDriver: true,
-          }),
         ]),
       ]),
-      Animated.delay(7000),
       Animated.parallel([
-        Animated.sequence([
-          Animated.timing(animatedShowText_Hold, {
-            duration: 100,
-            toValue: 0,
-            easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedShowText_Exhale, {
-            duration: 100,
-            toValue: 1,
-            easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animatedShowText_Exhale, {
-            duration: 7800,
-            toValue: 0,
-            easing,
-            useNativeDriver: true,
-          }),
-        ]),
+        Animated.timing(animatedShowText_Hold, {
+          duration: 100,
+          toValue: 1,
+          easing,
+          useNativeDriver: true,
+        }),
+        Animated.delay(6900),
+      ]),
+      Animated.timing(animatedShowText_Hold, {
+        duration: 100,
+        toValue: 0,
+        easing,
+        useNativeDriver: true,
+      }),
+      Animated.parallel([
         Animated.timing(animatedSize, {
           duration: 8000,
           toValue: 1,
@@ -112,6 +100,20 @@ export const BreathAnimation = ({ paused }) => {
           easingOut,
           useNativeDriver: true,
         }),
+        Animated.sequence([
+          Animated.timing(animatedShowText_Exhale, {
+            duration: 100,
+            toValue: 1,
+            easing,
+            useNativeDriver: true,
+          }),
+          Animated.timing(animatedShowText_Exhale, {
+            duration: 7800,
+            toValue: 0,
+            easing,
+            useNativeDriver: true,
+          }),
+        ]),
       ]),
     ])
   ).current;
