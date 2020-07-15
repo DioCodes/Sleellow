@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    fontSize: 21,
+    fontSize: theme.CONTAINER_HEADER,
     fontFamily: "norms-bold",
     color: "#fff",
   },

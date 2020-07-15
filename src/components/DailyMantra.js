@@ -122,7 +122,7 @@ export const DailyMantra = () => {
                   style={{
                     fontFamily: "norms-medium",
                     color: "#000",
-                    fontSize: 17,
+                    fontSize: theme.TEXT + 2,
                   }}
                 >
                   Complete
@@ -147,13 +147,13 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "norms-bold",
     color: "#fff",
-    fontSize: 17,
+    fontSize: theme.TEXT + 2,
     opacity: 0.75,
   },
   mantraHeader: {
     fontFamily: "norms-regular",
     color: "#fff",
-    fontSize: 16,
+    fontSize: theme.TEXT,
     opacity: 0.5,
   },
   mantraText: {

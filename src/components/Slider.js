@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
   text: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-regular",
-    fontSize: 16,
+    fontSize: theme.TEXT,
+    lineHeight: theme.TEXT_LINEHEIGHT,
     textAlign: "justify",
   },
   pagination: {

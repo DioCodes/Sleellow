@@ -464,20 +464,14 @@ const styles = StyleSheet.create({
   header: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-bold",
-    fontSize: 21,
+    fontSize: theme.CONTAINER_HEADER,
     textAlign: "center",
-  },
-  featureHeader: {
-    color: theme.SECONDARY_COLOR,
-    fontFamily: "norms-bold",
-    fontSize: 20,
-    textAlign: "center",
-    marginBottom: 5,
   },
   text: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-regular",
-    fontSize: 17,
+    fontSize: theme.TEXT,
+    lineHeight: theme.TEXT_LINEHEIGHT,
     opacity: 0.5,
     textAlign: "justify",
   },
@@ -490,7 +484,7 @@ const styles = StyleSheet.create({
     // alignItems: "center",
   },
   headerTime: {
-    fontSize: 22,
+    fontSize: 24,
     fontFamily: "norms-bold",
     color: theme.SECONDARY_COLOR,
   },
