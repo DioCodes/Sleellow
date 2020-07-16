@@ -5,21 +5,18 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Alert,
   Picker,
   Animated,
 } from "react-native";
-import * as Haptics from "expo-haptics";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { translate, t } from "i18n-js";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { translate, t } from "i18n-js";
 
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
 import { BreathAnimation } from "../../../components/BreathAnimation";
-import { StyledButton } from "../../../components/StyledButton";
 
 const SleepScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -44,8 +41,8 @@ const SleepScreen = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [pickerDate, setPickerDate] = useState(new Date());
   // const [chosenDate, setChosenDate] = useState("...");
-  const [napTime, setNapTime] = useState("5");
-  const [napCount, setNapCount] = useState("15");
+  const [napTime, setNapTime] = useState("3");
+  const [napCount, setNapCount] = useState("9");
 
   const mantraText = useSelector((state) => state.mantra.mantra);
 
@@ -209,13 +206,13 @@ const SleepScreen = ({ navigation }) => {
         setNapCount("9");
         break;
       case "5":
-        setNapCount("15");
+        setNapCount("16");
         break;
       case "8":
-        setNapCount("24");
+        setNapCount("25");
         break;
       default: {
-        setNapCount("9");
+        setNapCount("4");
       }
     }
   };
@@ -254,19 +251,19 @@ const SleepScreen = ({ navigation }) => {
     let time = 54 * 1000;
     switch (napTime) {
       case "1":
-        time = 19 * 4 * 1000;
+        time = 19 * 4 * 1000; // 4 breaths
         break;
       case "3":
-        time = 19 * ((57 * 3) / 19) * 1000;
+        time = 19 * Math.round((60 * 3) / 19) * 1000;
         break;
       case "5":
-        time = 19 * ((57 * 5) / 19) * 1000;
+        time = 19 * Math.round((60 * 5) / 19) * 1000;
         break;
       case "8":
-        time = 19 * ((57 * 8) / 19) * 1000;
+        time = 19 * Math.round((60 * 8) / 19) * 1000;
         break;
       default: {
-        time = 19 * ((57 * 3) / 19) * 1000;
+        time = 19 * 4 * 1000;
       }
     }
 
@@ -392,7 +389,6 @@ const SleepScreen = ({ navigation }) => {
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         isDarkModeEnabled={true}
-        date={pickerDate}
         customPickerIOS={minutesPicker}
         cancelTextIOS="Exit"
         is24Hour={false}

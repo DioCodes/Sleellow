@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Circle, Path } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const StatsImage = (props) => {
+export const StatsImage = () => {
   return (
-    <Svg width={200} height={200} viewBox="0 0 456 457" {...props}>
+    <Svg width={200} height={200} viewBox="0 0 456 457">
       <G fill="none" fillRule="evenodd">
         <G opacity={0.098} fill="#D8D8D8">
           <G>
