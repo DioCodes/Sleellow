@@ -41,13 +41,13 @@ export const BreathAnimation = ({ paused }) => {
         }),
         Animated.timing(animatedSizeThree, {
           duration: 4000,
-          toValue: 1.3,
+          toValue: 1.35,
           easing,
           useNativeDriver: true,
         }),
         Animated.timing(animatedSizeFour, {
           duration: 4000,
-          toValue: 1.4,
+          toValue: 1.45,
           easing,
           useNativeDriver: true,
         }),
@@ -219,8 +219,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   circle: {
-    height: 150,
-    width: 150,
+    height: 140,
+    width: 140,
     borderRadius: 200,
     backgroundColor: theme.SECONDARY_COLOR,
     // borderColor: theme.TERTIARY_COLOR,
@@ -230,20 +230,20 @@ const styles = StyleSheet.create({
   },
   circleTwo: {
     position: "absolute",
-    height: 170,
-    width: 170,
+    height: 160,
+    width: 160,
     opacity: 0.4,
   },
   circleThree: {
     position: "absolute",
-    height: 190,
-    width: 190,
+    height: 180,
+    width: 180,
     opacity: 0.25,
   },
   circleFour: {
     position: "absolute",
-    height: 210,
-    width: 210,
+    height: 200,
+    width: 200,
     opacity: 0.1,
   },
 });

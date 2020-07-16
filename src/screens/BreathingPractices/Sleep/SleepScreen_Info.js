@@ -111,7 +111,7 @@ const slides = [
     key: "s2",
     image: <DizzinessIcon />,
     text:
-      "If you feel dizzy, stop the exercise.  Try to take 4 breaths and increase this amount over time.",
+      "If you feel dizzy, stop the exercise. Try to take 4 breaths and increase this amount over time.",
   },
 ];
 
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   dot: {
-    bottom: 0,
+    bottom: Dimensions.get("window").height > 800 ? -5 : 0,
     width: 8,
     height: 8,
     backgroundColor: "rgba(255, 255, 255, .15)",
