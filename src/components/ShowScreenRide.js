@@ -14,10 +14,12 @@ export const ShowScreenRide = ({ children }) => {
       Animated.timing(showScreen, {
         duration: 600,
         toValue: 1,
+        useNativeDriver: false
       }),
       Animated.timing(topToBtmRide, {
         duration: 600,
         toValue: 0,
+        useNativeDriver: false
       }),
     ]).start();
   };
@@ -27,10 +29,12 @@ export const ShowScreenRide = ({ children }) => {
       Animated.timing(showScreen, {
         duration: 500,
         toValue: 0,
+        useNativeDriver: false
       }),
       Animated.timing(topToBtmRide, {
         duration: 600,
         toValue: -25,
+        useNativeDriver: false
       }),
     ]).start();
   };

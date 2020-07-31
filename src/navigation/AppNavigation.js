@@ -14,10 +14,10 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import { WelcomeScreens } from "../screens/WelcomeScreens";
 import { TabBarBtn } from "../components/TabBarBtn";
 import { SleepTimeScreen } from "../screens/SleepTimeScreen";
-import SleepScreen from "../screens/BreathingPractices/Sleep/SleepScreen";
-import SleepScreen_Info from "../screens/BreathingPractices/Sleep/SleepScreen_Info";
-import { WakeUpScreen } from "../screens/BreathingPractices/WakeUp/WakeUpScreen";
-import { BreathingPractices } from "../screens/BreathingPractices/BreathingPractices";
+import SleepScreen from "../screens/breathing_practices/Sleep/SleepScreen";
+import SleepScreen_Info from "../screens/breathing_practices/Sleep/SleepScreen_Info";
+import { WakeUpScreen } from "../screens/breathing_practices/WakeUp/WakeUpScreen";
+import { BreathingPractices } from "../screens/breathing_practices/BreathingPractices";
 
 //// сделай отдельный компонент из табБара
 
@@ -98,7 +98,7 @@ export const AppNavigation = ({ navigation }) => {
           headerTintColor: "#fff",
         }}
       >
-        <Stack.Screen name="Welcome" component={WelcomeScreens} />
+         <Stack.Screen name="Welcome" component={WelcomeScreens} />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Main"
@@ -106,11 +106,9 @@ export const AppNavigation = ({ navigation }) => {
         />
         <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
 
-        <Stack.Screen name="BreathSleepScreen" component={SleepScreen} />
-        <Stack.Screen
-          name="BreathSleepScreen_Info"
-          component={SleepScreen_Info}
-        />
+        <Stack.Screen name="SleepScreen" component={SleepScreen} />
+        <Stack.Screen name="WakeUpScreen" component={WakeUpScreen} />
+        <Stack.Screen name="SleepScreen_Info" component={SleepScreen_Info} />
         <Stack.Screen
           name="BreathingPractices"
           component={BreathingPractices}

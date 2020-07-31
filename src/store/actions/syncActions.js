@@ -5,7 +5,6 @@ import {
   REGISTRATION_ERROR,
   SIGNOUT_SUCCESS,
 } from "../types";
-// import { USER_DATA } from "../../userData";
 
 export const signIn = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {

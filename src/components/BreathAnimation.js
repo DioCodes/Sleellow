@@ -11,9 +11,12 @@ import * as Haptics from "expo-haptics";
 import theme from "../theme";
 import { useIsFocused } from "@react-navigation/native";
 import { ProgressBar } from "./ProgressBar";
+import { useSelector, useDispatch } from "react-redux";
+import { checkUserLevel } from "../store/reducers/levelReducer";
 
 export const BreathAnimation = ({ paused }) => {
   let isFocused = useIsFocused();
+  const dispatch = useDispatch()
 
   let intervalHaptics = useRef(null);
   let timeOutHaptics = useRef(null);
@@ -147,6 +150,7 @@ export const BreathAnimation = ({ paused }) => {
       activateHaptics();
       intervalHaptics.current = setInterval(() => {
         activateHaptics();
+        dispatch(checkUserLevel())
       }, 19000);
     }
 

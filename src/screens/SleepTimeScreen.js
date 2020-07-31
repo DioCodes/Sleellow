@@ -178,11 +178,13 @@ export const SleepTimeScreen = ({ navigation }) => {
       Animated.timing(showTime, {
         duration: 1500,
         toValue: 1,
+        useNativeDriver: false
       }),
 
       Animated.timing(showTime_Height, {
         duration: 2500,
         toValue: 100,
+        useNativeDriver: false
       }),
     ]).start();
   };
@@ -192,17 +194,20 @@ export const SleepTimeScreen = ({ navigation }) => {
       Animated.timing(showTime, {
         duration: 1500,
         toValue: 0,
+        useNativeDriver: false
       }),
       Animated.timing(showTime_Height, {
         duration: 1500,
         toValue: 0,
+        useNativeDriver: false
       }),
     ]).start();
   };
 
   const onCalculateHandler = () => {
     if (chosenDate == "...") {
-      Alert.alert("Please choose time to wake up! ⏰");
+      // Alert.alert("Please choose time to wake up! ⏰");
+      showDatePicker()
     } else {
       let d = new Date();
       d.setHours(chosenHours);
@@ -224,7 +229,7 @@ export const SleepTimeScreen = ({ navigation }) => {
       // setTimeout(() => setShowTimeToSleep(true), 500);
 
       showTimeToSleep ? setShowTimeToSleep(false) : setShowTimeToSleep(true);
-      showBar();
+      // showBar();
     }
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
@@ -296,8 +301,7 @@ export const SleepTimeScreen = ({ navigation }) => {
                   style={{
                     ...styles.header,
                     // opacity: chosenDate == "..." ? 0.5 : 1,
-                    textDecorationLine:
-                      chosenDate == "..." ? "underline" : "underline",
+                    textDecorationLine:"underline",
                     textDecorationColor: "rgba(255,255,255,.2)",
                   }}
                 >

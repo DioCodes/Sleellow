@@ -1,7 +1,13 @@
+export const EXPERIENCE_UP = "EXPERIENCE_UP";
+export const LEVEL_UP = "LEVEL_UP";
+export const RESET_LEVELS = "RESET_LEVELS";
+
 export const ADD_MINS = "ADD_MINS";
 export const RESET_MINS = "RESET_MINS";
+
 export const ADD_MANTRA = "ADD_MANTRA";
 export const RESET_MANTRA = "RESET_MANTRA";
+
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS ";
