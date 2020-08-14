@@ -300,8 +300,9 @@ export const SleepTimeScreen = ({ navigation }) => {
                 <Text
                   style={{
                     ...styles.header,
+                    fontFamily: "norms-medium",
                     // opacity: chosenDate == "..." ? 0.5 : 1,
-                    textDecorationLine:"underline",
+                    textDecorationLine: "underline",
                     textDecorationColor: "rgba(255,255,255,.2)",
                   }}
                 >
@@ -449,7 +450,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   paddingContainer: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
   },
   boxContainer: {
     flexDirection: "row",
@@ -467,7 +468,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: theme.SECONDARY_COLOR,
-    fontFamily: "norms-bold",
+    fontFamily: "norms-regular",
     fontSize: theme.CONTAINER_HEADER,
     textAlign: "center",
   },

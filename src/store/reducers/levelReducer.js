@@ -118,8 +118,8 @@ export const levelReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           level: INITIAL_STATE.level,
-          // levelExperience: INITIAL_STATE.levelExperience,
-          levelExperience: 9,
+          levelExperience: INITIAL_STATE.levelExperience,
+          // levelExperience: 9,
           maxLevelExperience: INITIAL_STATE.maxLevelExperience,
           levelTitle: INITIAL_STATE.levelTitle
       };

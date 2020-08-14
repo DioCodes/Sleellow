@@ -77,11 +77,12 @@ const styles = StyleSheet.create({
   },
   levelText: {
     color: "#fff",
-    fontFamily: "norms-medium",
+    fontFamily: "norms-bold",
     fontSize: 18,
   },
   levelTextProg: {
     opacity: 0.4,
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: "norms-regular",
   },
 });

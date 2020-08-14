@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Alert, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView, Alert, AsyncStorage, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
+import { useFocusEffect } from "@react-navigation/native";
 import ConfettiCannon from 'react-native-confetti-cannon';
 
-import { UserLevel } from "./UserLevel";
 import { ShowScreenRide } from "../../components/ShowScreenRide";
-import { useFocusEffect } from "@react-navigation/native";
+import { UserLevel } from "./UserLevel";
+import { SettingsNotifications } from "./SettingsNotifications";
+import theme from "../../theme";
+import { Premium } from "./Premium";
 
 
 export const ProfileScreen = ({navigation}) => {
@@ -39,26 +42,32 @@ export const ProfileScreen = ({navigation}) => {
     levelUpConfetti();
   }, [navigation])
 
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //   });
-  //   return unsubscribe;
-  // }, [navigation])
-
   return (
     <ShowScreenRide>
-      <View style={styles.main}>
+      <ScrollView>
+        <View style={styles.main}>
 
-      <View style={styles.top}>
-        <View style={styles.levelContainer}>
-          <UserLevel />
+          <View style={styles.top}>
+            <View style={styles.levelContainer}>
+              <UserLevel />
+            </View>
+            <Premium/>
+          </View>
+
+          <View style={styles.middle}>
+            <View style={styles.settingsContainer}>
+              <View style={styles.headerContainer}>
+                <Text style={styles.header}>Settings</Text>
+              </View>
+              <SettingsNotifications/>
+            </View>
+          </View>
+
+            <ConfettiCannon ref={(ref) => confetti.current = ref} autoStart={false} 
+            colors={confettiColors} fadeOut fallSpeed={4000} 
+            count={200}  origin={{ x: -20, y: 0 }} />
         </View>
-
-      </View>
-          <ConfettiCannon ref={(ref) => confetti.current = ref} autoStart={false} 
-          colors={confettiColors} fadeOut fallSpeed={4000} 
-          count={200}  origin={{ x: -20, y: 0 }} />
-      </View>
+      </ScrollView>
     </ShowScreenRide>
   );
 };
@@ -66,12 +75,6 @@ export const ProfileScreen = ({navigation}) => {
 const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-  header: {
-    color: "#fff",
-    fontFamily: "norms-bold",
-    fontSize: 30,
-    position: 'absolute',
-  },
   main: {
     paddingTop: windowHeight > 800 ? "10%" : "5%",
     flex: 1,
@@ -81,6 +84,28 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
+  },
+  middle: {
+    width: '100%',
+    height: '100%',
+    // backgroundColor: 'blue',
+    paddingTop: 10,
+    paddingHorizontal: 20
+  },
+  settingsContainer: {
+    width: '100%',
+    height: '100%',
+  },
+  headerContainer: {
+    width: "100%",
+    // backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  header: {
+    color: theme.SECONDARY_COLOR,
+    fontSize: theme.HEADER,
+    fontFamily: 'norms-bold',
   },
   levelContainer: {
   },
