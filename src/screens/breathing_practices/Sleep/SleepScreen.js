@@ -83,7 +83,7 @@ const SleepScreen = ({ navigation }) => {
         }),
         Animated.timing(animatedMantraContainer, {
           duration: 100,
-          toValue: 60,
+          toValue: 80,
           easing,
           useNativeDriver: false,
         }),
@@ -150,20 +150,20 @@ const SleepScreen = ({ navigation }) => {
 
   const showDescriptionAndSettings = () => {
     const easingOut = Easing.out;
-
+    
     Animated.sequence([
       Animated.parallel([
         Animated.timing(animatedBreathContainer, {
           duration: 2000,
           toValue: 0,
           easingOut,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(animatedMantraContainer, {
           duration: 2000,
           toValue: 10,
           easingOut,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(animatedMantra, {
           duration: 2000,
@@ -251,8 +251,9 @@ const SleepScreen = ({ navigation }) => {
   );
 
   let timeOutBreathing = useRef(null);
+
   const startBreathing = () => {
-    let time = 54 * 1000;
+    let time = 19 * 4 * 1000;
     switch (napTime) {
       case "1":
         time = 19 * 4 * 1000; // 4 breaths
@@ -275,16 +276,19 @@ const SleepScreen = ({ navigation }) => {
       ? (setPaused(false),
         (timeOutBreathing.current = setTimeout(() => {
           setPaused(true);
+          clearTimeout(timeOutBreathing.current),
           showDescriptionAndSettings();
         }, time)),
         hideDescriptionAndSettings())
       : (setPaused(true),
+        console.log("clear"),
         clearTimeout(timeOutBreathing.current),
         showDescriptionAndSettings());
   };
 
   return (
     <View style={styles.container}>
+
       <ScrollView
         style={{
           width: "100%",
@@ -293,12 +297,14 @@ const SleepScreen = ({ navigation }) => {
         }}
         contentContainerStyle={{ ...styles.wrapper }}
       >
+
         <Animated.View
           style={{
             ...styles.breathContainer,
             paddingTop: animatedBreathContainer,
           }}
         >
+
           <TouchableOpacity
             activeOpacity={theme.ACTIVE_OPACITY}
             onPress={() => {
@@ -309,22 +315,21 @@ const SleepScreen = ({ navigation }) => {
               <BreathAnimation paused={paused} />
             </View>
           </TouchableOpacity>
-          <Animated.Text
-            style={{ ...styles.description, opacity: animatedDescription }}
-          >
+
+          <Animated.Text style={{ ...styles.description, opacity: animatedDescription }}>
             Tap to start the breathing practice.
           </Animated.Text>
+
           <Animated.View
             style={{
               ...styles.mantraContainer,
               height: animatedMantraContainer,
             }}
           >
-            <Animated.Text
-              style={{ ...styles.mantra, opacity: animatedMantra }}
-            >
+            <Animated.Text style={{ ...styles.mantra, opacity: animatedMantra }}>
               {mantraText}
             </Animated.Text>
+
             <Animated.Text
               style={{
                 ...styles.description,
@@ -333,6 +338,7 @@ const SleepScreen = ({ navigation }) => {
             >
               Close your lips, inhale through your nose.
             </Animated.Text>
+
             <Animated.Text
               style={{
                 ...styles.description,
@@ -341,6 +347,7 @@ const SleepScreen = ({ navigation }) => {
             >
               Hold your breath for the 7 seconds.
             </Animated.Text>
+
             <Animated.Text
               style={{
                 ...styles.description,
@@ -349,6 +356,7 @@ const SleepScreen = ({ navigation }) => {
             >
               Make a whooshing sound, exhaling completely through your mouth.
             </Animated.Text>
+
             <Animated.Text
               style={{
                 ...styles.description,
@@ -357,7 +365,9 @@ const SleepScreen = ({ navigation }) => {
             >
               Relax and repeat your mantra.
             </Animated.Text>
+
           </Animated.View>
+          
         </Animated.View>
 
         <Animated.View
@@ -450,7 +460,7 @@ const styles = StyleSheet.create({
   description: {
     color: theme.SECONDARY_COLOR,
     fontSize: theme.TEXT + 2,
-    fontFamily: "norms-medium",
+    fontFamily: "norms-regular",
     opacity: 0.5,
     position: "absolute",
     bottom: 0,
@@ -460,14 +470,15 @@ const styles = StyleSheet.create({
     width: "100%",
     // backgroundColor: "red",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     paddingHorizontal: 20,
   },
   mantra: {
     color: theme.SECONDARY_COLOR,
-    fontSize: theme.HEADER,
-    fontFamily: "norms-medium",
+    fontSize: theme.MANTRA_HEADER,
+    fontFamily: "norms-bold",
     position: "absolute",
+    textAlign: 'center'
   },
   time: {
     fontSize: theme.TEXT + 2,

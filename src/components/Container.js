@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.05)",
     borderRadius: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     paddingVertical: 15,
     marginBottom: 10,
     flexDirection: "row",
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: theme.CONTAINER_HEADER,
-    fontFamily: "norms-bold",
+    fontFamily: "norms-regular",
     color: "#fff",
   },
   mainWrapper: {
