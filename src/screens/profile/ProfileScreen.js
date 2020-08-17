@@ -6,6 +6,7 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 
 import { ShowScreenRide } from "../../components/ShowScreenRide";
 import { UserLevel } from "./UserLevel";
+import { UserIcon } from "../../../assets/images/UserIcon";
 import { SettingsNotifications } from "./SettingsNotifications";
 import theme from "../../theme";
 import { Premium } from "./Premium";
@@ -48,9 +49,9 @@ export const ProfileScreen = ({navigation}) => {
         <View style={styles.main}>
 
           <View style={styles.top}>
-            <View style={styles.levelContainer}>
-              <UserLevel />
-            </View>
+              {/* Добавить уровень когда будет добавлена авторизация */}
+              {/* <UserLevel /> */}
+              <UserIcon/>
             <Premium/>
           </View>
 
@@ -76,9 +77,10 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   main: {
-    paddingTop: windowHeight > 800 ? "10%" : "5%",
     flex: 1,
     width: '100%',
+    paddingTop: windowHeight > 800 ? "15%" : "10%",
+    paddingHorizontal: 20,
   },
   top: {
     flexDirection: "row",
@@ -90,7 +92,6 @@ const styles = StyleSheet.create({
     height: '100%',
     // backgroundColor: 'blue',
     paddingTop: 10,
-    paddingHorizontal: 20
   },
   settingsContainer: {
     width: '100%',
@@ -100,15 +101,15 @@ const styles = StyleSheet.create({
     width: "100%",
     // backgroundColor: 'blue',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 10
   },
   header: {
     color: theme.SECONDARY_COLOR,
     fontSize: theme.HEADER,
     fontFamily: 'norms-bold',
   },
-  levelContainer: {
-  },
+
   btn: {
     width: 100,
     height: 50,

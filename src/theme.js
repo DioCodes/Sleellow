@@ -1,5 +1,6 @@
 export default {
   PRIMARY_COLOR: "#0A0D12", // 050608 // 0C0F12 // 0A0D12
+  MODAL_BGC_COLOR: "0C0F14",
   SECONDARY_COLOR: "#fff",
   TERTIARY_COLOR: "#4937FF",
   QUATERNARY_COLOR: "#1F12A6",
@@ -10,4 +11,5 @@ export default {
   CONTAINER_HEADER: 18,
   TEXT: 16,
   TEXT_LINEHEIGHT: 20,
+  CONTAINER_FONT_FAMILY: "norms-medium"
 };

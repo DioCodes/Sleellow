@@ -19,13 +19,6 @@ export const BreathingPractices = (props) => {
         <Text style={styles.header}>Relaxation 🧘🏻</Text>
         <Container
           name="Sleep"
-          icon={
-            <Ionicons
-              name="ios-arrow-forward"
-              color="rgba(255, 255, 255, .25)"
-              size={26}
-            />
-          }
           onPress={() => {
             props.navigation.navigate("SleepScreen");
           }}
@@ -33,13 +26,6 @@ export const BreathingPractices = (props) => {
         <Text style={styles.header}>Energy ⚡️</Text>
         <Container
           name="Wake up"
-          icon={
-            <Ionicons
-              name="ios-arrow-forward"
-              color="rgba(255, 255, 255, .25)"
-              size={26}
-            />
-          }
           onPress={() => {
             props.navigation.navigate("WakeUpScreen");
           }}

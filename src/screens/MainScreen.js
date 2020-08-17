@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import * as Permissions from "expo-permissions";
-import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
 import RBSheet from "react-native-raw-bottom-sheet";
 import theme from "../theme";
@@ -35,24 +33,6 @@ const MainScreen = (props) => {
   const dispatch = useDispatch();
   const bs = useRef();
   const windowHeight = Dimensions.get("window").height;
-
-  const isAllowNotifications = async () => {
-    const { status: existingStatus } = await Permissions.getAsync(
-      Permissions.NOTIFICATIONS
-    );
-    let finalStatus = existingStatus;
-    if (existingStatus !== "granted") {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-    if (finalStatus !== "granted") {
-      return;
-    }
-  };
-
-  useEffect(() => {
-    isAllowNotifications();
-  }, []);
 
   const checkNapDescription = (index, value) => {
     if (index == "0") {
@@ -154,26 +134,12 @@ const MainScreen = (props) => {
         <ScrollView>
           <Container
             name="Sleep time"
-            icon={
-              <Ionicons
-                name="ios-arrow-forward"
-                color="rgba(255, 255, 255, .25)"
-                size={26}
-              />
-            }
             onPress={() => {
               props.navigation.navigate("SleepTime");
             }}
           />
           <Container
             name="Breathing practices"
-            icon={
-              <Ionicons
-                name="ios-arrow-forward"
-                color="rgba(255, 255, 255, .25)"
-                size={26}
-              />
-            }
             onPress={() => {
               // props.navigation.navigate("BreathScreen");
               props.navigation.navigate("BreathingPractices");
