@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Haptics from "expo-haptics";
 import theme from "../theme";
+import { Ionicons } from "@expo/vector-icons";
 
-export const Container = ({ onPress, name, icon }) => {
+export const Container = ({ onPress, name }) => {
   const onPressHandler = () => {
     onPress();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -17,7 +18,11 @@ export const Container = ({ onPress, name, icon }) => {
     >
       <View style={styles.btnCont}>
         <Text style={styles.header}>{name}</Text>
-        {icon}
+        <Ionicons
+              name="ios-arrow-forward"
+              color="rgba(255, 255, 255, .25)"
+              size={26}
+            />
       </View>
     </TouchableOpacity>
   );
@@ -34,6 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    height: 60
   },
   btnCont: {
     width: "100%",
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: theme.CONTAINER_HEADER,
-    fontFamily: "norms-regular",
+    fontFamily: theme.CONTAINER_FONT_FAMILY,
     color: "#fff",
   },
   mainWrapper: {
