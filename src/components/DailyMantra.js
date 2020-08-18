@@ -30,6 +30,16 @@ export const DailyMantra = () => {
     }
   });
 
+  const onCompletePress = () => {
+    dispatch(resetMantra());
+    dispatch(addMantra(mantraValue));
+    if (inputValue == "") {
+      dispatch(resetMantra());
+    }
+    setInputValue("");
+    bs.current.close();
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} onPress={() => bs.current.open()}>
@@ -52,30 +62,29 @@ export const DailyMantra = () => {
           wrapper: {
             backgroundColor: "#rgba(0, 0, 0, 0.85)",
           },
+          draggableIcon: {
+            display: 'none'
+          },
           container: {
-            backgroundColor: theme.PRIMARY_COLOR,
+            backgroundColor: theme.MODAL_BGC_COLOR,
+            borderTopRightRadius: 10,
+            borderTopLeftRadius: 10,
           },
         }}
         animationType="fade"
       >
-        <View style={styles.rbSheetContainer}>
-          <View style={styles.sheetContainerContent}>
-            <Text
-              style={{
-                ...styles.mantraText,
-                marginBottom: 20,
-                fontSize: 25,
-              }}
-            >
-              Write your daily mantra
-            </Text>
+        <View style={styles.top}>
+              <Text style={styles.topHeader}>Your daily mantra</Text>
+          </View>
 
+          <View style={styles.sheetContainerContent}>
             <View
               style={{
-                borderBottomWidth: 1,
-                borderBottomColor: "rgba(255, 255, 255, .1)",
+                borderBottomWidth: 2,
+                borderBottomColor: "rgba(255, 255, 255, .5)",
                 width: "100%",
                 paddingBottom: 5,
+                marginBottom: 20
               }}
             >
               <TextInput
@@ -89,7 +98,7 @@ export const DailyMantra = () => {
                   setMantraValue(text);
                   setInputValue(text);
                 }}
-                placeholder="I can.."
+                placeholder="Write your daily mantra here.."
                 maxLength={70}
                 returnKeyType="done"
                 blurOnSubmit={true}
@@ -97,40 +106,16 @@ export const DailyMantra = () => {
                 autoCorrect={false}
               />
             </View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => {
-                dispatch(resetMantra());
-                dispatch(addMantra(mantraValue));
-                if (inputValue == "") {
-                  dispatch(resetMantra());
-                }
-                setInputValue("");
-                bs.current.close();
-              }}
-            >
-              <View
-                style={{
-                  marginTop: 30,
-                  backgroundColor: "white",
-                  paddingHorizontal: 30,
-                  paddingVertical: 12,
-                  borderRadius: 5,
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: "norms-medium",
-                    color: "#000",
-                    fontSize: theme.TEXT + 2,
-                  }}
-                >
-                  Complete
-                </Text>
-              </View>
-            </TouchableOpacity>
+
+            <View style={styles.completeBtnContainer}>
+              <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => onCompletePress()}>
+                <View style={styles.completeBtn}>
+                  <Text style={styles.completeBtnText}>Complete</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
           </View>
-        </View>
       </RBSheet>
     </View>
   );
@@ -161,16 +146,46 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
   },
-  rbSheetContainer: {
-    height: windowHeight > 800 ? 680 : 620,
-    width: "100%",
-    alignItems: "center",
-  },
   sheetContainerContent: {
-    justifyContent: "center",
-    alignItems: "flex-start",
-    width: "100%",
-    marginVertical: 30,
+    // justifyContent: "center",
+    // width: "100%",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
+  top: {
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    // backgroundColor: "rgba(255, 255, 255, .1)",
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, .05)',
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15
+  },
+  topHeader: {
+    fontSize: 18,
+    color: theme.SECONDARY_COLOR,
+    fontFamily: 'norms-bold',
+  },
+  completeBtnContainer: {
+    width: '50%',
+    height: 50,
+    // marginTop: 25,
+    alignSelf: 'flex-end'
+  },
+  completeBtn: {
+    width: '100%',
+    height: "100%",
+    backgroundColor: "rgba(255, 255, 255, .1)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+  },
+  completeBtnText: {
+    color: "#fff",
+    fontSize: 20,
+    fontFamily: "norms-medium",
+  }
 });
