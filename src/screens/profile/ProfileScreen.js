@@ -3,13 +3,17 @@ import { View, Text, StyleSheet, Dimensions, ScrollView, Alert, AsyncStorage, To
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import ConfettiCannon from 'react-native-confetti-cannon';
+import * as Linking from 'expo-linking';
 
 import { ShowScreenRide } from "../../components/ShowScreenRide";
 import { UserLevel } from "./UserLevel";
 import { UserIcon } from "../../../assets/images/UserIcon";
-import { SettingsNotifications } from "./SettingsNotifications";
 import theme from "../../theme";
 import { Premium } from "./Premium";
+import { Container } from "../../components/Container";
+import { ShareTheApp } from "../../components/ShareTheApp";
+import { PrepareForSleep } from "../../components/PrepareForSleep";
+import { WriteReview } from "../../components/WriteReview";
 
 
 export const ProfileScreen = ({navigation}) => {
@@ -43,6 +47,7 @@ export const ProfileScreen = ({navigation}) => {
     levelUpConfetti();
   }, [navigation])
 
+
   return (
     <ShowScreenRide>
       <ScrollView>
@@ -60,7 +65,10 @@ export const ProfileScreen = ({navigation}) => {
               <View style={styles.headerContainer}>
                 <Text style={styles.header}>Settings</Text>
               </View>
-              <SettingsNotifications/>
+              <PrepareForSleep />
+              <WriteReview />
+              <ShareTheApp />
+              <Container name="Find me on Instagram" icon="👨🏻‍💻" onPress={() => Linking.openURL("instagram://user?username=dio.codes")} />
             </View>
           </View>
 

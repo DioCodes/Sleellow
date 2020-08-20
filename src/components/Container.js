@@ -4,7 +4,7 @@ import * as Haptics from "expo-haptics";
 import theme from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 
-export const Container = ({ onPress, name }) => {
+export const Container = ({ onPress, name, icon }) => {
   const onPressHandler = () => {
     onPress();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -18,11 +18,13 @@ export const Container = ({ onPress, name }) => {
     >
       <View style={styles.btnCont}>
         <Text style={styles.header}>{name}</Text>
+        { icon ? <Text style={styles.icon}>{icon}</Text> :
         <Ionicons
-              name="ios-arrow-forward"
-              color="rgba(255, 255, 255, .25)"
-              size={26}
-            />
+          name="ios-arrow-forward"
+          color="rgba(255, 255, 255, .25)"
+          size={26}
+        />
+        }
       </View>
     </TouchableOpacity>
   );
@@ -70,4 +72,7 @@ const styles = StyleSheet.create({
     fontFamily: "norms-regular",
     color: "rgba(255, 255, 255, .5)",
   },
+  icon: {
+    fontSize: 22
+  }
 });

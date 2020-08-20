@@ -150,7 +150,7 @@ export const BreathAnimation = ({ paused }) => {
       activateHaptics();
       intervalHaptics.current = setInterval(() => {
         activateHaptics();
-        dispatch(checkUserLevel())
+        // dispatch(checkUserLevel())
       }, 19000);
     }
 

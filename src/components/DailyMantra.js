@@ -102,7 +102,7 @@ export const DailyMantra = () => {
                 maxLength={70}
                 returnKeyType="done"
                 blurOnSubmit={true}
-                autoCapitalize="none"
+                autoCapitalize="sentences"
                 autoCorrect={false}
               />
             </View>

@@ -6,10 +6,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import RBSheet from "react-native-raw-bottom-sheet";
 import moment from "moment";
 
-import theme from "../../theme"
-import { Container } from "../../components/Container";
+import theme from "../theme"
+import { Container } from "./Container";
 
-export const SettingsNotifications = () => {
+export const PrepareForSleep = () => {
   const [date, setDate] = useState(new Date());
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
@@ -50,21 +50,24 @@ export const SettingsNotifications = () => {
   const bs = useRef();
   const windowHeight = Dimensions.get("window").height;
 
-  const sheduledNotification = async () => {
+  const scheduledNotification = async () => {
     await Notifications.cancelAllScheduledNotificationsAsync()
 
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
         shouldShowAlert: true,
         shouldPlaySound: true,
-        shouldSetBadge: true,
+        shouldSetBadge: false,
       }),
     });
+
+
 
     Notifications.scheduleNotificationAsync({
       content: {
         title: 'Prepare for sleep.',
         body: "Go to sleep right now!",
+        sound: 'default'
       },
       trigger: {
         hour: hours,
@@ -77,6 +80,7 @@ export const SettingsNotifications = () => {
       content: {
         title: 'Prepare for sleep.',
         body: "It's time to start your bedtime routine!",
+        sound: 'default'
       },
       trigger: {
         hour: secHours,
@@ -89,6 +93,7 @@ export const SettingsNotifications = () => {
       content: {
         title: 'Prepare for sleep.',
         body: "Finish all your tasks and get ready for sleep.",
+        sound: 'default'
       },
       trigger: {
         hour: thirdHours,
@@ -102,12 +107,12 @@ export const SettingsNotifications = () => {
   const onSavePress = () => {
     bs.current.close()
     isAllowNotifications()
-    sheduledNotification()
+    scheduledNotification()
   }
 
   return (
     <View>
-      <Container name="Prepare for sleep" onPress={() => bs.current.open()} />
+      <Container icon="😴"  name="Prepare for sleep" onPress={() => bs.current.open()} />
 
       <RBSheet
           ref={bs}
@@ -133,7 +138,7 @@ export const SettingsNotifications = () => {
           animationType="fade"
         >
           <View style={styles.top}>
-              <Text style={styles.topHeader}>Prepare for sleep</Text>
+              <Text style={styles.topHeader}>Prepare for sleep 😴</Text>
           </View>
           
           <View style={styles.modalContainer}>
@@ -150,7 +155,7 @@ export const SettingsNotifications = () => {
             onChange={onChange}
           />
 
-          <View style={{...styles.modalContainer, marginTop: 10}}>
+          <View style={styles.modalContainer}>
             <Text style={{ ...styles.modalHeader, opacity: .25, fontSize: 14}}>Sleellow will remind you to get ready for bed at your chosen time, 30 minutes and 1 hour before it.</Text>
           </View>
 
@@ -220,7 +225,7 @@ const styles = StyleSheet.create({
     width: '50%',
     height: 50,
     alignSelf: 'center',
-    marginTop: 25
+    marginTop: 20
   },
   saveBtn: {
     width: '100%',
