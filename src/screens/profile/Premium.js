@@ -20,15 +20,12 @@ const styles = StyleSheet.create({
   premiumContainer: {
     borderWidth: 2,
     borderColor: "rgba(255, 255, 255, 1)",
-    // width: "50%",
-    height: 50,
-    // margin: 20,
     borderRadius: 10,
+    paddingVertical: 15,
     paddingHorizontal: 15,
   },
   premiumTextContainer: {
     width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },

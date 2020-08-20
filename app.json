@@ -3,11 +3,10 @@
     "name": "Sleellow",
     "slug": "sleep-breath-app",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "ios"
     ],
-    "version": "0.1.0",
+    "privacy": "public",
+    "version": "0.9.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -17,6 +16,7 @@
     },
     "notification": {
       "icon": "./assets/images/icon.png",
+      "color": "#0A0D12",
       "iosDisplayInForeground": true
     },
     "updates": {
@@ -28,12 +28,12 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "icon": "./assets/images/icon.png",
-      "backgroundColor": "#0C0F12",
+      "backgroundColor": "#0A0D12",
       "bundleIdentifier": "com.diocode.sleellow",
-      "buildNumber": "0.1.0",
+      "buildNumber": "0.9.4",
       "userInterfaceStyle": "dark"
     },
-    "description": "Sleellow - sleep app",
-    "githubUrl": "https://github.com/DioCode/Sleellow"
+    "description": "Sleellow is an application that helps improve your sleep and well-being after waking up.",
+    "githubUrl": "https://github.com/DioCodes/Sleellow"
   }
 }
