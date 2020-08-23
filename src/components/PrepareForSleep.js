@@ -8,8 +8,9 @@ import moment from "moment";
 
 import theme from "../theme"
 import { Container } from "./Container";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export const PrepareForSleep = () => {
+export const PrepareForSleep = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
@@ -61,11 +62,9 @@ export const PrepareForSleep = () => {
       }),
     });
 
-
-
     Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Prepare for sleep.',
+        title: 'Go to sleep!',
         body: "Go to sleep right now!",
         sound: 'default'
       },
@@ -104,74 +103,53 @@ export const PrepareForSleep = () => {
     
   }
 
-  const onSavePress = () => {
-    bs.current.close()
+  const oncomplePress = () => {
     isAllowNotifications()
     scheduledNotification()
+    navigation.goBack()
   }
 
   return (
-    <View>
-      <Container icon="😴"  name="Prepare for sleep" onPress={() => bs.current.open()} />
 
-      <RBSheet
-          ref={bs}
-          height={windowHeight > 800 ? 735 : 675}
-          openDuration={275}
-          closeDuration={275}
-          closeOnDragDown={true}
-          closeOnPressMask={true}
-          customStyles={{
-            wrapper: {
-              backgroundColor: "#rgba(0, 0, 0, 0.85)",
-              // marginHorizontal: 100
-            },
-            draggableIcon: {
-              display: 'none'
-            },
-            container: {
-              backgroundColor: theme.MODAL_BGC_COLOR,
-              borderTopRightRadius: 10,
-              borderTopLeftRadius: 10,
-            },
-          }}
-          animationType="fade"
-        >
-          <View style={styles.top}>
-              <Text style={styles.topHeader}>Prepare for sleep 😴</Text>
-          </View>
+    <View style={styles.main}>
+      <View style={styles.top}>
+        <Text style={styles.topHeader}>Prepare for sleep 😴</Text>
+      </View>
           
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalHeader}>Choose the time you want to fall asleep</Text>
-          </View>
+      <View style={styles.modalContainer}>
+        <Text style={styles.modalHeader}>Choose the time you want to fall asleep</Text>
+      </View>
 
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="time"
-            minuteInterval={5}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
+      <DateTimePicker
+        testID="dateTimePicker"
+        value={date}
+        mode="time"
+        minuteInterval={5}
+        is24Hour={true}
+        display="default"
+        onChange={onChange}
+      />
 
-          <View style={styles.modalContainer}>
-            <Text style={{ ...styles.modalHeader, opacity: .25, fontSize: 14}}>Sleellow will remind you to get ready for bed at your chosen time, 30 minutes and 1 hour before it.</Text>
-          </View>
+      <View style={styles.modalContainer}>
+        <Text style={{ ...styles.modalHeader, opacity: .25, fontSize: 14}}>Sleellow will remind you to get ready for sleep at chosen time, 30 minutes and 1 hour before it.</Text>
+      </View>
 
-          <View style={styles.saveBtnContainer}>
-            <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => onSavePress()}>
-              <View style={styles.saveBtn}>
-                <Text style={styles.saveBtnText}>Save</Text>
-              </View>
-            </TouchableOpacity>
+      <View style={styles.compleBtnContainer}>
+        <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => oncomplePress()}>
+          <View style={styles.compleBtn}>
+            <Text style={styles.compleBtnText}>Complete</Text>
           </View>
-        </RBSheet>
+        </TouchableOpacity>
+      </View> 
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1, 
+    backgroundColor: theme.MODAL_BGC_COLOR,
+  },
   container: { 
     width: "100%",
     height: 60,
@@ -221,13 +199,13 @@ const styles = StyleSheet.create({
     fontFamily: 'norms-regular',
     opacity: 1
   },
-  saveBtnContainer: {
+  compleBtnContainer: {
     width: '50%',
     height: 50,
     alignSelf: 'center',
     marginTop: 20
   },
-  saveBtn: {
+  compleBtn: {
     width: '100%',
     height: "100%",
     backgroundColor: "rgba(255, 255, 255, .1)",
@@ -235,9 +213,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 30,
   },
-  saveBtnText: {
+  compleBtnText: {
     color: "#fff",
     fontSize: 20,
     fontFamily: "norms-medium",
   }
 })
+
+{/* <RBSheet
+          ref={bs}
+          height={windowHeight > 800 ? 735 : 675}
+          openDuration={275}
+          closeDuration={275}
+          closeOnDragDown={true}
+          closeOnPressMask={true}
+          customStyles={{
+            wrapper: {
+              backgroundColor: "#rgba(0, 0, 0, 0.85)",
+              // marginHorizontal: 100
+            },
+            draggableIcon: {
+              display: 'none'
+            },
+            container: {
+              backgroundColor: theme.MODAL_BGC_COLOR,
+              borderTopRightRadius: 10,
+              borderTopLeftRadius: 10,
+            },
+          }}
+          animationType="fade"
+        > */}

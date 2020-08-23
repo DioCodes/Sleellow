@@ -17,7 +17,7 @@ import { Container } from "../components/Container";
 import TimerDisp from "../components/Timer/TimerDisp";
 import { useDispatch } from "react-redux";
 
-import { DailyMantra } from "../components/DailyMantra";
+import { DailyMantraButton } from "../components/DailyMantra/DailyMantraButton";
 import { SleepRoutine } from "../components/SleepRoutine";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -129,7 +129,7 @@ const MainScreen = (props) => {
   return (
     <ShowScreenRide>
       <View style={styles.main}>
-        <DailyMantra />
+        <DailyMantraButton navigation={props.navigation} />
 
         <ScrollView>
           <Container
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: windowHeight > 800 ? "14%" : "8%",
+    paddingTop: windowHeight > 800 ? "0%" : "3%",
   },
   text: {
     fontFamily: "norms-regular",

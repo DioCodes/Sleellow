@@ -9,7 +9,7 @@ import { ShowScreenRide } from "../../components/ShowScreenRide";
 import { UserLevel } from "./UserLevel";
 import { UserIcon } from "../../../assets/images/UserIcon";
 import theme from "../../theme";
-import { Premium } from "./Premium";
+import { PremiumButton } from "../../components/PremiumButton";
 import { Container } from "../../components/Container";
 import { ShareTheApp } from "../../components/ShareTheApp";
 import { PrepareForSleep } from "../../components/PrepareForSleep";
@@ -57,7 +57,7 @@ export const ProfileScreen = ({navigation}) => {
               {/* Добавить уровень когда будет добавлена авторизация */}
               {/* <UserLevel /> */}
               <UserIcon/>
-            <Premium/>
+            <PremiumButton navigation={navigation} />
           </View>
 
           <View style={styles.middle}>
@@ -65,7 +65,7 @@ export const ProfileScreen = ({navigation}) => {
               <View style={styles.headerContainer}>
                 <Text style={styles.header}>Settings</Text>
               </View>
-              <PrepareForSleep />
+              <Container icon="😴"  name="Prepare for sleep" onPress={() => navigation.push("PrepareForSleepModal")} />
               <WriteReview />
               <ShareTheApp />
               <Container name="Find me on Instagram" icon="👨🏻‍💻" onPress={() => Linking.openURL("instagram://user?username=dio.codes")} />
@@ -87,8 +87,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: '100%',
-    paddingTop: windowHeight > 800 ? "15%" : "10%",
+    paddingTop: windowHeight > 800 ? "0%" : "3%",
     paddingHorizontal: 20,
+    // backgroundColor: 'red'
   },
   top: {
     flexDirection: "row",

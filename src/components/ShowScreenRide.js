@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, SafeAreaView, Dimensions } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import theme from "../theme";
 
@@ -46,7 +46,7 @@ export const ShowScreenRide = ({ children }) => {
   }
 
   return (
-    <View style={styles.center}>
+    <SafeAreaView style={styles.center}>
       <Animated.View
         style={{
           ...styles.screenContainer,
@@ -56,14 +56,16 @@ export const ShowScreenRide = ({ children }) => {
       >
         {children}
       </Animated.View>
-    </View>
+    </SafeAreaView>
   );
 };
+
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    backgroundColor: theme.PRIMARY_COLOR,
+    backgroundColor: theme.PRIMARY_COLOR
     // paddingTop: "10%",
   },
   screenContainer: {

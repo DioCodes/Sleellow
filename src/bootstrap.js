@@ -16,6 +16,7 @@ export async function bootstrap() {
       }
     });
   }
+  
   cacheImages([
     require("../assets/images/SecurityImage"),
     require("../assets/images/StatsImage"),
