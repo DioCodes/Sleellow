@@ -4,7 +4,7 @@ import * as StoreReview from 'expo-store-review';
 
 export const WriteReview = () => {
   return(
-    <Container icon="😍" name="Write a nice review" onPress={() => {
+    <Container icon="😍" name="Review Sleellow" onPress={() => {
       if (StoreReview.isAvailableAsync()) {
         StoreReview.requestReview(); 
       }

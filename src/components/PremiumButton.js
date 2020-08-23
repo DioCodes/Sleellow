@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import theme from "../../theme";
+import theme from "../theme";
 
-export const Premium = () => {
+export const PremiumButton = ({navigation}) => {
   return (
     <View style={styles.premiumContainer}>
-      <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY}>
+      <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => navigation.push("PremiumScreen")}>
         <View style={styles.premiumTextContainer}>
           <Text style={styles.premiumText}>
             Try premium for free

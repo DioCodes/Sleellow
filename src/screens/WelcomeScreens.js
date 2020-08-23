@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, Dimensions, AsyncStorage } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { AppIcon } from "../../assets/images/AppIcon";

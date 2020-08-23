@@ -9,40 +9,40 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import RBSheet from "react-native-raw-bottom-sheet";
-import theme from "../theme";
+import theme from "../../theme";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { addMantra, resetMantra } from "../store/actions/mantraActions";
+import { addMantra, resetMantra } from "../../store/actions/mantraActions";
 
-export const DailyMantra = () => {
-  const [isMantraWrited, setIsMantraWrited] = useState(false);
-  const [mantraValue, setMantraValue] = useState("");
-  const [inputValue, setInputValue] = useState("");
+export const DailyMantraButton = ({navigation}) => {
+  // const [isMantraWrited, setIsMantraWrited] = useState(false);
+  // const [mantraValue, setMantraValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
 
-  const bs = useRef();
-  const windowHeight = Dimensions.get("window").height;
+  // const bs = useRef();
+  // const windowHeight = Dimensions.get("window").height;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.mantra.mantra);
 
-  useEffect(() => {
-    if (mantraValue != "") {
-      setIsMantraWrited(true);
-    }
-  });
+  // useEffect(() => {
+  //   if (mantraValue != "") {
+  //     setIsMantraWrited(true);
+  //   }
+  // });
 
-  const onCompletePress = () => {
-    dispatch(resetMantra());
-    dispatch(addMantra(mantraValue));
-    if (inputValue == "") {
-      dispatch(resetMantra());
-    }
-    setInputValue("");
-    bs.current.close();
-  }
+  // const onCompletePress = () => {
+  //   dispatch(resetMantra());
+  //   dispatch(addMantra(mantraValue));
+  //   if (inputValue == "") {
+  //     dispatch(resetMantra());
+  //   }
+  //   setInputValue("");
+  //   bs.current.close();
+  // }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.7} onPress={() => bs.current.open()}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.push("MantraModal")}>
         <Text style={styles.mantraHeader}>Your daily mantra:</Text>
         {allPosts != "" ? (
           <Text style={styles.mantraText}>{allPosts}</Text>
@@ -50,7 +50,7 @@ export const DailyMantra = () => {
           <Text style={styles.text}>Write your daily mantra...</Text>
         )}
       </TouchableOpacity>
-      <RBSheet
+      {/* <RBSheet
         ref={bs}
         height={windowHeight > 800 ? 735 : 675}
         openDuration={275}
@@ -116,7 +116,7 @@ export const DailyMantra = () => {
             </View>
 
           </View>
-      </RBSheet>
+      </RBSheet> */}
     </View>
   );
 };

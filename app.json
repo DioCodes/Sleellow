@@ -28,7 +28,7 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "icon": "./assets/images/icon.png",
-      "backgroundColor": "#0A0D12",
+      "backgroundColor": "#000000",
       "bundleIdentifier": "com.diocode.sleellow",
       "buildNumber": "0.9.4",
       "userInterfaceStyle": "dark"
