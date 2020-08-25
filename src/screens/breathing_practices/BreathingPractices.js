@@ -16,14 +16,14 @@ export const BreathingPractices = (props) => {
   return (
     <View style={styles.main}>
       <ScrollView>
-        <Text style={styles.header}>Relaxation 🧘🏻</Text>
+        <Text style={styles.header}>Relaxation {<Ionicons name="ios-leaf" size={22} color="white" />}</Text>
         <Container
           name="Sleep"
           onPress={() => {
             props.navigation.navigate("SleepScreen");
           }}
         />
-        <Text style={styles.header}>Energy ⚡️</Text>
+        <Text style={styles.header}>Energy {<Ionicons name="ios-flame" size={22} color="white" />}</Text>
         <Container
           name="Wake up"
           onPress={() => {

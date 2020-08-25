@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Path } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const SleepBackIcon = () => {
+export const SleepBackIcon = (props) => {
   return (
-    <Svg width={275 / 2.3} height={326 / 2.3} viewBox="0 0 275 328">
+    <Svg width={275 / 2.3} height={326 / 2.3} viewBox="0 0 275 328" {...props}>
       <G fill="none" fillRule="evenodd">
         <G stroke="#FFF">
           <G strokeLinejoin="round" strokeWidth={2}>

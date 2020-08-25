@@ -7,7 +7,7 @@ export const AppIcon = (props) => {
     <Svg width={200} height={200} viewBox="0 0 472 501" {...props}>
       <G
         stroke="#FFF"
-        strokeWidth={4}
+        strokeWidth={6}
         fill="none"
         fillRule="evenodd"
         strokeLinecap="round"

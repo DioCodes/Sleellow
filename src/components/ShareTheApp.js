@@ -1,13 +1,15 @@
 import React from 'react'
 import {View, Share} from 'react-native'
 import { Container } from './Container';
+import { Ionicons } from '@expo/vector-icons';
 
 export const ShareTheApp = () => {
+  // Link here: https://www.itunes.apple.com/
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-          "Hey, check out Sleellow, great sleep app. Download it today while it's free for a limited time! Link here: https://www.itunes.apple.com/app",
+          "Hey, check out Sleellow, great sleep app.",
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -25,7 +27,7 @@ export const ShareTheApp = () => {
 
   return (
     <View>
-      <Container icon="🥳" name="Share the app" onPress={onShare} />
+      <Container icon={<Ionicons name="ios-share-alt" size={30} color="white" />} name="Share the app" onPress={onShare} />
     </View>
   )
 }

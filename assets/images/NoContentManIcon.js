@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Path, Defs, Use } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const NoContentManIcon = () => {
+export const NoContentManIcon = (props) => {
   return (
-    <Svg width={275} height={295 / 1.5} viewBox="0 0 275 295">
+    <Svg width={275} height={295 / 1.5} viewBox="0 0 275 295" {...props}>
       <G stroke="#FFF" fill="none" fillRule="evenodd">
         <G strokeLinejoin="round" strokeWidth={2}>
           <Path

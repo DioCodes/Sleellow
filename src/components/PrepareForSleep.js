@@ -1,5 +1,6 @@
 import React, {useState, useRef} from "react"
 import {View, Text, TouchableOpacity, StyleSheet, Switch, Dimensions, Picker} from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 import * as Permissions from "expo-permissions";
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -113,7 +114,7 @@ export const PrepareForSleep = ({navigation}) => {
 
     <View style={styles.main}>
       <View style={styles.top}>
-        <Text style={styles.topHeader}>Prepare for sleep 😴</Text>
+        <Text style={styles.topHeader}>Prepare for sleep {<Ionicons name="ios-moon" size={18} color="white" />}</Text>
       </View>
           
       <View style={styles.modalContainer}>
