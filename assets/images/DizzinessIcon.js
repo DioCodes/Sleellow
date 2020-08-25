@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Path } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const DizzinessIcon = () => {
+export const DizzinessIcon = (props) => {
   return (
-    <Svg width={275 / 2.3} height={326 / 2.3} viewBox="0 0 275 304">
+    <Svg width={275 / 2.3} height={326 / 2.3} viewBox="0 0 275 304" {...props}>
       <G fill="none" fillRule="evenodd">
         <G stroke="#FFF" strokeLinejoin="round">
           <G strokeWidth={2}>

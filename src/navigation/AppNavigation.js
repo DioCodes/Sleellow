@@ -44,7 +44,6 @@ export const AppNavigation = ({ navigation, route }) => {
     },
     cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
     ...TransitionPresets.ModalPresentationIOS,
-    
   }
 
   useEffect(() => {
@@ -206,7 +205,16 @@ export const AppNavigation = ({ navigation, route }) => {
         <Stack.Screen
           name="PremiumScreen"
           component={PremiumScreen}
-          options={modalOptions}
+          options={{
+            headerShown: false,
+            gestureEnabled: true,
+            gestureResponseDistance: {
+              vertical: Dimensions.get("window").height 
+            },
+            cardOverlayEnabled: true,
+            cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+            ...TransitionPresets.ModalSlideFromBottomIOS,
+          }}
         />
       </Stack.Navigator>
     );

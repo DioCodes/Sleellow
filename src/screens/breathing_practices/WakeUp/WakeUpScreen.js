@@ -19,7 +19,6 @@ import { connect, useDispatch, useSelector } from "react-redux";
 
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
-import { NoContentPillowIcon } from "../../../../assets/images/NoContentPillowIcon";
 import { NoContentManIcon } from "../../../../assets/images/NoContentManIcon";
 
 export const WakeUpScreen = ({ navigation }) => {

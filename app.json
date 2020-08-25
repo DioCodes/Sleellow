@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "Sleellow",
-    "slug": "sleep-breath-app",
+    "slug": "sleellow",
     "platforms": [
       "ios"
     ],
     "privacy": "public",
-    "version": "0.9.4",
+    "version": "0.9.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -30,7 +30,7 @@
       "icon": "./assets/images/icon.png",
       "backgroundColor": "#000000",
       "bundleIdentifier": "com.diocode.sleellow",
-      "buildNumber": "0.9.4",
+      "buildNumber": "0.9.5",
       "userInterfaceStyle": "dark"
     },
     "description": "Sleellow is an application that helps improve your sleep and well-being after waking up.",

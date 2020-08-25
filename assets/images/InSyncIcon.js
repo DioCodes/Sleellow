@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Path } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const InSyncIcon = ({ iconWidth, iconHeight }) => {
+export const InSyncIcon = (props,{ iconWidth, iconHeight }) => {
   return (
-    <Svg width={iconWidth} height={iconHeight} viewBox="0 0 422 288">
+    <Svg width={iconWidth} height={iconHeight} viewBox="0 0 422 288" {...props}>
       <G
         stroke="#FFF"
         strokeWidth={20}

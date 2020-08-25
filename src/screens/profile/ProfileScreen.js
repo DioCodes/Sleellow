@@ -14,11 +14,11 @@ import { Container } from "../../components/Container";
 import { ShareTheApp } from "../../components/ShareTheApp";
 import { PrepareForSleep } from "../../components/PrepareForSleep";
 import { WriteReview } from "../../components/WriteReview";
+import { Ionicons } from "@expo/vector-icons";
+import { Leaves } from "../../../assets/images/Leaves";
 
 
 export const ProfileScreen = ({navigation}) => {
-  const [showConfetti, setShowConfetti] = useState(false)
-
   const level = useSelector((state) => state.level.level)
   const confetti = useRef()
   const confettiColors = ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, .5)",
@@ -54,9 +54,13 @@ export const ProfileScreen = ({navigation}) => {
         <View style={styles.main}>
 
           <View style={styles.top}>
-              {/* Добавить уровень когда будет добавлена авторизация */}
-              {/* <UserLevel /> */}
+            {/* Добавить уровень когда будет добавлена авторизация */}
+            {/* <UserLevel /> */}
+            <Leaves height={175} width={175}/>
+            <View style={styles.userPos}>
               <UserIcon/>
+            </View>
+            {/* <Text style={styles.thanks}>Thanks for your support <Ionicons name="ios-heart" size={18} color="white" /></Text> */}
             <PremiumButton navigation={navigation} />
           </View>
 
@@ -65,10 +69,18 @@ export const ProfileScreen = ({navigation}) => {
               <View style={styles.headerContainer}>
                 <Text style={styles.header}>Settings</Text>
               </View>
-              <Container icon="😴"  name="Prepare for sleep" onPress={() => navigation.push("PrepareForSleepModal")} />
+              <Container icon={<Ionicons name="ios-moon" size={30} color="white" />}  name="Prepare for sleep" onPress={() => navigation.push("PrepareForSleepModal")} />
               <WriteReview />
               <ShareTheApp />
-              <Container name="Find me on Instagram" icon="👨🏻‍💻" onPress={() => Linking.openURL("instagram://user?username=dio.codes")} />
+              <Container 
+                name="Developer's Instagram" 
+                icon={
+                  <Ionicons name="logo-instagram" size={30} color="white" />
+                } 
+                onPress={
+                  () => Linking.openURL("instagram://user?username=dio.codes")
+                }
+              />
             </View>
           </View>
 
@@ -87,14 +99,26 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: '100%',
-    paddingTop: windowHeight > 800 ? "0%" : "3%",
+    paddingTop: windowHeight > 800 ? "2%" : "3%",
     paddingHorizontal: 20,
     // backgroundColor: 'red'
   },
   top: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    // flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10
+  },
+  userPos: {
+    position: 'absolute',
+    top: 30
+  },
+  thanks: {
+    color: '#fff',
+    fontSize: 18,
+    fontFamily: 'norms-medium',
+    position: 'absolute',
+    bottom: 0
   },
   middle: {
     width: '100%',
@@ -118,7 +142,15 @@ const styles = StyleSheet.create({
     fontSize: theme.HEADER,
     fontFamily: 'norms-bold',
   },
-
+  you: {
+    color: '#fff',
+    fontSize: 30,
+    fontFamily: 'norms-bold',
+    marginLeft: 5,
+    // position: 'absolute',
+    // bottom: 0
+  },
+  
   btn: {
     width: 100,
     height: 50,

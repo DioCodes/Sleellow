@@ -2,9 +2,9 @@ import * as React from "react";
 import Svg, { G, Path, Defs, Use } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const NoContentPillowIcon = () => {
+export const CoolSleellow = (props) => {
   return (
-    <Svg width={290} height={228 / 1.25} viewBox="0 0 290 228">
+    <Svg width={290} height={228 / 1.25} viewBox="0 0 290 228" {...props}>
       <Defs>
         <Path
           d="M1 4c0 15.708 12.637 28.442 28.225 28.442C44.814 32.442 57.45 19.708 57.45 4"

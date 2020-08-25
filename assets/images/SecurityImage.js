@@ -3,10 +3,10 @@ import { Animated } from "react-native";
 import Svg, { Defs, Path, G, Use } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
-export const SecurityImage = ({ imageWidth, imageHeight }) => {
+export const SecurityImage = (props, { imageWidth, imageHeight }) => {
   const AnimatedSvg = Animated.createAnimatedComponent(Svg);
   return (
-    <AnimatedSvg width={imageWidth} height={imageHeight} viewBox="0 0 433 510">
+    <AnimatedSvg width={imageWidth} height={imageHeight} viewBox="0 0 433 510" {...props}>
       <Defs>
         <Path
           d="M1 4c0 15.708 12.637 28.442 28.225 28.442C44.814 32.442 57.45 19.708 57.45 4"
