@@ -12,17 +12,17 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
 import { useSelector } from "react-redux";
-import { translate, t } from "i18n-js";
 
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
 import { BreathAnimation } from "../../../components/BreathAnimation";
+import { t } from "../../../../assets/lang";
 
 const SleepScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Sleep",
+      headerTitle: t("sleep"),
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
           <Item
@@ -288,7 +288,6 @@ const SleepScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-
       <ScrollView
         style={{
           width: "100%",
@@ -297,14 +296,12 @@ const SleepScreen = ({ navigation }) => {
         }}
         contentContainerStyle={{ ...styles.wrapper }}
       >
-
         <Animated.View
           style={{
             ...styles.breathContainer,
             paddingTop: animatedBreathContainer,
           }}
         >
-
           <TouchableOpacity
             activeOpacity={theme.ACTIVE_OPACITY}
             onPress={() => {
@@ -317,7 +314,7 @@ const SleepScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <Animated.Text style={{ ...styles.description, opacity: animatedDescription }}>
-            Tap to start the breathing practice.
+            {t("tap_to_start")}
           </Animated.Text>
 
           <Animated.View
@@ -336,7 +333,7 @@ const SleepScreen = ({ navigation }) => {
                 opacity: animatedMantraDescriptionFirst,
               }}
             >
-              Close your lips, inhale through your nose.
+              {t("breathing_guide_1")}
             </Animated.Text>
 
             <Animated.Text
@@ -345,7 +342,7 @@ const SleepScreen = ({ navigation }) => {
                 opacity: animatedMantraDescriptionSecond,
               }}
             >
-              Hold your breath for the 7 seconds.
+              {t("breathing_guide_2")}
             </Animated.Text>
 
             <Animated.Text
@@ -354,7 +351,7 @@ const SleepScreen = ({ navigation }) => {
                 opacity: animatedMantraDescriptionThird,
               }}
             >
-              Make a whooshing sound, exhaling completely through your mouth.
+              {t("breathing_guide_3")}
             </Animated.Text>
 
             <Animated.Text
@@ -378,7 +375,7 @@ const SleepScreen = ({ navigation }) => {
           }}
         >
           <View style={styles.settingsContainer}>
-            <Text style={styles.settingsContainerHeader}>Time</Text>
+            <Text style={styles.settingsContainerHeader}>{t("time")}</Text>
 
             <TouchableOpacity
               activeOpacity={theme.ACTIVE_OPACITY}
@@ -387,9 +384,9 @@ const SleepScreen = ({ navigation }) => {
               <Text style={styles.time}>
                 {napTime}{" "}
                 <Text style={styles.timeMin}>
-                  {napTime != 1 ? "mins" : "min"}
+                  {napTime != 1 ? t("mins") : t("min")}
                 </Text>{" "}
-                {napCount} <Text style={styles.timeMin}>reps</Text>
+                {napCount} <Text style={styles.timeMin}>{t("reps")}</Text>
               </Text>
             </TouchableOpacity>
           </View>

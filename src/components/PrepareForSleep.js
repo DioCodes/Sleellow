@@ -10,6 +10,7 @@ import moment from "moment";
 import theme from "../theme"
 import { Container } from "./Container";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { t } from "../../assets/lang";
 
 export const PrepareForSleep = ({navigation}) => {
   const [date, setDate] = useState(new Date());
@@ -114,7 +115,7 @@ export const PrepareForSleep = ({navigation}) => {
 
     <View style={styles.main}>
       <View style={styles.top}>
-        <Text style={styles.topHeader}>Prepare for sleep {<Ionicons name="ios-moon" size={18} color="white" />}</Text>
+        <Text style={styles.topHeader}>{t("prepare_for_sleep")} {<Ionicons name="ios-moon" size={18} color="white" />}</Text>
       </View>
           
       <View style={styles.modalContainer}>

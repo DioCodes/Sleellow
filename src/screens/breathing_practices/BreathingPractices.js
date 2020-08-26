@@ -4,28 +4,29 @@ import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../../theme";
 import { Container } from "../../components/Container";
+import { t } from "../../../assets/lang";
 
 export const BreathingPractices = (props) => {
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerShown: true,
-      headerTitle: "Breathing practices",
+      headerTitle: t("breathing_practices"),
     });
   }, []);
 
   return (
     <View style={styles.main}>
       <ScrollView>
-        <Text style={styles.header}>Relaxation {<Ionicons name="ios-leaf" size={22} color="white" />}</Text>
+        <Text style={styles.header}>{t("relaxation")} {<Ionicons name="ios-leaf" size={22} color="white" />}</Text>
         <Container
-          name="Sleep"
+          name={t("sleep")}
           onPress={() => {
             props.navigation.navigate("SleepScreen");
           }}
         />
-        <Text style={styles.header}>Energy {<Ionicons name="ios-flame" size={22} color="white" />}</Text>
+        <Text style={styles.header}>{t("energy")} {<Ionicons name="ios-sunny" size={22} color="white" />}</Text>
         <Container
-          name="Wake up"
+          name={t("awakening")}
           onPress={() => {
             props.navigation.navigate("WakeUpScreen");
           }}

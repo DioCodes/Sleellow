@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { DailyMantraButton } from "../components/DailyMantra/DailyMantraButton";
 import { SleepRoutine } from "../components/SleepRoutine";
 import { ScrollView } from "react-native-gesture-handler";
+import { t } from "../../assets/lang";
 
 const MainScreen = (props) => {
   const [napTime, setNapTime] = useState("45");
@@ -133,15 +134,14 @@ const MainScreen = (props) => {
 
         <ScrollView>
           <Container
-            name="Sleep time"
+            name={t("sleep_time")}
             onPress={() => {
               props.navigation.navigate("SleepTime");
             }}
           />
           <Container
-            name="Breathing practices"
+            name={t("breathing_practices")}
             onPress={() => {
-              // props.navigation.navigate("BreathScreen");
               props.navigation.navigate("BreathingPractices");
             }}
           />

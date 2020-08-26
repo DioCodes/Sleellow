@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { translate, t } from "i18n-js";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -20,12 +19,13 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
 import { NoContentManIcon } from "../../../../assets/images/NoContentManIcon";
+import { t } from "../../../../assets/lang";
 
 export const WakeUpScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Wake up",
+      headerTitle: t("awakening"),
       headerTransparent: true,
       // headerRight: () => (
       //   <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
@@ -57,9 +57,9 @@ export const WakeUpScreen = ({ navigation }) => {
           <View style={styles.image}>
             <NoContentManIcon />
           </View>
-          <Text style={styles.header}>There is no content here yet.</Text>
+          <Text style={styles.header}>{t("no_content_header")}</Text>
           <Text style={styles.text}>
-            Now we are working on its implementation!
+            {t("no_content_desc")}
           </Text>
         </View>
       </ScrollView>
