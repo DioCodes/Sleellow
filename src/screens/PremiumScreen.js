@@ -11,46 +11,57 @@ import { CoolSleellow } from "../../assets/images/CoolSleellow";
 import { SleepBackIcon } from "../../assets/images/SleepBackIcon";
 import { NoContentManIcon } from "../../assets/images/NoContentManIcon";
 import { StyledButton } from "../components/StyledButton";
+import { t } from "../../assets/lang/index";
 
 
 
-export const PremiumScreen = () => {
+export const PremiumScreen = ({navigation}) => {
   const slides = [
     {
       key: "s1",
       // image: <CoolSleellow height={250} width={275} />,
-      image: <AppIcon height={250} width={250} />,
-      header: "Привет!\nМеня зовут Sleellow",
-      text: "Я - твой помощник в улучшении качества сна. Так же я помогу тебе стать счастливей и улучшить твою жизнь!\n\nХочешь узнать как? Читай дальше!",
+      image: <AppIcon height={220} width={250} />,
+      header: t("premium_s1_header"),
+      text: t("premium_s1_text")
     },
     {
       key: "s2",
-      image: <DizzinessIcon height={250} width={250} />,
-      header: "Что с твоей жизнью?",
-      text: "Как думаешь, контролируешь ли ты её? Чувствуешь ли ты сонливость в течении дня? Уделяешь ли время вещам, которые делают тебя счастливым? На сколько хорошо ты концентрируешься?\n\nЕсли ответ отрицательный - пора это исправлять, согласен?",
+      image: <DizzinessIcon height={220} width={250} />,
+      header: t("premium_s2_header"),
+      text: t("premium_s2_text")
     },
     {
       key: "s3",
-      image: <CoolSleellow height={250} width={250} />,
-      header: "Я помогу тебе.",
-      text:  "Мне хорошо известно, как тяжело выполнять свои обязанности на работе или в учёбе, уделять время хобби, заниматься саморазвитием и при этом бороться с последсвиями плохого сна в течении дня.\n\nДавай разберёмся, что это за последсвия и как они влияют на твою жизнь",
+      image: <CoolSleellow height={220} width={250} />,
+      header: t("premium_s3_header"),
+      text: t("premium_s3_text")
     },
     {
       key: "s4",
-      image: <NoContentManIcon height={250} width={250} />,
-      header: "Почему я ничего не успеваю?",
-      text: "Плохой сон имеет последсвтия из-за которых сложно выполнить список хотя-бы из 5 дел.\nВот некоторые из них:",
-      list: "1. Ухудшается внимание. \n2. Появляются проблемы с памятью и концентрацией.\n3. Недостаток сил и потеря времени.",
-      textSecond: "Вместо того, чтобы готовиться ко сну, мы обычно сидим в телефоне до поздна и впустую тратим время. Вы знали, что свет от телефона заставляет ваш мозг думать, что ещё день и потому вам не хочется спать?",
+      image: <NoContentManIcon height={220} width={250} />,
+      header: t("premium_s4_header"),
+      text: t("premium_s4_text"),
+      list: t("premium_s4_list"),
+      textSecond: t("premium_s4_textSecond")
     },
     {
       key: "s5",
-      image: <BreathImage height={250} width={250} />,
-      header: "Давай поможем друг другу",
-      text: "Как мы уже выяснили, плохой сон - причина потери контроля над жизнью. Но, ты способен вернуть контроль, чувстовать себя лучше и делать больше!\n\nЯ помогу тебе избавиться от плохих привычек, что рушат твою жизнь. Взамен я попрошу поддержать разработчика.",
-      button: <StyledButton name="$2.99/месяц" color="transparent" borderColor="white" />,
+      image: <BreathImage height={220} width={250} />,
+      header: t("premium_s5_header"),
+      text: t("premium_s5_text"),
+      button: <StyledButton name={`$2.99/${t("month")}`} color="transparent" borderColor="white" onPress={() => onPurchaseHandler()} />,
     },
   ];
+
+  let onPurchaseHandler = async () => {
+    try {
+      await AsyncStorage.setItem("@WelcomeScreen:key", "purchased");
+      console.log('hi')
+      navigation.replace("Main");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const renderSliderItem = ({ item }) => {
     return(
@@ -63,7 +74,7 @@ export const PremiumScreen = () => {
             <View style={styles.listContainer}>
               <Text style={{...styles.text, ...styles.list}}>{item.list}</Text>
             </View>
-              <Text style={styles.text}>{item.textSecond}</Text>
+              <Text style={{...styles.text, textAlign: "left"}}>{item.textSecond}</Text>
               {item.button}
           </View>
         </View>
@@ -104,17 +115,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'center',
     // position: 'absolute',
-    // top: 50
   },
   image: {
 
   },
   text: {
     fontFamily: "norms-regular",
-    fontSize: 18,
+    fontSize: 15,
     color: "rgba(255, 255, 255, .7)",
-    textAlign: "center",
     paddingVertical: 5,
+    textAlign: "center"
     // textTransform: "uppercase"
   },
   listContainer: {

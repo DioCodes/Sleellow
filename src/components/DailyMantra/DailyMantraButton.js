@@ -12,6 +12,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import theme from "../../theme";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { addMantra, resetMantra } from "../../store/actions/mantraActions";
+import { t } from "../../../assets/lang";
 
 export const DailyMantraButton = ({navigation}) => {
   // const [isMantraWrited, setIsMantraWrited] = useState(false);
@@ -22,7 +23,7 @@ export const DailyMantraButton = ({navigation}) => {
   // const windowHeight = Dimensions.get("window").height;
 
   // const dispatch = useDispatch();
-  const allPosts = useSelector((state) => state.mantra.mantra);
+  const mantraText = useSelector((state) => state.mantra.mantra);
 
   // useEffect(() => {
   //   if (mantraValue != "") {
@@ -43,11 +44,11 @@ export const DailyMantraButton = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.push("MantraModal")}>
-        <Text style={styles.mantraHeader}>Your daily mantra:</Text>
-        {allPosts != "" ? (
-          <Text style={styles.mantraText}>{allPosts}</Text>
+        <Text style={styles.mantraHeader}>{t("mantra_header")}:</Text>
+        {mantraText != "" ? (
+          <Text style={styles.mantra}>{mantraText}</Text>
         ) : (
-          <Text style={styles.text}>Write your daily mantra...</Text>
+          <Text style={styles.text}>{t("mantra_button_text")}</Text>
         )}
       </TouchableOpacity>
       {/* <RBSheet
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: theme.TEXT,
     opacity: 0.5,
   },
-  mantraText: {
+  mantra: {
     fontFamily: "norms-bold",
     color: "#fff",
     fontSize: 20,

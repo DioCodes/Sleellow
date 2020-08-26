@@ -1,4 +1,67 @@
 {
+  "premium_s1_header": "Hello!\nMy name is Sleellow",
+  "premium_s1_text": "I am your helper in improving the quality of sleep. I will also help you become happier and improve your life!\n\nDo you want to know how? Read on!",
+  
+  "premium_s2_header": "What's with your life?",
+  "premium_s2_text": "Do you think you control her? Do you feel sleepy during the day? Do you take the time to do the things that make you happy? How well do you concentrate?\n\nIf the answer is no, it's time to fix it, okay?",
+  
+  "premium_s3_header": "I will help you",
+  "premium_s3_text": "I am well aware of how difficult it is to carry out your duties at work or in school, to devote time to hobbies, to engage in self-development and at the same time deal with the consequences of poor sleep during the day.\n\nLet's figure out what these consequences are and how they affect your life.",
+  
+  "premium_s4_header": "Why am I not doing anything?",
+  "premium_s4_text": "Poor sleep has consequences that make it difficult to complete a list of at least 5 to do.\nHere are some of them:",
+  "premium_s4_list": "1. Deteriorating attention.\n2. Problems with memory and concentration appear.\n3. Lack of energy and loss of time.",
+  "premium_s4_textSecond": "Instead of getting ready for bed, we usually sit on the phone late and waste time. Did you know that the light from your phone makes your brain think it's daytime and therefore you don't feel like sleeping?",
+  
+  "premium_s5_header": "Давай поможем друг другу",
+  "premium_s5_text": "As we have already found out, poor sleep is the reason for the loss of control over life. But, you are able to take back control, feel better and do more!\n\nI will help you break the bad habits that are ruining your life. In return, I will ask you to support the developer.",
+  
+  "thanks_for_your_support": "Thanks for your support",
+  
+  "sleep_time": "Sleep time",
+  "breathing_practices": "Breathing practices",
+  "mantra_header": "Your mantra",
+  "mantra_button_text": "Write your daily mantra...",
+  "mantra_input_desc": "Write your mantra here...",
+
+  "prepare_for_sleep": "Prepare for sleep",
+  "dev_insta": "Developer's Instagram",
+  "review_app": "Review Sleellow",
+  "share_the_app": "Share the app",
+
+  "relaxation": "Relaxation",
+  "sleep": "Sleep",
+  "energy": "Energy",
+  "awakening": "Awakening",
+
+  "no_content_header": "There is no content here yet",
+  "no_content_desc": "We are working on its implementation!",
+
+  "tap_to_start": "Tap to start",
+  "min": "min",
+  "mins": "mins",
+  "reps": "reps",
+
+  "breathing_guide_1": "Close your lips, inhale through your nose",
+  "breathing_guide_2": "Hold your breath for 7 seconds",
+  "breathing_guide_3": "Make a whooshing sound, exhaling completely through your mouth.",
+  "breathing_guide_4": "Relax and repeat your mantra",
+
+  "inhale": "Inhale",
+  "hold": "Hold",
+  "exhale": "Exhale",
+  
+  "back_C": "Back",
+  "back": "back",
+  "time_C": "Time",
+  "time": "time",
+  "settings_C": "Settings",
+  "settings": "settings",
+  "month_C": "Month",
+  "month": "month",
+  "complete_C": "Complete", 
+  "complete": "complete",
+
   "welcome_one_header": "Welcome!",
   "welcome_two_header": "How it works?",
   "welcome_three_header": "About important things",

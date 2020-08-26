@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import theme from "../theme";
 import { Ionicons } from '@expo/vector-icons';
+import { t } from "../../assets/lang";
 
 export const PremiumButton = ({navigation}) => {
   return (
-    <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => navigation.push("PremiumScreen")}>
+    <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => navigation.replace("PremiumScreen")}>
       <View style={styles.premiumTextContainer}>
         <Text style={styles.premiumText}>
-          Thanks for your support{" "}
+          {t("thanks_for_your_support")} {""}
           <Ionicons name="ios-heart" size={18} color="white" />
         </Text>
       </View>

@@ -16,6 +16,7 @@ import { PrepareForSleep } from "../../components/PrepareForSleep";
 import { WriteReview } from "../../components/WriteReview";
 import { Ionicons } from "@expo/vector-icons";
 import { Leaves } from "../../../assets/images/Leaves";
+import { t } from "../../../assets/lang";
 
 
 export const ProfileScreen = ({navigation}) => {
@@ -60,20 +61,20 @@ export const ProfileScreen = ({navigation}) => {
             <View style={styles.userPos}>
               <UserIcon/>
             </View>
-            {/* <Text style={styles.thanks}>Thanks for your support <Ionicons name="ios-heart" size={18} color="white" /></Text> */}
+            {/* <Text style={styles.thanks}>{t("thanks_for_your_support")} <Ionicons name="ios-heart" size={18} color="white" /></Text> */}
             <PremiumButton navigation={navigation} />
           </View>
 
           <View style={styles.middle}>
             <View style={styles.settingsContainer}>
               <View style={styles.headerContainer}>
-                <Text style={styles.header}>Settings</Text>
+                <Text style={styles.header}>{t("settings_C")}</Text>
               </View>
-              <Container icon={<Ionicons name="ios-moon" size={30} color="white" />}  name="Prepare for sleep" onPress={() => navigation.push("PrepareForSleepModal")} />
+              <Container icon={<Ionicons name="ios-moon" size={30} color="white" />}  name={t("prepare_for_sleep")} onPress={() => navigation.push("PrepareForSleepModal")} />
               <WriteReview />
               <ShareTheApp />
               <Container 
-                name="Developer's Instagram" 
+                name={t("dev_insta")} 
                 icon={
                   <Ionicons name="logo-instagram" size={30} color="white" />
                 } 

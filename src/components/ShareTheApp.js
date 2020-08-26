@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Share} from 'react-native'
 import { Container } from './Container';
 import { Ionicons } from '@expo/vector-icons';
+import { t } from '../../assets/lang';
 
 export const ShareTheApp = () => {
   // Link here: https://www.itunes.apple.com/
@@ -27,7 +28,7 @@ export const ShareTheApp = () => {
 
   return (
     <View>
-      <Container icon={<Ionicons name="ios-share-alt" size={30} color="white" />} name="Share the app" onPress={onShare} />
+      <Container icon={<Ionicons name="ios-share-alt" size={30} color="white" />} name={t("share_the_app")} onPress={onShare} />
     </View>
   )
 }

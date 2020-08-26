@@ -4,7 +4,7 @@ import * as Haptics from "expo-haptics";
 import theme from "../theme";
 
 export const StyledButton = ({
-  onPress,
+  onPress = (() => {}),
   name,
   color = theme.PRIMARY_COLOR,
   borderColor = "transparent",

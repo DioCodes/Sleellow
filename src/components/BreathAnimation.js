@@ -13,6 +13,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { ProgressBar } from "./ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
 import { checkUserLevel } from "../store/reducers/levelReducer";
+import { t } from "../../assets/lang";
 
 export const BreathAnimation = ({ paused }) => {
   let isFocused = useIsFocused();
@@ -168,17 +169,17 @@ export const BreathAnimation = ({ paused }) => {
         <Animated.Text
           style={{ ...styles.buttonText, opacity: animatedShowText_Inhale }}
         >
-          Inhale
+          {t("inhale")}
         </Animated.Text>
         <Animated.Text
           style={{ ...styles.buttonText, opacity: animatedShowText_Hold }}
         >
-          Hold
+          {t("hold")}
         </Animated.Text>
         <Animated.Text
           style={{ ...styles.buttonText, opacity: animatedShowText_Exhale }}
         >
-          Exhale
+          {t("exhale")}
         </Animated.Text>
         <Animated.View
           style={{

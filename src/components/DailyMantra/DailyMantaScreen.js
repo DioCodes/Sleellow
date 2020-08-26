@@ -7,9 +7,12 @@ import {
   Dimensions,
   TouchableOpacity
 } from "react-native";
-import theme from "../../theme";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { Ionicons } from '@expo/vector-icons';
+
 import { addMantra, resetMantra } from "../../store/actions/mantraActions";
+import theme from "../../theme";
+import { t } from '../../../assets/lang';
 
 export const DailyMantraScreen = ({navigation}) => {
   const [isMantraWrited, setIsMantraWrited] = useState(false);
@@ -37,7 +40,9 @@ export const DailyMantraScreen = ({navigation}) => {
   return(
     <View style={styles.main}>
       <View style={styles.top}>
-        <Text style={styles.topHeader}>Your daily mantra</Text>
+        <Text style={styles.topHeader}>
+          {t("mantra_header")} {""}
+        </Text>
       </View>
 
       <View style={styles.sheetContainerContent}>
@@ -61,7 +66,7 @@ export const DailyMantraScreen = ({navigation}) => {
           setMantraValue(text);
           setInputValue(text);
         }}
-        placeholder="Write your daily mantra here.."
+        placeholder={t("mantra_input_desc")}
         maxLength={70}
         returnKeyType="done"
         blurOnSubmit={true}
@@ -73,7 +78,7 @@ export const DailyMantraScreen = ({navigation}) => {
       <View style={styles.completeBtnContainer}>
         <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => onCompletePress()}>
           <View style={styles.completeBtn}>
-            <Text style={styles.completeBtnText}>Complete</Text>
+            <Text style={styles.completeBtnText}>{t("complete_C")}</Text>
           </View>
         </TouchableOpacity>
       </View>
