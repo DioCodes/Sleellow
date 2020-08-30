@@ -21,12 +21,13 @@ import SwiperFlatList from "react-native-swiper-flatlist";
 import { Slider } from "../components/Slider";
 import { color } from "react-native-reanimated";
 import { ShowScreenRide } from "../components/ShowScreenRide";
+import { t } from "../../assets/lang";
 
 export const SleepTimeScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Sleep time",
+      headerTitle: t("sleep_time"),
     });
   }, []);
 
@@ -76,10 +77,10 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime }}>6-5 cycles</Text>
+            <Text style={{ ...styles.headerTime }}>6-5 {t("cycles")}</Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res6}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res5}</Text>
             </View>
           </View>
@@ -92,11 +93,11 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
-              4-3 cycles
+              4-3 {t("cycles-2")}
             </Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
             </View>
           </View>
@@ -109,11 +110,11 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <Text style={{ ...styles.headerTime, opacity: 0.25 }}>
-              2-1 cycles
+              2-1 {t('cycles-2')}
             </Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res2}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
               <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res1}</Text>
             </View>
           </View>
@@ -135,10 +136,10 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime }}>6-5 cycles</Text>
+            <Text style={{ ...styles.headerTime }}>6-5 {t("cycles")}</Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res1}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res2}</Text>
             </View>
           </View>
@@ -151,11 +152,11 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
-              4-3 cycles
+              4-3 {t("cycles-2")}
             </Text>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
-              <Text style={{ ...styles.textTimeOr }}> or </Text>
+              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
             </View>
           </View>
@@ -290,7 +291,7 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <View style={{ flexDirection: "row" }}>
-              <Text style={styles.header}>I want to wake up at</Text>
+              <Text style={styles.header}>{t("sleep_time-wake_up")}</Text>
 
               <TouchableOpacity
                 style={{ marginHorizontal: 5 }}
@@ -326,8 +327,7 @@ export const SleepTimeScreen = ({ navigation }) => {
               {"\n"}
             </Text> */}
             <Text style={styles.text}>
-              If you want to wake up at {chosenDate}, you should try to fall
-              asleep at one of the following times:
+              {t("sleep_time-wake_up-desc_1")} {chosenDate}{t("sleep_time-wake_up-desc_2")}
             </Text>
             <View
               style={{
@@ -362,7 +362,7 @@ export const SleepTimeScreen = ({ navigation }) => {
               ...styles.paddingContainer,
             }}
           >
-            <Text style={styles.header}>I want to fall asleep now</Text>
+            <Text style={styles.header}>{t("sleep_time-fall_asleep_now")}</Text>
             <Ionicons
               name="ios-arrow-down"
               color="rgba(255, 255, 255, .25)"
@@ -381,8 +381,7 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <Text style={styles.text}>
-              If you go to bed now, you should try to wake up at one of the
-              following times:
+              {t("sleep_time-fall_asleep_now-desc")}
             </Text>
             <View style={{ marginTop: 10 }}>{timeToWakeUp}</View>
           </Animated.View>
@@ -420,10 +419,10 @@ export const SleepTimeScreen = ({ navigation }) => {
 const windowHeight = Dimensions.get("window").height;
 
 const tips = [
-  "A good night's sleep consists of 5-6 full sleep cycles, each of which lasts 1.5 hours.",
-  "The average person falls asleep after 14 minutes. We take this time into account.",
-  "Waking up in the middle of a sleep cycle, you will feel overwhelmed..",
-  "Waking up between sleep cycles, you will feel freshness and energy!",
+  t("sleep_time-tip_1"),
+  t("sleep_time-tip_2"),
+  t("sleep_time-tip_3"),
+  t("sleep_time-tip_4"),
 ];
 
 const styles = StyleSheet.create({
@@ -478,7 +477,7 @@ const styles = StyleSheet.create({
     fontSize: theme.TEXT,
     lineHeight: theme.TEXT_LINEHEIGHT,
     opacity: 0.5,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   textDesctiptionContainer: {
     width: "100%",

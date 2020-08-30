@@ -6,13 +6,13 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 import * as Linking from 'expo-linking';
 
 import { ShowScreenRide } from "../../components/ShowScreenRide";
-import { UserLevel } from "./UserLevel";
+import { UserLevel } from "../../components/UserLevel";
 import { UserIcon } from "../../../assets/images/UserIcon";
 import theme from "../../theme";
 import { PremiumButton } from "../../components/PremiumButton";
 import { Container } from "../../components/Container";
 import { ShareTheApp } from "../../components/ShareTheApp";
-import { PrepareForSleep } from "../../components/PrepareForSleep";
+// import { PrepareForSleep } from "../PrepareForSleep";
 import { WriteReview } from "../../components/WriteReview";
 import { Ionicons } from "@expo/vector-icons";
 import { Leaves } from "../../../assets/images/Leaves";
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   userPos: {
     position: 'absolute',
-    top: 30
+    top: 25
   },
   thanks: {
     color: '#fff',

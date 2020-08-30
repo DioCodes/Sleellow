@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { translate } from "i18n-js";
+import { translate, t } from "i18n-js";
 
 import theme from "../../../theme";
 import { LeapsIconClosed } from "../../../../assets/images/LeapsIconClosed";
@@ -46,43 +46,39 @@ const BreathSleepScreen_Info = ({ navigation }) => {
       <ScrollView>
         <View>
           <View style={styles.textContainer}>
-            <Text style={styles.textHeader}>Description</Text>
+            <Text style={styles.textHeader}>{t("description")}</Text>
 
             <Text style={styles.text}>
-              This exercise was developed by Dr. Andrew Weil. It calms the
-              nervous system. Unlike tranquilizing drugs, which are initially
-              effective, but then lose their strength over time, this exercise
-              is not very effective at first when you first use it, but it gains
-              strength through repetition and practice.
+              {t("breathing_info-description")}
             </Text>
           </View>
 
           <View style={styles.textContainer}>
-            <Text style={styles.textHeader}>Exercise</Text>
+            <Text style={styles.textHeader}>{t("exercise")}</Text>
 
             <View style={styles.icons}>
               <View style={styles.iconContainer}>
-                <Text style={styles.iconText}>Inhale</Text>
-                <Text style={styles.iconTextTime}>4 sec</Text>
+                <Text style={styles.iconText}>{t("inhale")}</Text>
+                <Text style={styles.iconTextTime}>4 {t("sec")}</Text>
                 <NoseIconInhale />
               </View>
 
               <View style={styles.iconContainer}>
-                <Text style={styles.iconText}>Hold</Text>
-                <Text style={styles.iconTextTime}>7 sec</Text>
+                <Text style={styles.iconText}>{t("hold")}</Text>
+                <Text style={styles.iconTextTime}>7 {t("sec")}</Text>
                 <LeapsIconClosed />
               </View>
 
               <View style={styles.iconContainer}>
-                <Text style={styles.iconText}>Exhale</Text>
-                <Text style={styles.iconTextTime}>8 sec</Text>
+                <Text style={styles.iconText}>{t("exhale")}</Text>
+                <Text style={styles.iconTextTime}>8 {t("sec")}</Text>
                 <LeapsIconBreath />
               </View>
             </View>
           </View>
 
           <View style={styles.textContainer}>
-            <Text style={styles.textHeader}>Tips</Text>
+            <Text style={styles.textHeader}>{t("tips")}</Text>
             <AppIntroSlider
               data={slides}
               renderItem={renderSliderItem}
@@ -105,13 +101,13 @@ const slides = [
     key: "s1",
     image: <SleepBackIcon />,
     text:
-      "Lie on your back. Relax and focus on breathing. Repeat the mantra in your mind.",
+      t("breathing_info-tip_1")
   },
   {
     key: "s2",
     image: <DizzinessIcon />,
     text:
-      "If you feel dizzy, stop the exercise. Try to take 4 breaths and increase this amount over time.",
+      t("breathing_info-tip_2")
   },
 ];
 
@@ -133,6 +129,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#fff",
     textAlign: "justify",
+    // textAlign: "center",
     paddingHorizontal: 20,
     fontFamily: "norms-regular",
     fontSize: theme.TEXT,

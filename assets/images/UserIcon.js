@@ -4,7 +4,7 @@ import Svg, { Defs, Circle, G, Mask, Use, Path } from "react-native-svg";
 
 export const UserIcon = (props) => {
   return (
-    <Svg width={100} height={100} viewBox="0 0 378 378" {...props}>
+    <Svg width={115} height={115} viewBox="0 0 378 378" {...props}>
       <Defs>
         <Circle id="prefix__a" cx={186} cy={186} r={186} />
       </Defs>

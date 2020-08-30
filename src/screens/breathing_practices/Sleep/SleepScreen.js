@@ -360,7 +360,7 @@ const SleepScreen = ({ navigation }) => {
                 opacity: animatedMantraDescriptionLast,
               }}
             >
-              Relax and repeat your mantra.
+              {t("breathing_guide_4")}
             </Animated.Text>
 
           </Animated.View>

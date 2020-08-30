@@ -55,7 +55,7 @@ export const PremiumScreen = ({navigation}) => {
 
   let onPurchaseHandler = async () => {
     try {
-      await AsyncStorage.setItem("@WelcomeScreen:key", "purchased");
+      await AsyncStorage.setItem("@PremiumScreen:key", "purchased");
       console.log('hi')
       navigation.replace("Main");
     } catch (err) {

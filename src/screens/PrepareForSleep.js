@@ -8,7 +8,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import moment from "moment";
 
 import theme from "../theme"
-import { Container } from "./Container";
+import { Container } from "../components/Container";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { t } from "../../assets/lang";
 
@@ -66,8 +66,8 @@ export const PrepareForSleep = ({navigation}) => {
 
     Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Go to sleep!',
-        body: "Go to sleep right now!",
+        title: t("notification_s1_title"),
+        body: t("notification_s1_desc"),
         sound: 'default'
       },
       trigger: {
@@ -79,8 +79,8 @@ export const PrepareForSleep = ({navigation}) => {
 
     Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Prepare for sleep.',
-        body: "It's time to start your bedtime routine!",
+        title: t("notification_s2_title"),
+        body: t("notification_s2_desc"),
         sound: 'default'
       },
       trigger: {
@@ -92,8 +92,8 @@ export const PrepareForSleep = ({navigation}) => {
 
     Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Prepare for sleep.',
-        body: "Finish all your tasks and get ready for sleep.",
+        title: t("notification_s3_title"),
+        body: t("notification_s3_desc"),
         sound: 'default'
       },
       trigger: {
@@ -115,12 +115,9 @@ export const PrepareForSleep = ({navigation}) => {
 
     <View style={styles.main}>
       <View style={styles.top}>
-        <Text style={styles.topHeader}>{t("prepare_for_sleep")} {<Ionicons name="ios-moon" size={18} color="white" />}</Text>
+        <Text style={styles.topHeader}>{<Ionicons name="ios-moon" size={30} color="white" />}{"\n"}{t("prepare_for_sleep")} </Text>
       </View>
           
-      <View style={styles.modalContainer}>
-        <Text style={styles.modalHeader}>Choose the time you want to fall asleep</Text>
-      </View>
 
       <DateTimePicker
         testID="dateTimePicker"
@@ -133,13 +130,16 @@ export const PrepareForSleep = ({navigation}) => {
       />
 
       <View style={styles.modalContainer}>
-        <Text style={{ ...styles.modalHeader, opacity: .25, fontSize: 14}}>Sleellow will remind you to get ready for sleep at chosen time, 30 minutes and 1 hour before it.</Text>
+        <Text style={styles.modalHeader}>{t("prepare_for_sleep_header")}</Text>
+      </View>
+      <View style={styles.modalContainer}>
+        <Text style={styles.modalHeader}>{t("prepare_for_sleep_desc")}</Text>
       </View>
 
       <View style={styles.compleBtnContainer}>
         <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => oncomplePress()}>
           <View style={styles.compleBtn}>
-            <Text style={styles.compleBtnText}>Complete</Text>
+            <Text style={styles.compleBtnText}>{t("complete_C")}</Text>
           </View>
         </TouchableOpacity>
       </View> 
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: theme.SECONDARY_COLOR,
     fontFamily: 'norms-bold',
+    textAlign: 'center'
   },
   header: {
     color: theme.SECONDARY_COLOR,
@@ -197,9 +198,9 @@ const styles = StyleSheet.create({
   },
   modalHeader: {
     color: theme.SECONDARY_COLOR,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'norms-regular',
-    opacity: 1
+    opacity: .25,
   },
   compleBtnContainer: {
     width: '50%',
