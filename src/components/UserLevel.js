@@ -10,8 +10,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
-import { UserIcon } from "../../../assets/images/UserIcon";
-import { t } from "../../../assets/lang/index";
+import { UserIcon } from "../../assets/images/UserIcon";
 import { useSelector } from "react-redux";
 
 export const UserLevel = () => {

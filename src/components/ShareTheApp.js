@@ -10,7 +10,7 @@ export const ShareTheApp = () => {
     try {
       const result = await Share.share({
         message:
-          "Hey, check out Sleellow, great sleep app.",
+          t("share_text"),
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

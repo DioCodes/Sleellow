@@ -10,6 +10,6 @@ export default {
   MANTRA_HEADER: 24,
   CONTAINER_HEADER: 18,
   TEXT: 16,
-  TEXT_LINEHEIGHT: 20,
+  TEXT_LINEHEIGHT: 18,
   CONTAINER_FONT_FAMILY: "norms-medium"
 };
