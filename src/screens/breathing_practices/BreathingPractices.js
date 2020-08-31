@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../../theme";
@@ -17,11 +17,13 @@ export const BreathingPractices = (props) => {
   return (
     <View style={styles.main}>
       <ScrollView>
-        <Text style={styles.header}>{t("relaxation")} {<Ionicons name="ios-leaf" size={22} color="white" />}</Text>
+        <Text style={styles.header}>{t("relaxation")}{" "}
+         {<Ionicons name="ios-leaf" size={22} color="white" />}
+        </Text>
         <Container
           name={t("sleep")}
           onPress={() => {
-            props.navigation.navigate("SleepScreen");
+            props.navigation.navigate("NestedSleepStack");
           }}
         />
         <Text style={styles.header}>{t("energy")} {<Ionicons name="ios-sunny" size={22} color="white" />}</Text>

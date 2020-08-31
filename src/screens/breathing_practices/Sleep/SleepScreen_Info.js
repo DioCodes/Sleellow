@@ -7,23 +7,28 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
+import * as Localization from "expo-localization";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { translate, t } from "i18n-js";
 
 import theme from "../../../theme";
+import { t } from "../../../../assets/lang";
+
+import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
+
 import { LeapsIconClosed } from "../../../../assets/images/LeapsIconClosed";
 import { LeapsIconBreath } from "../../../../assets/images/LeapsIconBreath";
 import { NoseIconInhale } from "../../../../assets/images/NoseIconInhale";
 import { SleepBackIcon } from "../../../../assets/images/SleepBackIcon";
 import { DizzinessIcon } from "../../../../assets/images/DizzinessIcon";
+import { HeaderModal } from "../../../components/HeaderModal";
 
 const BreathSleepScreen_Info = ({ navigation }) => {
   useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: true,
-      headerTitle: "Info",
-      headerBackTitle: "Sleep",
-    });
+    navigation.setOptions(
+      HeaderModal(navigation, t("info"))
+    )
   }, []);
 
   const Img = ({ children }) => {
@@ -34,17 +39,22 @@ const BreathSleepScreen_Info = ({ navigation }) => {
     return (
       <View style={styles.tipsContent}>
         <Img>{item.image}</Img>
-        <Text style={styles.text}>{item.text}</Text>
+        <View style={styles.textSlideWrapper}>
+          <Text style={styles.text}>{item.text}</Text>
+        </View>
       </View>
     );
   };
-
-  const wh = Dimensions.get("window").height;
-
+  
   return (
     <View style={styles.mainContainer}>
+      {/* <View style={styles.top}>
+        <Text style={styles.topHeader}>
+          {t("info")}
+        </Text>
+      </View> */}
       <ScrollView>
-        <View>
+        {/* <View> */}
           <View style={styles.textContainer}>
             <Text style={styles.textHeader}>{t("description")}</Text>
 
@@ -90,11 +100,14 @@ const BreathSleepScreen_Info = ({ navigation }) => {
               activeDotStyle={{ ...styles.dot, ...styles.activeDot }}
             />
           </View>
-        </View>
+        {/* </View> */}
       </ScrollView>
     </View>
   );
 };
+
+const wh = Dimensions.get("window").height;
+const locale = Localization.locale.substr(0,2)
 
 const slides = [
   {
@@ -117,7 +130,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     backgroundColor: theme.PRIMARY_COLOR,
-    // paddingHorizontal: 20,
+    paddingTop: 5
   },
   container: {
     justifyContent: "center",
@@ -126,10 +139,16 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 15,
   },
+  textSlideWrapper: {
+    // height: "22%", 
+    // backgroundColor: 'blue',
+    height: wh > 800 && locale === "ru-US" ? "24%" : "22%", 
+    justifyContent: locale === "en" ? "flex-start" : "center"
+  },
   text: {
     color: "#fff",
-    textAlign: "justify",
-    // textAlign: "center",
+    // textAlign: "justify",
+    textAlign: "center", 
     paddingHorizontal: 20,
     fontFamily: "norms-regular",
     fontSize: theme.TEXT,
@@ -174,8 +193,10 @@ const styles = StyleSheet.create({
     height: 240,
     width: "100%",
   },
+
   dot: {
-    bottom: Dimensions.get("window").height > 800 ? -5 : 0,
+    bottom: wh > 800 && locale === "en" ? -0 : wh < 800 ? -5 : -20,
+    // locale === "en" ? "flex-start" : "center"
     width: 8,
     height: 8,
     backgroundColor: "rgba(255, 255, 255, .15)",
