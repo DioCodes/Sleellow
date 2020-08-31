@@ -31,17 +31,15 @@ export const AppNavigation = ({ navigation, route }) => {
   const [screen, setScreen] = useState("PremiumScreen");
 
   const statusBarHeight = Constants.statusBarHeight;
+  const wh = Dimensions.get('window').height;
 
   const modalOptions = {
     headerShown: false,
     gestureEnabled: true,
     gestureResponseDistance: {
-      vertical: Dimensions.get("window").height 
+      vertical: wh
     },
     cardOverlayEnabled: true,
-    safeAreaInsets: {
-      top: Dimensions.get("window").height > 800 ? Constants.statusBarHeight : Constants.statusBarHeight + 10
-    },
     cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
     ...TransitionPresets.ModalPresentationIOS,
   }
@@ -64,6 +62,7 @@ export const AppNavigation = ({ navigation, route }) => {
   };
 
   const Stack = createStackNavigator();
+  const NestedSleepStack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
   const tabPress = () => {
@@ -105,6 +104,46 @@ export const AppNavigation = ({ navigation, route }) => {
     );
   };
 
+  const NestedSleepStackScreen = () => {
+    return (
+      <NestedSleepStack.Navigator
+        initialRouteName="SleepScreen"
+        mode="modal"
+        headerMode="screen"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme.PRIMARY_COLOR,
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerShown: false,
+          headerBackTitle: t("back_C"),
+          headerTintColor: "#fff",
+          gestureEnabled: false,
+        }}
+      >
+      <Stack.Screen name="SleepScreen" component={SleepScreen}  
+        options={{
+          cardOverlayEnabled: true,
+          headerShown: true,
+          // cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          // ...TransitionPresets.ModalPresentationIOS,
+        }} />
+        <NestedSleepStack.Screen 
+          name="Sleep_Info" 
+          component={SleepScreen_Info} 
+          options={{
+            gestureEnabled: true,
+            gestureResponseDistance: {
+              vertical: wh
+            },
+            cardOverlayEnabled: true,
+            // cardStyleInterpolator:CardStyleInterpolatorsforModalPresentationIOS,
+            ...TransitionPresets.ModalPresentationIOS,
+          }}/>
+      </NestedSleepStack.Navigator>
+    )
+  }
 
   const MainStack = () => {
     return (
@@ -117,9 +156,11 @@ export const AppNavigation = ({ navigation, route }) => {
             elevation: 0,
           },
           headerTitle: null,
+          headerShown: false,
           headerBackTitle: t("back_C"),
           headerTintColor: "#fff",
         }}
+        headerMode="screen"
       >
         <Stack.Screen
           name="PremiumScreen"
@@ -128,7 +169,7 @@ export const AppNavigation = ({ navigation, route }) => {
             headerShown: false,
             gestureEnabled: true,
             gestureResponseDistance: {
-              vertical: Dimensions.get("window").height 
+              vertical: wh
             },
             cardOverlayEnabled: true,
             cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
@@ -140,17 +181,12 @@ export const AppNavigation = ({ navigation, route }) => {
           component={MainTabNavigator}
           options={{ 
             headerShown: false, 
-            safeAreaInsets: {
-              top: Dimensions.get("window").height > 800 ? Constants.statusBarHeight : Constants.statusBarHeight + 10,
-            },
-            // cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
           }}
         />
         <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
-        <Stack.Screen name="SleepScreen" component={SleepScreen} />
         <Stack.Screen name="WakeUpScreen" component={WakeUpScreen} />
-        <Stack.Screen name="SleepScreen_Info" component={SleepScreen_Info} />
-        <Stack.Screen name="BreathingPractices" component={BreathingPractices} />
+        <Stack.Screen name="NestedSleepStack" component={NestedSleepStackScreen} />
+        <Stack.Screen name="BreathingPractices" component={BreathingPractices}/>
         <Stack.Screen 
           name="PrepareForSleepModal"
           component={PrepareForSleep}

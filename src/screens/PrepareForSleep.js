@@ -1,16 +1,19 @@
-import React, {useState, useRef} from "react"
+import React, {useState, useRef, useLayoutEffect, useEffect} from "react"
 import {View, Text, TouchableOpacity, StyleSheet, Switch, Dimensions, Picker} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import * as Permissions from "expo-permissions";
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RBSheet from "react-native-raw-bottom-sheet";
+import { useHeaderHeight } from "@react-navigation/stack";
 import moment from "moment";
 
 import theme from "../theme"
 import { Container } from "../components/Container";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { t } from "../../assets/lang";
+import {HeaderModal} from "../components/HeaderModal";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 export const PrepareForSleep = ({navigation}) => {
   const [date, setDate] = useState(new Date());
@@ -20,6 +23,13 @@ export const PrepareForSleep = ({navigation}) => {
   const [secMinutes, setSecMinutes] = useState()
   const [thirdHours, setThirdHours] = useState()
   const [thirdMinutes, setThirdMinutes] = useState()
+  
+  useLayoutEffect(() => {
+    navigation.setOptions(
+      HeaderModal(navigation, t("prepare_for_sleep"))
+    )
+  }, []);
+  
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -102,7 +112,6 @@ export const PrepareForSleep = ({navigation}) => {
         repeats: true
       }
     });
-    
   }
 
   const oncomplePress = () => {
@@ -114,10 +123,13 @@ export const PrepareForSleep = ({navigation}) => {
   return (
 
     <View style={styles.main}>
-      <View style={styles.top}>
-        <Text style={styles.topHeader}>{<Ionicons name="ios-moon" size={30} color="white" />}{"\n"}{t("prepare_for_sleep")} </Text>
-      </View>
-          
+      {/* <View style={styles.top}>
+        <Text style={styles.topHeader}>
+          {t("prepare_for_sleep")}
+          {"  "}
+          { <Ionicons name="ios-moon" size={18} color="white" />}
+        </Text>
+      </View> */}
 
       <DateTimePicker
         testID="dateTimePicker"
@@ -147,23 +159,25 @@ export const PrepareForSleep = ({navigation}) => {
   )
 }
 
+const wh =  Dimensions.get("window").height
+
 const styles = StyleSheet.create({
   main: {
     flex: 1, 
     backgroundColor: theme.MODAL_BGC_COLOR,
   },
-  container: { 
-    width: "100%",
-    height: 60,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderRadius: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
+  // container: { 
+  //   width: "100%",
+  //   height: 60,
+  //   backgroundColor: "rgba(255, 255, 255, 0.05)",
+  //   borderRadius: 10,
+  //   paddingHorizontal: 20,
+  //   paddingVertical: 15,
+  //   marginTop: 10,
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center"
+  // },
   top: {
     width: '100%',
     paddingHorizontal: 20,
@@ -194,7 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5,
-    paddingHorizontal: 20
+    paddingHorizontal: wh > 800 ? 10 : 20
   },
   modalHeader: {
     color: theme.SECONDARY_COLOR,

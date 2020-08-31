@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import {
   View,
   StyleSheet,
@@ -13,11 +13,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { addMantra, resetMantra } from "../../store/actions/mantraActions";
 import theme from "../../theme";
 import { t } from '../../../assets/lang';
+import { HeaderModal } from '../HeaderModal';
 
 export const DailyMantraScreen = ({navigation}) => {
   const [isMantraWrited, setIsMantraWrited] = useState(false);
   const [mantraValue, setMantraValue] = useState("");
   const [inputValue, setInputValue] = useState("");
+
+  useLayoutEffect(() => {
+    navigation.setOptions(
+      HeaderModal(navigation, t("mantra_header"))
+    )
+  }, []);
 
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.mantra.mantra);
@@ -39,17 +46,17 @@ export const DailyMantraScreen = ({navigation}) => {
   });
   return(
     <View style={styles.main}>
-      <View style={styles.top}>
+      {/* <View style={styles.top}>
         <Text style={styles.topHeader}>
           {t("mantra_header")} {""}
         </Text>
-      </View>
+      </View> */}
 
       <View style={styles.sheetContainerContent}>
       <View
         style={{
           borderBottomWidth: 2,
-          borderBottomColor: "rgba(255, 255, 255, .5)",
+          borderBottomColor: "rgba(255, 255, 255, .1)",
           width: "100%",
           paddingBottom: 5,
           marginBottom: 20
@@ -119,6 +126,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // width: "100%",
     alignItems: "center",
+    paddingTop: 20,
     paddingHorizontal: 20,
   },
   top: {

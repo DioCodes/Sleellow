@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
+import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -7,16 +7,19 @@ import {
   TouchableOpacity,
   Picker,
   Animated,
+  Dimensions,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
 import { useSelector } from "react-redux";
+import Constants from 'expo-constants';
 
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
 import { BreathAnimation } from "../../../components/BreathAnimation";
 import { t } from "../../../../assets/lang";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 const SleepScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -29,11 +32,13 @@ const SleepScreen = ({ navigation }) => {
             title="Breath Info"
             iconName="ios-information-circle-outline"
             onPress={() => {
-              navigation.navigate("SleepScreen_Info");
+              navigation.push("Sleep_Info");
+              // console.log()
+              // navigation.navigate("NestedSleepStack");
             }}
           />
         </HeaderButtons>
-      ),
+      )
     });
   }, []);
 

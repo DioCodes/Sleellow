@@ -64,9 +64,9 @@
   "breathing_guide_4": "Relax and repeat your mantra",
   "breathing_info-description": "This exercise was developed by Dr. Andrew Weil. It calms the nervous system. Unlike tranquilizing drugs, which are initially effective, but then lose their strength over time, this exercise is not very effective at first when you first use it, but it gains strength through repetition and practice.",
   "breathing_info-tip_1": "Lie on your back. Relax and focus on breathing. Repeat the mantra in your mind.",
+  // "breathing_info-tip_1": "Ложитесь на спину. Расслабтесь и сфокусируйтесь на дыхании. Повторяйте свою мантру в уме.",
   "breathing_info-tip_2": "If you feel dizzy, stop the exercise. Try to start with 4 reps and increase this amount over time.",
-  // "breathing_info-tip_2": "Если вы чувствуете головокружение - остановитесь. Начните с 4 повт и со временем увеличивайте это количество.",
-  
+  // "breathing_info-tip_2": "Если у вас кружится голова - остановитесь. Начните с 4 повторений и со временем увеличивайте это количество.",
 
   "sec": "sec",
   "min": "min",
@@ -88,7 +88,7 @@
   "sleep": "Sleep",
   "energy": "Energy",
   "awakening": "Awakening",
-  "info": "Info",
+  "info": "Information",
   "back_C": "Back",
   "back": "back",
   "time_C": "Time",
