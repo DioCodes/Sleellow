@@ -108,6 +108,7 @@ const BreathSleepScreen_Info = ({ navigation }) => {
 
 const wh = Dimensions.get("window").height;
 const locale = Localization.locale.substr(0,2)
+console.log(locale)
 
 const slides = [
   {
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   textSlideWrapper: {
     // height: "22%", 
     // backgroundColor: 'blue',
-    height: wh > 800 && locale === "ru-US" ? "24%" : "22%", 
+    height: wh > 800 && locale === "ru" ? "24%" : "22%", 
     justifyContent: locale === "en" ? "flex-start" : "center"
   },
   text: {

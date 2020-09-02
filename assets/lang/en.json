@@ -93,12 +93,18 @@
   "back": "back",
   "time_C": "Time",
   "time": "time",
+  "choose_C": "Choose",
+  "choose": "choose",
   "settings_C": "Settings",
   "settings": "settings",
   "month_C": "Month",
   "month": "month",
   "complete_C": "Complete", 
   "complete": "complete",
+  "confirm_C": "Confirm",
+  "confirm": "confirm",
+  "cancel_C": "Cancel",
+  "cancel": "cancel",
 
   "levelIs": "Cheers! Now you are:"
 }

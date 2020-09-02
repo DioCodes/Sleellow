@@ -229,7 +229,6 @@ const SleepScreen = ({ navigation }) => {
   const minutesPicker = () => (
     <View
       style={{
-        marginVertical: 20,
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
@@ -240,17 +239,17 @@ const SleepScreen = ({ navigation }) => {
         itemStyle={{ color: "#fff" }}
         style={{
           // height: 200,
-          width: 250,
+          width: "100%",
         }}
         onValueChange={(itemValue) => {
           setNapTime(itemValue);
           checkNapDescription(itemValue);
         }}
       >
-        <Picker.Item label="1" value="1" />
-        <Picker.Item label="3" value="3" />
-        <Picker.Item label="5" value="5" />
-        <Picker.Item label="8" value="8" />
+        <Picker.Item label={`1 ${t("min")}`} value="1" />
+        <Picker.Item label={`3 ${t("mins")}`} value="3" />
+        <Picker.Item label={`5 ${t("mins")}`} value="5" />
+        <Picker.Item label={`8 ${t("mins")}`} value="8" />
       </Picker>
     </View>
   );
@@ -399,14 +398,15 @@ const SleepScreen = ({ navigation }) => {
       </ScrollView>
 
       <DateTimePickerModal
-        headerTextIOS="Choose time for breathing"
+        headerTextIOS={`${t("choose_C")} ${t("time")}`}
+        cancelTextIOS={t("cancel_C")}
+        confirmTextIOS={t("confirm_C")}
         mode="time"
         isVisible={isDatePickerVisible}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         isDarkModeEnabled={true}
         customPickerIOS={minutesPicker}
-        cancelTextIOS="Exit"
         is24Hour={false}
       />
     </View>
