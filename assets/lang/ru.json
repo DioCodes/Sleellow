@@ -29,7 +29,7 @@
   "sleep_time-fall_asleep_now-desc": "Если вы ложитесь спать сейчас, вам стоит проснуться в следующее время:",
 
   "sleep_time-wake_up": "Я хочу проснуться в",
-  "sleep_time-wake_up-desc_1": "Если вы хотите проснкться в",
+  "sleep_time-wake_up-desc_1": "Если вы хотите проснуться в",
   "sleep_time-wake_up-desc_2": ", вам стоит заснуть в следующее время:",
 
 
@@ -90,12 +90,18 @@
   "back": "назад",
   "time_C": "Время",
   "time": "время",
+  "choose_C": "Выберите",
+  "choose": "выберите",
   "settings_C": "Настройки",
   "settings": "настройки",
   "month_C": "Месяц",
   "month": "месяц",
   "complete_C": "Готово",
   "complete": "готово",
-
+  "confirm_C": "Подтвердить",
+  "confirm": "подтвердить",
+  "cancel_C": "Отмена",
+  "cancel": "отмена",
+  
   "levelIs": "Ура! Теперь вы:"
 }

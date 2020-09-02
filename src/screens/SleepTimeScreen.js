@@ -77,11 +77,13 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime }}>6-5 {t("cycles")}</Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 1 }}>{res6}</Text>
-              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
+            <Text style={{ ...styles.textTime, opacity: 1 }}>
+              5-6 <Text style={styles.textTimeSmall}>{t("cycles")}</Text>
+            </Text>
+            <View style={styles.timeContainer}>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res5}</Text>
+              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 1 }}>{res6}</Text>
             </View>
           </View>
 
@@ -92,13 +94,13 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
-              4-3 {t("cycles-2")}
-            </Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
-              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>
+                3-4 <Text style={styles.textTimeSmall}>{t("cycles-2")}</Text>
+              </Text>
+            <View style={styles.timeContainer}>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
+              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
             </View>
           </View>
 
@@ -109,13 +111,13 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime, opacity: 0.25 }}>
-              2-1 {t('cycles-2')}
+            <Text style={{ ...styles.textTime, opacity: 0.25 }}>
+              1-2 <Text style={styles.textTimeSmall}>{t("cycles-2")}</Text>
             </Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res2}</Text>
-              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
+            <View style={styles.timeContainer}>
               <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res1}</Text>
+              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res2}</Text>
             </View>
           </View>
         </View>
@@ -136,11 +138,13 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime }}>6-5 {t("cycles")}</Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 1 }}>{res1}</Text>
-              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
+            <Text style={{ ...styles.textTime, opacity: 1 }}>
+                5-6 <Text style={styles.textTimeSmall}>{t("cycles")}</Text>
+              </Text>
+            <View style={styles.timeContainer}>
               <Text style={{ ...styles.textTime, opacity: 1 }}>{res2}</Text>
+              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 1 }}>{res1}</Text>
             </View>
           </View>
 
@@ -151,13 +155,13 @@ export const SleepTimeScreen = ({ navigation }) => {
               width: "100%",
             }}
           >
-            <Text style={{ ...styles.headerTime, opacity: 0.5 }}>
-              4-3 {t("cycles-2")}
+            <Text style={{ ...styles.textTime, opacity: 0.5 }}>
+              3-4 <Text style={styles.textTimeSmall}>{t("cycles-2")}</Text>
             </Text>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
-              <Text style={{ ...styles.textTimeOr }}> {t("or")} </Text>
+            <View style={styles.timeContainer}>
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res4}</Text>
+              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}> {t("or")} </Text>
+              <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
             </View>
           </View>
         </View>
@@ -402,15 +406,23 @@ export const SleepTimeScreen = ({ navigation }) => {
         </View>
       </ScrollView>
       <DateTimePickerModal
-        headerTextIOS="Choose a time to wake up"
+        headerTextIOS={`${t("choose_C")} ${t("time")}`}
+        cancelTextIOS={t("cancel_C")}
+        confirmTextIOS={t("confirm_C")}
+        isDarkModeEnabled={true}
+        is24Hour={false}
         mode="time"
         isVisible={isDatePickerVisible}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        isDarkModeEnabled={true}
         date={pickerDate}
-        cancelTextIOS="Exit"
-        is24Hour={false}
+        // customHeaderIOS={() => (
+        // <View style={styles.modalHeaderContainer}>
+        //   <Text style={styles.modalHeader}>
+        //     {`${t("choose_C")} ${t("time")}`}
+        //   </Text>
+        // </View>
+        // )}
       />
     </View>
   );
@@ -471,6 +483,18 @@ const styles = StyleSheet.create({
     fontSize: theme.CONTAINER_HEADER,
     textAlign: "center",
   },
+  modalHeaderContainer: {
+    // backgroundColor: 'red',
+    width: "100%",
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10
+  },
+  modalHeader: {
+    color: theme.SECONDARY_COLOR,
+    fontFamily: 'norms-regular',
+    fontSize: 20,
+  },
   text: {
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-regular",
@@ -483,17 +507,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   timeContainer: {
-    // width: "100%",
-    // justifyContent: "center",
-    // alignItems: "center",
-  },
-  headerTime: {
-    fontSize: 24,
-    fontFamily: "norms-bold",
-    color: theme.SECONDARY_COLOR,
+    flexDirection: "row", 
+    alignItems: 'flex-end'
   },
   time: {
-    fontSize: 24,
+    fontSize: 29,
     color: "#fff",
     fontFamily: "norms-bold",
   },
@@ -504,24 +522,19 @@ const styles = StyleSheet.create({
     opacity: 0.25,
   },
   textTime: {
-    fontSize: 24,
+    fontSize: 22,
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-bold",
-  },
-  textTimeAsleep: {
-    color: theme.SECONDARY_COLOR,
-    fontSize: 24,
-    textAlign: "center",
-    fontFamily: "norms-bold",
-    lineHeight: 27,
   },
   textTimeOr: {
-    fontSize: 24,
-    opacity: 0.15,
+    opacity: 0.1,
     color: theme.SECONDARY_COLOR,
     fontFamily: "norms-regular",
+    textAlignVertical: "bottom"
   },
-
+  textTimeSmall: {
+    fontSize: 18,
+  },
   timeToWakeUp: {
     // flex: 1,
     width: "100%",
