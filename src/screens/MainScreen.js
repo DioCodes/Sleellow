@@ -145,7 +145,14 @@ const MainScreen = (props) => {
               props.navigation.navigate("BreathingPractices");
             }}
           />
+          <Container
+            name={t("daytime_sleep")}
+            onPress={() => {
+              props.navigation.navigate("DaytimeSleepModal")
+            }}
+          />
         </ScrollView>
+
         <RBSheet
           ref={bs}
           height={windowHeight > 800 ? 735 : 675}

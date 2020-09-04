@@ -12,6 +12,7 @@ import { SleepBackIcon } from "../../assets/images/SleepBackIcon";
 import { NoContentManIcon } from "../../assets/images/NoContentManIcon";
 import { StyledButton } from "../components/StyledButton";
 import { t } from "../../assets/lang/index";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 
@@ -49,7 +50,13 @@ export const PremiumScreen = ({navigation}) => {
       image: <BreathImage height={220} width={250} />,
       header: t("premium_s5_header"),
       text: t("premium_s5_text"),
-      button: <StyledButton name={`$2.99/${t("month")}`} color="transparent" borderColor="white" onPress={() => onPurchaseHandler()} />,
+      button: 
+      (<View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => onPurchaseHandler()}>
+            <Text style={styles.buttonText}>{`$2.99/${t("month")}`}</Text>
+        </TouchableOpacity>
+      </View>),
+      btnDesc: <Text style={styles.buttonTextDesc}>{t("premium_trial_text")}</Text>
     },
   ];
 
@@ -69,14 +76,15 @@ export const PremiumScreen = ({navigation}) => {
         <View style={styles.container}>
           <View style={styles.image}>{item.image}</View>
           <View style={styles.textWrapper}>
-            <Text style={styles.textHeader}>{item.header}</Text>
-              <Text style={styles.text}>{item.text}</Text>
+            <Text style={styles.textHeader}> {item.header}</Text>
+            <Text style={styles.text}> {item.text} </Text>
             <View style={styles.listContainer}>
               <Text style={{...styles.text, ...styles.list}}>{item.list}</Text>
             </View>
-              <Text style={{...styles.text, textAlign: "left"}}>{item.textSecond}</Text>
-              {item.button}
+            <Text style={styles.text}> {item.textSecond} </Text>
           </View>
+            {item.button}
+            {item.btnDesc}
         </View>
       </View>
     )
@@ -115,13 +123,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'center',
     // position: 'absolute',
+    width: '100%'
   },
   image: {
 
   },
   text: {
     fontFamily: "norms-regular",
-    fontSize: 15,
+    fontSize: 16,
     color: "rgba(255, 255, 255, .7)",
     paddingVertical: 5,
     textAlign: "center"
@@ -136,7 +145,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   textHeader: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "norms-medium",
     color: "#fff",
     textAlign: "center",
@@ -148,19 +157,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     paddingHorizontal: 20,
-
+    width: '100%'
   },
 
   buttonContainer: {
-    width: 70,
-    height: 25,
+    width: 150,
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 5
   },
   buttonText: {
     color: theme.SECONDARY_COLOR,
-    fontSize: 18,
-    fontFamily: "norms-medium",
+    fontSize: 14,
+    fontFamily: "norms-bold",
+  },
+  buttonTextDesc: {
+    color: theme.SECONDARY_COLOR,
+    fontSize: 12,
+    fontFamily: "norms-regular",
+    marginTop: 10,
+    opacity: 0.5
   },
 
   dot: {

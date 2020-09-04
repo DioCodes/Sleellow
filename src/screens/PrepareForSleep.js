@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { t } from "../../assets/lang";
 import {HeaderModal} from "../components/HeaderModal";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { StyledButton } from "../components/StyledButton";
 
 export const PrepareForSleep = ({navigation}) => {
   const [date, setDate] = useState(new Date());
@@ -114,7 +115,7 @@ export const PrepareForSleep = ({navigation}) => {
     });
   }
 
-  const oncomplePress = () => {
+  const onComplePress = () => {
     isAllowNotifications()
     scheduledNotification()
     navigation.goBack()
@@ -149,12 +150,8 @@ export const PrepareForSleep = ({navigation}) => {
       </View>
 
       <View style={styles.compleBtnContainer}>
-        <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => oncomplePress()}>
-          <View style={styles.compleBtn}>
-            <Text style={styles.compleBtnText}>{t("complete_C")}</Text>
-          </View>
-        </TouchableOpacity>
-      </View> 
+        <StyledButton name={t("complete_C")} alignSelf="center" onPress={() => onComplePress()} />
+      </View>
     </View>
   )
 }
@@ -217,46 +214,6 @@ const styles = StyleSheet.create({
     opacity: .25,
   },
   compleBtnContainer: {
-    width: '50%',
-    height: 50,
-    alignSelf: 'center',
     marginTop: 20
   },
-  compleBtn: {
-    width: '100%',
-    height: "100%",
-    backgroundColor: "rgba(255, 255, 255, .1)",
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-  },
-  compleBtnText: {
-    color: "#fff",
-    fontSize: 20,
-    fontFamily: "norms-medium",
-  }
 })
-
-{/* <RBSheet
-          ref={bs}
-          height={windowHeight > 800 ? 735 : 675}
-          openDuration={275}
-          closeDuration={275}
-          closeOnDragDown={true}
-          closeOnPressMask={true}
-          customStyles={{
-            wrapper: {
-              backgroundColor: "#rgba(0, 0, 0, 0.85)",
-              // marginHorizontal: 100
-            },
-            draggableIcon: {
-              display: 'none'
-            },
-            container: {
-              backgroundColor: theme.MODAL_BGC_COLOR,
-              borderTopRightRadius: 10,
-              borderTopLeftRadius: 10,
-            },
-          }}
-          animationType="fade"
-        > */}
