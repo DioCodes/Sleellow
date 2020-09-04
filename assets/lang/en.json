@@ -16,6 +16,8 @@
   "premium_s5_header": "Let's help each other",
   "premium_s5_text": "As we have already found out, poor sleep is the reason for the loss of control over life. But, you are able to take back control, feel better and do more!\n\nI will help you break the bad habits that are ruining your life. In return, I will ask you to support the developer.",
   
+  "premium_trial_text": "3 days free*",
+
   "thanks_for_your_support": "Thanks for your support",
 
   
@@ -50,7 +52,7 @@
   "notification_s3_desc": "Finish all your tasks and get ready for sleep!",
   
   "share_the_app": "Share the app",
-  "share_text": "Hey, check out Sleellow, great sleep app!",
+  "share_text": "Hey, check out Sleellow, great sleep app! expo.io/@diocode/sleellow",
   
   
   "no_content_header": "There is no content here yet",
@@ -64,9 +66,11 @@
   "breathing_guide_4": "Relax and repeat your mantra",
   "breathing_info-description": "This exercise was developed by Dr. Andrew Weil. It calms the nervous system. Unlike tranquilizing drugs, which are initially effective, but then lose their strength over time, this exercise is not very effective at first when you first use it, but it gains strength through repetition and practice.",
   "breathing_info-tip_1": "Lie on your back. Relax and focus on breathing. Repeat the mantra in your mind.",
-  // "breathing_info-tip_1": "Ложитесь на спину. Расслабтесь и сфокусируйтесь на дыхании. Повторяйте свою мантру в уме.",
   "breathing_info-tip_2": "If you feel dizzy, stop the exercise. Try to start with 4 reps and increase this amount over time.",
-  // "breathing_info-tip_2": "Если у вас кружится голова - остановитесь. Начните с 4 повторений и со временем увеличивайте это количество.",
+  
+
+  "daytime_sleep": "Daytime sleep",
+
 
   "sec": "sec",
   "min": "min",
@@ -75,7 +79,6 @@
   "cycles": "cycles",
   "cycles-2": "cycles",
   "or": "or",
-
   "description": "Description",
   "exercise": "Exercise",
   "tips": "Tips",
@@ -105,6 +108,7 @@
   "confirm": "confirm",
   "cancel_C": "Cancel",
   "cancel": "cancel",
+  
 
   "levelIs": "Cheers! Now you are:"
 }

@@ -108,7 +108,6 @@ const BreathSleepScreen_Info = ({ navigation }) => {
 
 const wh = Dimensions.get("window").height;
 const locale = Localization.locale.substr(0,2)
-console.log(locale)
 
 const slides = [
   {

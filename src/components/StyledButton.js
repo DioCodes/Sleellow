@@ -6,8 +6,10 @@ import theme from "../theme";
 export const StyledButton = ({
   onPress = (() => {}),
   name,
-  color = theme.PRIMARY_COLOR,
+  color = theme.BUTTONS_COLOR,
   borderColor = "transparent",
+  alignSelf = "flex-end",
+  borderWidth
 }) => {
   const onPressHandler = () => {
     onPress();
@@ -15,30 +17,31 @@ export const StyledButton = ({
   };
 
   return (
-    <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
-      <View style={{ ...styles.button, backgroundColor: color, borderColor }}>
-        <Text style={styles.buttonText}>{name}</Text>
-      </View>
-    </TouchableOpacity>
+    <View style={{...styles.buttonContainer, alignSelf}}>
+      <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
+        <View style={{ ...styles.button, backgroundColor: color, borderColor, borderWidth }}>
+          <Text style={styles.buttonText}>{name}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    width: '50%',
+    height: 50,
+  },
   button: {
-    borderWidth: 1,
-    borderColor: "transparent",
-    backgroundColor: theme.PRIMARY_COLOR,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 150,
-    height: 45,
-    // marginVertical: 10,
+    width: '100%',
+    height: "100%",
+    justifyContent: 'center',
+    borderRadius: 30,
   },
   buttonText: {
     color: theme.SECONDARY_COLOR,
-    fontSize: 14,
-    fontFamily: "norms-bold",
+    fontSize: 20,
+    fontFamily: "norms-medium",
     textAlign: "center",
   },
 });

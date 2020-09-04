@@ -14,6 +14,7 @@ import { addMantra, resetMantra } from "../../store/actions/mantraActions";
 import theme from "../../theme";
 import { t } from '../../../assets/lang';
 import { HeaderModal } from '../HeaderModal';
+import { StyledButton } from '../StyledButton';
 
 export const DailyMantraScreen = ({navigation}) => {
   const [isMantraWrited, setIsMantraWrited] = useState(false);
@@ -82,13 +83,7 @@ export const DailyMantraScreen = ({navigation}) => {
       />
       </View>
 
-      <View style={styles.completeBtnContainer}>
-        <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => onCompletePress()}>
-          <View style={styles.completeBtn}>
-            <Text style={styles.completeBtnText}>{t("complete_C")}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <StyledButton name={t("complete_C")} onPress={() => onCompletePress()}/>
 
       </View>
     </View>
@@ -149,7 +144,6 @@ const styles = StyleSheet.create({
   completeBtnContainer: {
     width: '50%',
     height: 50,
-    // marginTop: 25,
     alignSelf: 'flex-end'
   },
   completeBtn: {

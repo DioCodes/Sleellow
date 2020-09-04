@@ -24,6 +24,7 @@ import { PremiumScreen } from "../screens/PremiumScreen";
 import { PrepareForSleep } from "../screens/PrepareForSleep";
 import { DailyMantraScreen } from "../components/DailyMantra/DailyMantaScreen";
 import { t } from "../../assets/lang";
+import { DaytimeSleepScreen } from "../screens/DaytimeSleepScreen";
 
 //// сделай отдельный компонент из табБара
 
@@ -42,6 +43,12 @@ export const AppNavigation = ({ navigation, route }) => {
     cardOverlayEnabled: true,
     cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
     ...TransitionPresets.ModalPresentationIOS,
+  }
+
+  const modalWithPicker = {
+    gestureResponseDistance: {
+      vertical: 100
+    },
   }
 
   useEffect(() => {
@@ -190,12 +197,23 @@ export const AppNavigation = ({ navigation, route }) => {
         <Stack.Screen 
           name="PrepareForSleepModal"
           component={PrepareForSleep}
-          options={modalOptions}
+          options={{
+            ...modalOptions,  
+            ...modalWithPicker
+          }}
         />
         <Stack.Screen 
           name="MantraModal"
           component={DailyMantraScreen}
           options={modalOptions}
+        />
+        <Stack.Screen 
+          name="DaytimeSleepModal"
+          component={DaytimeSleepScreen}
+          options={{
+            ...modalOptions,  
+            ...modalWithPicker
+          }}
         />
       </Stack.Navigator>
     );
