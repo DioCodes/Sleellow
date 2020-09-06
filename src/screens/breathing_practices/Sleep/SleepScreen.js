@@ -366,9 +366,7 @@ const SleepScreen = ({ navigation }) => {
             >
               {t("breathing_guide_4")}
             </Animated.Text>
-
           </Animated.View>
-          
         </Animated.View>
 
         <Animated.View
