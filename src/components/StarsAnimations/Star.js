@@ -5,7 +5,7 @@ import theme from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 
 
-export const Star = ({ height, paused }) => {
+export const Star = ({ height, paused}) => {
   let trueFalse = [false, true];
   let rNum = [0.5, 1];
   var randomBool = Math.floor(Math.random() * trueFalse.length);
@@ -44,7 +44,7 @@ export const Star = ({ height, paused }) => {
 
   
   let loopStarAnimation = () => {
-    const time = 1000 * randomIntFromInterval(10, 25);
+    const time = 1000 * randomIntFromInterval(10, 15);
     let easing = Easing.linear;
     reversed = !reversed;
 
@@ -114,15 +114,21 @@ export const Star = ({ height, paused }) => {
       }),
       Animated.sequence([
         Animated.timing(opacity, {
-          toValue: 1,
-          duration: time,
+          toValue: .5,
+          duration: time / 1.5,
+          useNativeDriver: true,
+          easing,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0,
+          duration: time / 3,
           useNativeDriver: true,
           easing,
         }),
       ]),
       Animated.timing(randomStarSize, {
         toValue: 0,
-        duration: time/1.5,
+        duration: time,
         useNativeDriver: true,
         easing,
       }),
@@ -144,14 +150,31 @@ export const Star = ({ height, paused }) => {
     })
   }
 
+  const stopAnimation = () => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 2500,
+      easing: Easing.linear,
+      useNativeDriver: true
+    }).start((e) => {
+      if (e.finished) {
+        valXY.setValue({
+          x: randomIntFromInterval(0, deviceWidth - startHeight),
+          y: randomIntFromInterval(0, parentHeight) * -1
+        })
+        randomStarSize.setValue(randomIntFromInterval(1, starMaxSize))
+      }
+    })
+  }
+
   useEffect(() => {
     if (paused) {
-      opacity.setValue(0)
-      valXY.setValue({
-        x: randomIntFromInterval(0, deviceWidth - startHeight),
-        y: randomIntFromInterval(0, parentHeight) * -1
-      })
-      randomStarSize.setValue(randomIntFromInterval(1, starMaxSize))
+      // opacity.setValue(0)
+      // valXY.setValue({
+      //   x: randomIntFromInterval(0, deviceWidth - startHeight),
+      //   y: randomIntFromInterval(0, parentHeight) * -1
+      // })
+      // randomStarSize.setValue(randomIntFromInterval(1, starMaxSize))
       
     } else if (!paused) {
       requestAnimationFrame(() => {
@@ -170,8 +193,10 @@ export const Star = ({ height, paused }) => {
           { translateY: valXY.y },
           { scale: randomStarSize },
         ],
-        opacity: opacity
+        opacity: opacity,
+        // backgroundColor: color
       }}>
+        {/* <Ionicons name="ios-planet" size={15} color="white" /> */}
         {/* <View style={{...styles.starPart, ...styles.starPartFirst}} />
         <View style={{...styles.starPart, ...styles.starPartSec}} /> */}
       </Animated.View>
@@ -180,9 +205,8 @@ export const Star = ({ height, paused }) => {
 
 const styles = StyleSheet.create({
   star: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    left: 0,
     shadowColor: theme.SECONDARY_COLOR,
     shadowOpacity: 1,
     shadowOffset: 

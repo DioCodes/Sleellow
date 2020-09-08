@@ -14,6 +14,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
 import { useSelector } from "react-redux";
 import Constants from 'expo-constants';
+import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../../../theme";
 import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
@@ -300,6 +301,13 @@ const SleepScreen = ({ navigation }) => {
         }}
         contentContainerStyle={{ ...styles.wrapper }}
       >
+        {/* <View style={{
+          position: 'absolute',
+          top: 30,
+          
+        }}>
+          <Ionicons name="ios-leaf" size={22} color="white" />
+        </View> */}
         <Animated.View
           style={{
             ...styles.breathContainer,

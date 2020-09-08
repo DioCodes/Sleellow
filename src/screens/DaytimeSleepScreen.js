@@ -7,15 +7,23 @@ import { StyledButton } from '../components/StyledButton';
 import { CircleMoveAnimation } from '../components/CircleMoveAnimations';
 import { StarsAnimation } from '../components/StarsAnimations/StarsAnimation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Haptics from "expo-haptics";
+import moment from 'moment';
+import { HoldButton } from '../components/HoldButton';
 
 export const DaytimeSleepScreen = ({navigation}) => {
   const [napTime, setNapTime] = useState("20");
   const [paused, setPaused] = useState(true);
-  const [display, setDisplay] = useState(false);
+  const [pause, setPause] = useState(false);
+  const [display, setDisplay] = useState("flex");
+  const [displaySec, setDisplaySec] = useState("flex");
+  const [currentTime, setCurrentTime] = useState(moment());
+  const [progress, setProgress] = useState(0)
 
   let topIndent = useRef(new Animated.Value(0)).current;
   let btnOpacity = useRef(new Animated.Value(1)).current;
   let gdText = useRef(new Animated.Value(0)).current;
+  let timeOpacity = useRef(new Animated.Value(0)).current;
 
   let startSleep = () => {
     Animated.sequence([
@@ -33,6 +41,12 @@ export const DaytimeSleepScreen = ({navigation}) => {
           useNativeDriver: true
         }),
       ]),
+      Animated.timing(timeOpacity, {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: true
+      }),
       Animated.timing(gdText, {
         toValue: .5,
         duration: 2000,
@@ -41,13 +55,13 @@ export const DaytimeSleepScreen = ({navigation}) => {
       }),
       Animated.timing(gdText, {
         toValue: 0,
-        duration: 1000,
+        duration: 2500,
         easing: Easing.linear,
         useNativeDriver: true
       }),
       ]).start((e) => {
         if (e.finished) {
-          setDisplay(true)
+          setDisplay("none")
         }
       })
   }
@@ -65,10 +79,17 @@ export const DaytimeSleepScreen = ({navigation}) => {
         duration: 500,
         easing: Easing.linear,
         useNativeDriver: true
+      }),
+      Animated.timing(timeOpacity, {
+        toValue: 0,
+        duration: 2500,
+        easing: Easing.linear,
+        useNativeDriver: true
       })
     ]).start((e) => {
       if (e.finished) {
-        setDisplay(false)
+        setDisplay("flex")
+        // setDisplaySec("none")
       }
     })
   }
@@ -93,11 +114,11 @@ export const DaytimeSleepScreen = ({navigation}) => {
     } else if (!paused) {
       startSleep()
     }
-    return () => {
-      topIndent
-      btnOpacity
-      gdText
-    }
+    
+    setInterval(() => {
+      setCurrentTime(moment())
+      // setProgress((p) => p + .025 )
+    }, 1000)
   }, [paused])
 
   return (
@@ -108,13 +129,30 @@ export const DaytimeSleepScreen = ({navigation}) => {
       }}>
         <TouchableOpacity 
           style={{
-            borderRadius: 150, width: 300
+            borderRadius: 150, 
+            width: 300,
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative'
           }} 
           activeOpacity={theme.ACTIVE_OPACITY} 
-          onPress={() => {
+          onLongPress={() => {
             setPaused(true);
-          }}>
+            !paused ? Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light) : null;
+          }}
+          delayLongPress={5000}
+        >
           <CircleMoveAnimation paused={paused} />
+
+          <Animated.View style={{
+            ...styles.timeContainer,
+            opacity: timeOpacity,
+            // display: displaySec
+          }}>
+            <Text style={styles.time}>
+              {currentTime.format("hh")}{"\n"}{currentTime.format("mm")}
+            </Text>
+          </Animated.View>
         </TouchableOpacity>
 
         <Animated.View style={{
@@ -141,6 +179,8 @@ export const DaytimeSleepScreen = ({navigation}) => {
             <Picker.Item label={`30 ${t("mins")}`} value="30" />
           </Picker>
         </Animated.View>
+
+        <HoldButton progress={progress} duration={500} />
       </Animated.View>
       
       <Animated.View style={{
@@ -152,14 +192,15 @@ export const DaytimeSleepScreen = ({navigation}) => {
           name="Старт"
           alignSelf="center" 
           onPress={() => {
-            setPaused(paused ? false : true);
+            setPaused(false);
+            setPause(true);
           }} 
         />
       </Animated.View>
 
-      <GuideText text={"Нажмите, чтобы остановить"} />
+      <GuideText text={"Зажмите, чтобы остановить"} />
       
-      <StarsAnimation paused={paused} />
+      <StarsAnimation paused={paused} pause={pause} />
     </View>
   )
 }
@@ -216,5 +257,19 @@ const styles = StyleSheet.create({
     fontFamily: "norms-regular",
     opacity: .5,
     top: wh > 800 ? 10 : 20,
+  },
+
+  timeContainer: {
+    position: 'absolute',
+    // width: 250,
+  },
+  time: {
+    color: theme.SECONDARY_COLOR,
+    fontFamily: "norms-bold",
+    fontSize: 60,
+    opacity: .5,
+    textAlign: "center",
+    // width: "100%",
+    // backgroundColor: 'red',
   }
 })

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { View, StyleSheet, Animated, Easing } from 'react-native'
+import theme from '../theme';
 
 
 export const CircleMoveAnimation = ({ paused }) => {
@@ -51,18 +52,18 @@ export const CircleMoveAnimation = ({ paused }) => {
               easing: Easing.in,
               useNativeDriver: true
             }),
-            Animated.timing(yThree, {
-              toValue: .92,
-              duration: 3000,
-              easing: Easing.in,
-              useNativeDriver: true
-            }),
-            Animated.timing(xThree, {
-              toValue: .9,
-              duration: 3000,
-              easing: Easing.in,
-              useNativeDriver: true
-            }),
+            // Animated.timing(yThree, {
+            //   toValue: .9,
+            //   duration: 3000,
+            //   easing: Easing.in,
+            //   useNativeDriver: true
+            // }),
+            // Animated.timing(xThree, {
+            //   toValue: .9,
+            //   duration: 3000,
+            //   easing: Easing.in,
+            //   useNativeDriver: true
+            // }),
           ]),
 
         Animated.parallel([
@@ -90,18 +91,18 @@ export const CircleMoveAnimation = ({ paused }) => {
             easing: Easing.in,
             useNativeDriver: true
           }),
-          Animated.timing(yThree, {
-            toValue: .9,
-            duration: 3000,
-            easing: Easing.in,
-            useNativeDriver: true
-          }),
-          Animated.timing(xThree, {
-            toValue: .9,
-            duration: 3000,
-            easing: Easing.in,
-            useNativeDriver: true
-          }),
+          // Animated.timing(yThree, {
+          //   toValue: .9,
+          //   duration: 3000,
+          //   easing: Easing.in,
+          //   useNativeDriver: true
+          // }),
+          // Animated.timing(xThree, {
+          //   toValue: .9,
+          //   duration: 3000,
+          //   easing: Easing.in,
+          //   useNativeDriver: true
+          // }),
         ]),
         Animated.timing(rotateTwo, {
           toValue: 0,
@@ -165,14 +166,6 @@ export const CircleMoveAnimation = ({ paused }) => {
 
   useEffect(() => {
     if (paused) {
-      // create stopAnimation function
-      // rotateTwo.setValue(0);
-      // x.setValue(.9);
-      // y.setValue(.9);
-      // xTwo.setValue(.9);
-      // yTwo.setValue(.9);
-      // xThree.setValue(.9);
-      // yThree.setValue(.9);
       stopAnimation()
     } else if (!paused) {
       loopCircleAnimation()
@@ -205,7 +198,6 @@ export const CircleMoveAnimation = ({ paused }) => {
       <Animated.View style={{
         ...styles.circle, 
         ...styles.circleTwo,
-        // borderColor: 'red',
         transform: [
           {scaleX: xThree},
           {scaleY: yThree}
