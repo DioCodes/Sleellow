@@ -220,9 +220,9 @@ export const AppNavigation = ({ navigation, route }) => {
   };
 
   return (
-      <NavigationContainer>
-        <StatusBar barStyle="light-content" />
-        <MainStack/>
-      </NavigationContainer>
+    <NavigationContainer>
+      <StatusBar barStyle="light-content" />
+      <MainStack/>
+    </NavigationContainer>
   );
 };

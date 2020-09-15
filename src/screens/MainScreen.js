@@ -7,20 +7,19 @@ import {
   Picker,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
-import theme from "../theme";
-import moment from "moment";
+
 import { ShowScreenRide } from "../components/ShowScreenRide";
 import { Container } from "../components/Container";
 import TimerDisp from "../components/Timer/TimerDisp";
-import { useDispatch } from "react-redux";
-
 import { DailyMantraButton } from "../components/DailyMantra/DailyMantraButton";
 import { SleepRoutine } from "../components/SleepRoutine";
-import { ScrollView } from "react-native-gesture-handler";
 import { t } from "../../assets/lang";
+import theme from "../theme";
 
 const MainScreen = (props) => {
   const [napTime, setNapTime] = useState("45");
@@ -148,7 +147,7 @@ const MainScreen = (props) => {
           <Container
             name={t("daytime_sleep")}
             onPress={() => {
-              props.navigation.navigate("DaytimeSleepModal")
+              props.navigation.navigate("DaytimeSleepModal");
             }}
           />
         </ScrollView>

@@ -4,12 +4,12 @@ import * as Haptics from "expo-haptics";
 import theme from "../theme";
 
 export const StyledButton = ({
-  onPress = (() => {}),
+  onPress = () => {},
   name,
   color = theme.BUTTONS_COLOR,
   borderColor = "transparent",
-  alignSelf = "flex-end",
-  borderWidth
+  alignSelf,
+  borderWidth,
 }) => {
   const onPressHandler = () => {
     onPress();
@@ -17,9 +17,16 @@ export const StyledButton = ({
   };
 
   return (
-    <View style={{...styles.buttonContainer, alignSelf}}>
+    <View style={{ ...styles.buttonContainer, alignSelf }}>
       <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
-        <View style={{ ...styles.button, backgroundColor: color, borderColor, borderWidth }}>
+        <View
+          style={{
+            ...styles.button,
+            backgroundColor: color,
+            borderColor,
+            borderWidth,
+          }}
+        >
           <Text style={styles.buttonText}>{name}</Text>
         </View>
       </TouchableOpacity>
@@ -29,13 +36,14 @@ export const StyledButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: '50%',
+    // width: "50%",
+    width: "50%",
     height: 50,
   },
   button: {
-    width: '100%',
+    width: "100%",
     height: "100%",
-    justifyContent: 'center',
+    justifyContent: "center",
     borderRadius: 30,
   },
   buttonText: {

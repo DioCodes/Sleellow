@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { View, StyleSheet, Animated, Easing, Dimensions } from 'react-native'
-import Constants from "expo-constants"
-import { Star } from './Star'
-
+import React, { useRef, useEffect, useState } from "react";
+import { View, StyleSheet, Animated, Easing, Dimensions } from "react-native";
+import Constants from "expo-constants";
+import { Star } from "./Star";
 
 export const StarsAnimation = ({ paused, pause }) => {
   const [stars, setStars] = useState([]);
@@ -19,13 +18,13 @@ export const StarsAnimation = ({ paused, pause }) => {
     const starsOne = [];
     const starsTwo = [];
 
-    for (let y = 0; y < 15; y += 1) {
+    for (let y = 0; y < 10; y += 1) {
       starsOne.push({
         id: y,
       });
     }
 
-    for (let y = 0; y < 15; y += 1) {
+    for (let y = 0; y < 20; y += 1) {
       starsTwo.push({
         id: y,
       });
@@ -36,54 +35,49 @@ export const StarsAnimation = ({ paused, pause }) => {
 
   useEffect(() => {
     if (paused === false) {
-      getStars()
+      getStars();
     } else if (paused === true && pause == true) {
       // setStars([])
       // setStarsSec([])
       Animated.timing(mainOpacity, {
         toValue: 0,
         duration: 2500,
-        useNativeDriver: true
-      }).start(e => {
+        useNativeDriver: true,
+      }).start((e) => {
         if (e.finished) {
           setStars([]);
           setStarsSec([]);
-          mainOpacity.setValue(1)
+          mainOpacity.setValue(1);
         }
-      })
+      });
     }
 
-    console.log(paused)
-  }, [paused])
+    console.log(paused);
+  }, [paused]);
 
   return (
-    <Animated.View style={{...styles.main, opacity: mainOpacity}} onLayout={onLayout}>
+    <Animated.View
+      style={{ ...styles.main, opacity: mainOpacity }}
+      onLayout={onLayout}
+    >
       {stars.map((star) => (
-        <Star
-          height={height}
-          paused={paused}
-          key={star.id}
-        />
+        <Star height={height} paused={paused} key={star.id} />
       ))}
       {starsSec.map((star) => (
-        <Star
-          height={height/1.75}
-          paused={paused}
-          key={star.id}
-        />
+        <Star height={height / 1.75} paused={paused} key={star.id} />
       ))}
     </Animated.View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   main: {
-    position: 'absolute',
+    position: "absolute",
     top: 30,
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
     // flex: 1,
     zIndex: -1,
     // backgroundColor: 'red',
   },
-})
+});
