@@ -59,7 +59,7 @@ export const HoldButton = ({ duration, row = false, onHoldEnd, paused }) => {
   const handleLongPress = () => {
     prog.current = setInterval(() => {
       setProgress((p) => p + 0.1);
-    }, 325);
+    }, 375);
 
     Animated.timing(anim, {
       toValue: 1,
@@ -87,15 +87,15 @@ export const HoldButton = ({ duration, row = false, onHoldEnd, paused }) => {
   };
 
   useEffect(() => {
+    if (!paused) {
+      showBtn();
+    } else {
+      hideBtn();
+    }
+
     if (progress === 1.2) {
       onHoldEnd();
       handlePressOut();
-    }
-    if (!paused) {
-      showBtn();
-      console.log("setted paused");
-    } else {
-      hideBtn();
     }
   }, [paused, progress]);
 

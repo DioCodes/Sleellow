@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StatusBar, AsyncStorage, Button, Dimensions } from "react-native";
+import {
+  View,
+  StatusBar,
+  AsyncStorage,
+  Button,
+  Dimensions,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -9,7 +15,7 @@ import {
 } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Haptics from "expo-haptics";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 
 import theme from "../theme";
 import MainScreen from "../screens/MainScreen";
@@ -32,24 +38,24 @@ export const AppNavigation = ({ navigation, route }) => {
   const [screen, setScreen] = useState("PremiumScreen");
 
   const statusBarHeight = Constants.statusBarHeight;
-  const wh = Dimensions.get('window').height;
+  const wh = Dimensions.get("window").height;
 
   const modalOptions = {
     headerShown: false,
     gestureEnabled: true,
     gestureResponseDistance: {
-      vertical: wh
+      vertical: wh,
     },
     cardOverlayEnabled: true,
     cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
     ...TransitionPresets.ModalPresentationIOS,
-  }
+  };
 
   const modalWithPicker = {
     gestureResponseDistance: {
-      vertical: 100
+      vertical: 100,
     },
-  }
+  };
 
   useEffect(() => {
     getScreen();
@@ -87,7 +93,7 @@ export const AppNavigation = ({ navigation, route }) => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
             return <TabBarBtn focused={focused} route={route} />;
-          }
+          },
         })}
         tabBarOptions={{
           activeTintColor: "white",
@@ -103,7 +109,6 @@ export const AppNavigation = ({ navigation, route }) => {
           },
           showLabel: false,
         }}
-        
       >
         <Tab.Screen name="main" component={MainScreen} listeners={tabPress} />
         <Tab.Screen name="you" component={ProfileScreen} listeners={tabPress} />
@@ -129,28 +134,32 @@ export const AppNavigation = ({ navigation, route }) => {
           gestureEnabled: false,
         }}
       >
-      <Stack.Screen name="SleepScreen" component={SleepScreen}  
-        options={{
-          cardOverlayEnabled: true,
-          headerShown: true,
-          // cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
-          // ...TransitionPresets.ModalPresentationIOS,
-        }} />
-        <NestedSleepStack.Screen 
-          name="Sleep_Info" 
-          component={SleepScreen_Info} 
+        <Stack.Screen
+          name="SleepScreen"
+          component={SleepScreen}
+          options={{
+            cardOverlayEnabled: true,
+            headerShown: true,
+            // cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+            // ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+        <NestedSleepStack.Screen
+          name="Sleep_Info"
+          component={SleepScreen_Info}
           options={{
             gestureEnabled: true,
             gestureResponseDistance: {
-              vertical: wh
+              vertical: wh,
             },
             cardOverlayEnabled: true,
             // cardStyleInterpolator:CardStyleInterpolatorsforModalPresentationIOS,
             ...TransitionPresets.ModalPresentationIOS,
-          }}/>
+          }}
+        />
       </NestedSleepStack.Navigator>
-    )
-  }
+    );
+  };
 
   const MainStack = () => {
     return (
@@ -176,43 +185,51 @@ export const AppNavigation = ({ navigation, route }) => {
             headerShown: false,
             gestureEnabled: true,
             gestureResponseDistance: {
-              vertical: wh
+              vertical: wh,
             },
             cardOverlayEnabled: true,
-            cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+            cardStyleInterpolator:
+              CardStyleInterpolators.forModalPresentationIOS,
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
         <Stack.Screen
           name="Main"
           component={MainTabNavigator}
-          options={{ 
-            headerShown: false, 
+          options={{
+            headerShown: false,
+            ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
         <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
         <Stack.Screen name="WakeUpScreen" component={WakeUpScreen} />
-        <Stack.Screen name="NestedSleepStack" component={NestedSleepStackScreen} />
-        <Stack.Screen name="BreathingPractices" component={BreathingPractices}/>
-        <Stack.Screen 
+        <Stack.Screen
+          name="NestedSleepStack"
+          component={NestedSleepStackScreen}
+        />
+        <Stack.Screen
+          name="BreathingPractices"
+          component={BreathingPractices}
+        />
+        <Stack.Screen
           name="PrepareForSleepModal"
           component={PrepareForSleep}
           options={{
-            ...modalOptions,  
-            ...modalWithPicker
+            ...modalOptions,
+            ...modalWithPicker,
           }}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="MantraModal"
           component={DailyMantraScreen}
           options={modalOptions}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="DaytimeSleepModal"
           component={DaytimeSleepScreen}
           options={{
-            ...modalOptions,  
-            ...modalWithPicker
+            ...modalOptions,
+            ...modalWithPicker,
           }}
         />
       </Stack.Navigator>
@@ -222,7 +239,7 @@ export const AppNavigation = ({ navigation, route }) => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" />
-      <MainStack/>
+      <MainStack />
     </NavigationContainer>
   );
 };

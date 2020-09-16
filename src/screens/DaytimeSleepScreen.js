@@ -33,6 +33,8 @@ export const DaytimeSleepScreen = ({ navigation }) => {
   let gdText = useRef(new Animated.Value(0)).current;
   let timeOpacity = useRef(new Animated.Value(0)).current;
 
+  let curTime = useRef(null);
+
   let startSleep = () => {
     Animated.sequence([
       Animated.parallel([
@@ -117,14 +119,21 @@ export const DaytimeSleepScreen = ({ navigation }) => {
   useEffect(() => {
     if (paused) {
       stopSleep();
+      clearInterval(curTime.current);
     } else if (!paused) {
       startSleep();
+      curTime.current = setInterval(() => {
+        setCurrentTime(moment());
+      }, 1000);
     }
 
-    setInterval(() => {
-      setCurrentTime(moment());
-      // setProgress((p) => p + .025 )
-    }, 1000);
+    return () => {
+      console.log(paused);
+      if (paused) {
+        stopSleep();
+        clearInterval(curTime.current);
+      }
+    };
   }, [paused]);
 
   const stopAnim = () => {
@@ -217,7 +226,12 @@ export const DaytimeSleepScreen = ({ navigation }) => {
         <HoldButton
           progress={progress}
           duration={250}
-          onHoldEnd={stopAnim}
+          onHoldEnd={() => {
+            setPaused(true);
+            !paused
+              ? Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+              : null;
+          }}
           paused={paused}
         />
       </View>

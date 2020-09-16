@@ -14,28 +14,26 @@ import { StyledButton } from "../components/StyledButton";
 import { t } from "../../assets/lang/index";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-export const PremiumScreen = ({navigation}) => {
+export const PremiumScreen = ({ navigation }) => {
   const slides = [
     {
       key: "s1",
       // image: <CoolSleellow height={250} width={275} />,
       image: <AppIcon height={220} width={250} />,
       header: t("premium_s1_header"),
-      text: t("premium_s1_text")
+      text: t("premium_s1_text"),
     },
     {
       key: "s2",
       image: <DizzinessIcon height={220} width={250} />,
       header: t("premium_s2_header"),
-      text: t("premium_s2_text")
+      text: t("premium_s2_text"),
     },
     {
       key: "s3",
       image: <CoolSleellow height={220} width={250} />,
       header: t("premium_s3_header"),
-      text: t("premium_s3_text")
+      text: t("premium_s3_text"),
     },
     {
       key: "s4",
@@ -43,27 +41,33 @@ export const PremiumScreen = ({navigation}) => {
       header: t("premium_s4_header"),
       text: t("premium_s4_text"),
       list: t("premium_s4_list"),
-      textSecond: t("premium_s4_textSecond")
+      textSecond: t("premium_s4_textSecond"),
     },
     {
       key: "s5",
       image: <BreathImage height={220} width={250} />,
       header: t("premium_s5_header"),
       text: t("premium_s5_text"),
-      button: 
-      (<View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => onPurchaseHandler()}>
+      button: (
+        <TouchableOpacity
+          activeOpacity={theme.ACTIVE_OPACITY}
+          onPress={() => onPurchaseHandler()}
+        >
+          <View style={styles.buttonContainer}>
             <Text style={styles.buttonText}>{`$2.99/${t("month")}`}</Text>
+          </View>
         </TouchableOpacity>
-      </View>),
-      btnDesc: <Text style={styles.buttonTextDesc}>{t("premium_trial_text")}</Text>
+      ),
+      btnDesc: (
+        <Text style={styles.buttonTextDesc}>{t("premium_trial_text")}</Text>
+      ),
     },
   ];
 
   let onPurchaseHandler = async () => {
     try {
       await AsyncStorage.setItem("@PremiumScreen:key", "purchased");
-      console.log('hi')
+      console.log("hi");
       navigation.replace("Main");
     } catch (err) {
       console.log(err);
@@ -71,7 +75,7 @@ export const PremiumScreen = ({navigation}) => {
   };
 
   const renderSliderItem = ({ item }) => {
-    return(
+    return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
           <View style={styles.image}>{item.image}</View>
@@ -79,16 +83,18 @@ export const PremiumScreen = ({navigation}) => {
             <Text style={styles.textHeader}> {item.header}</Text>
             <Text style={styles.text}> {item.text} </Text>
             <View style={styles.listContainer}>
-              <Text style={{...styles.text, ...styles.list}}>{item.list}</Text>
+              <Text style={{ ...styles.text, ...styles.list }}>
+                {item.list}
+              </Text>
             </View>
             <Text style={styles.text}> {item.textSecond} </Text>
           </View>
-            {item.button}
-            {item.btnDesc}
+          {item.button}
+          {item.btnDesc}
         </View>
       </View>
-    )
-  }
+    );
+  };
 
   const renderSliderButton = (name) => {
     return (
@@ -98,18 +104,18 @@ export const PremiumScreen = ({navigation}) => {
     );
   };
 
-  return(
-      <AppIntroSlider
-        data={slides}
-        renderItem={renderSliderItem}
-        showDoneButton={false}
-        showNextButton={false}
-        renderNextButton={() => renderSliderButton("next")}
-        dotStyle={styles.dot}
-        activeDotStyle={{ ...styles.dot, ...styles.activeDot }}
-      />
-  )
-}
+  return (
+    <AppIntroSlider
+      data={slides}
+      renderItem={renderSliderItem}
+      showDoneButton={false}
+      showNextButton={false}
+      renderNextButton={() => renderSliderButton("next")}
+      dotStyle={styles.dot}
+      activeDotStyle={{ ...styles.dot, ...styles.activeDot }}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -121,27 +127,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.PRIMARY_COLOR,
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     // position: 'absolute',
-    width: '100%'
+    width: "100%",
   },
-  image: {
-
-  },
+  image: {},
   text: {
     fontFamily: "norms-regular",
     fontSize: 16,
     color: "rgba(255, 255, 255, .7)",
     paddingVertical: 5,
-    textAlign: "center"
+    textAlign: "center",
     // textTransform: "uppercase"
   },
   listContainer: {
-    justifyContent: 'flex-start'
+    justifyContent: "flex-start",
   },
   list: {
-    color: '#fff',
-    fontFamily: 'norms-medium',
+    color: "#fff",
+    fontFamily: "norms-medium",
     textAlign: "left",
   },
   textHeader: {
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     paddingHorizontal: 20,
-    width: '100%'
+    width: "100%",
   },
 
   buttonContainer: {
@@ -167,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "white",
-    borderRadius: 5
+    borderRadius: 5,
   },
   buttonText: {
     color: theme.SECONDARY_COLOR,
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: "norms-regular",
     marginTop: 10,
-    opacity: 0.5
+    opacity: 0.5,
   },
 
   dot: {
@@ -190,5 +194,4 @@ const styles = StyleSheet.create({
   activeDot: {
     backgroundColor: theme.SECONDARY_COLOR,
   },
-})
-
+});
