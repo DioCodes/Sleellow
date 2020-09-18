@@ -43,6 +43,7 @@ export const DailyMantraScreen = ({ navigation }) => {
       setIsMantraWrited(true);
     }
   });
+
   return (
     <View style={styles.main}>
       {/* <View style={styles.top}>
@@ -69,8 +70,10 @@ export const DailyMantraScreen = ({ navigation }) => {
             }}
             value={inputValue}
             onChangeText={(text) => {
-              setMantraValue(text);
               setInputValue(text);
+            }}
+            onSubmitEditing={() => {
+              setMantraValue(inputValue);
             }}
             placeholder={t("mantra_input_desc")}
             maxLength={70}

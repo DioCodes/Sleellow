@@ -3,11 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Picker,
   Animated,
   Easing,
   Dimensions,
 } from "react-native";
+import { Picker } from "@react-native-community/picker";
 import theme from "../theme";
 import { HeaderModal } from "../components/HeaderModal";
 import { t } from "../../assets/lang";
