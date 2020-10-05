@@ -179,26 +179,6 @@ export const SleepTimeScreen = ({ navigation }) => {
               <Text style={{ ...styles.textTime, opacity: 0.5 }}>{res3}</Text>
             </View>
           </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Text style={{ ...styles.textTime, opacity: 0.25 }}>
-              1-2 <Text style={styles.textTimeSmall}>{t("cycles-2")}</Text>
-            </Text>
-            <View style={styles.timeContainer}>
-              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res5}</Text>
-              <Text style={{ ...styles.textTimeOr, ...styles.textTimeSmall }}>
-                {" "}
-                {t("or")}{" "}
-              </Text>
-              <Text style={{ ...styles.textTime, opacity: 0.25 }}>{res6}</Text>
-            </View>
-          </View>
         </View>
       );
     }
@@ -254,20 +234,16 @@ export const SleepTimeScreen = ({ navigation }) => {
       d.setMinutes(chosenMinutes);
       // time to fall asleep
       let last = new Date(d.getTime() - 270 * 60000); // chosenDate - 4:30 h
-      let result5 = new Date(last.getTime() - 90 * 60000); // chosenDate - 6:00 h
-      let result4 = new Date(result5.getTime() - 90 * 60000); // chosenDate - 6:00 h
-      let result3 = new Date(result4.getTime() - 90 * 60000); // chosenDate - 6:00 h
+      let result3 = new Date(last.getTime() - 90 * 60000); // chosenDate - 6:00 h
       let result2 = new Date(result3.getTime() - 90 * 60000); // chosenDate - 7:30 h
       let first = new Date(result2.getTime() - 90 * 60000); // chosenDate - 9:00 h
 
       first = findTimeToFallAsleep(first);
       result2 = findTimeToFallAsleep(result2);
       result3 = findTimeToFallAsleep(result3);
-      result4 = findTimeToFallAsleep(result4);
-      result5 = findTimeToFallAsleep(result5);
       last = findTimeToFallAsleep(last);
       setTimeToFallAsleep(
-        timeToFallAsleepColors(first, result2, result3, result4, result5, last)
+        timeToFallAsleepColors(first, result2, result3, last)
       );
 
       // setTimeout(() => setShowTimeToSleep(true), 500);
@@ -334,24 +310,11 @@ export const SleepTimeScreen = ({ navigation }) => {
             }}
           >
             <View style={{ flexDirection: "row" }}>
-              <Text style={styles.header}>{t("sleep_time-wake_up")}</Text>
-
               <TouchableOpacity
-                style={{ marginHorizontal: 5 }}
                 activeOpacity={theme.ACTIVE_OPACITY}
                 onPress={showDatePicker}
               >
-                <Text
-                  style={{
-                    ...styles.header,
-                    // fontFamily: "norms-regular",
-                    // opacity: chosenDate == "..." ? 0.5 : 1,
-                    textDecorationLine: "underline",
-                    textDecorationColor: "rgba(255,255,255,.2)",
-                  }}
-                >
-                  {chosenDate}
-                </Text>
+                <Text style={styles.timeChoosing}>{chosenDate}</Text>
               </TouchableOpacity>
             </View>
 
@@ -365,13 +328,8 @@ export const SleepTimeScreen = ({ navigation }) => {
 
         {showTimeToSleep ? (
           <View style={{ ...styles.timeToWakeUp, ...styles.paddingContainer }}>
-            {/* <Text style={styles.text}>
-              The average person falls asleep after 14 minutes!
-              {"\n"}
-            </Text> */}
             <Text style={styles.text}>
-              {t("sleep_time-wake_up-desc_1")} {chosenDate}
-              {t("sleep_time-wake_up-desc_2")}
+              {t("sleep_time-wake_up-desc")} {chosenDate}
             </Text>
             <View
               style={{
@@ -561,6 +519,13 @@ const styles = StyleSheet.create({
   },
   time3: {
     opacity: 0.25,
+  },
+  timeChoosing: {
+    fontSize: 24,
+    color: theme.SECONDARY_COLOR,
+    fontFamily: "norms-bold",
+    textDecorationLine: "underline",
+    textDecorationColor: "rgba(255, 255, 255, .2)",
   },
   textTime: {
     fontSize: 22,

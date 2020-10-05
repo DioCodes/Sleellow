@@ -3,7 +3,8 @@
     "name": "Sleellow",
     "slug": "sleellow",
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ],
     "privacy": "public",
     "version": "0.9.6",
@@ -12,7 +13,7 @@
     "splash": {
       "image": "./assets/images/icon.png",
       "resizemode": "contain",
-      "backgroundColor": "#0C0F12"
+      "backgroundColor": "#0A0D12"
     },
     "notification": {
       "icon": "./assets/images/icon.png",
@@ -34,6 +35,10 @@
       "userInterfaceStyle": "dark"
     },
     "description": "Sleellow is an application that helps improve your sleep and well-being after waking up.",
-    "githubUrl": "https://github.com/DioCodes/Sleellow"
+    "githubUrl": "https://github.com/DioCodes/Sleellow",
+    "sdkVersion": "38.0.0",
+    "android": {
+      "package": "com.diocode.sleellow"
+    }
   }
 }

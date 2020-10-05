@@ -34,9 +34,10 @@ export const StarsAnimation = ({ paused, pause }) => {
   };
 
   useEffect(() => {
-    if (paused === false) {
+    if (paused === false && pause == true) {
+      mainOpacity.setValue(1);
       getStars();
-    } else if (paused === true && pause == true) {
+    } else if (paused === true && pause == false) {
       // setStars([])
       // setStarsSec([])
       Animated.timing(mainOpacity, {
@@ -51,9 +52,9 @@ export const StarsAnimation = ({ paused, pause }) => {
         }
       });
     }
-
-    console.log(paused);
-  }, [paused]);
+    // console.log("-----------");
+    // console.log("paused: " + paused, "pause: " + pause);
+  }, [paused, pause]);
 
   return (
     <Animated.View

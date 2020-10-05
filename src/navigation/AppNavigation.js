@@ -30,7 +30,9 @@ import { PremiumScreen } from "../screens/PremiumScreen";
 import { PrepareForSleep } from "../screens/PrepareForSleep";
 import { DailyMantraScreen } from "../components/DailyMantra/DailyMantaScreen";
 import { t } from "../../assets/lang";
-import { DaytimeSleepScreen } from "../screens/DaytimeSleepScreen";
+import { NapScreen } from "../screens/NapScreen";
+import { NapScreen_Info } from "../screens/NapScreen_Info";
+import { SleepTimeScreen_New } from "../screens/SleepTimeScreen_New";
 
 //// сделай отдельный компонент из табБара
 
@@ -53,7 +55,7 @@ export const AppNavigation = ({ navigation, route }) => {
 
   const modalWithPicker = {
     gestureResponseDistance: {
-      vertical: 100,
+      vertical: wh,
     },
   };
 
@@ -75,7 +77,7 @@ export const AppNavigation = ({ navigation, route }) => {
   };
 
   const Stack = createStackNavigator();
-  const NestedSleepStack = createStackNavigator();
+  const NestedStack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
   const tabPress = () => {
@@ -118,7 +120,7 @@ export const AppNavigation = ({ navigation, route }) => {
 
   const NestedSleepStackScreen = () => {
     return (
-      <NestedSleepStack.Navigator
+      <NestedStack.Navigator
         initialRouteName="SleepScreen"
         mode="modal"
         headerMode="screen"
@@ -134,7 +136,7 @@ export const AppNavigation = ({ navigation, route }) => {
           gestureEnabled: false,
         }}
       >
-        <Stack.Screen
+        <NestedStack.Screen
           name="SleepScreen"
           component={SleepScreen}
           options={{
@@ -144,7 +146,7 @@ export const AppNavigation = ({ navigation, route }) => {
             // ...TransitionPresets.ModalPresentationIOS,
           }}
         />
-        <NestedSleepStack.Screen
+        <NestedStack.Screen
           name="Sleep_Info"
           component={SleepScreen_Info}
           options={{
@@ -157,7 +159,49 @@ export const AppNavigation = ({ navigation, route }) => {
             ...TransitionPresets.ModalPresentationIOS,
           }}
         />
-      </NestedSleepStack.Navigator>
+      </NestedStack.Navigator>
+    );
+  };
+
+  const NestedNapStackScreen = () => {
+    return (
+      <NestedStack.Navigator
+        initialRouteName="NapScreen"
+        mode="modal"
+        headerMode="screen"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme.PRIMARY_COLOR,
+            shadowColor: "transparent",
+            elevation: 0,
+          },
+          headerShown: false,
+          headerBackTitle: t("back_C"),
+          headerTintColor: "#fff",
+          gestureEnabled: false,
+        }}
+      >
+        <NestedStack.Screen
+          name="NapScreen"
+          component={NapScreen}
+          options={{
+            cardOverlayEnabled: true,
+            headerShown: true,
+          }}
+        />
+        <NestedStack.Screen
+          name="Nap_Info"
+          component={NapScreen_Info}
+          options={{
+            gestureEnabled: true,
+            gestureResponseDistance: {
+              vertical: wh,
+            },
+            cardOverlayEnabled: true,
+            ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+      </NestedStack.Navigator>
     );
   };
 
@@ -198,14 +242,20 @@ export const AppNavigation = ({ navigation, route }) => {
           component={MainTabNavigator}
           options={{
             headerShown: false,
+            cardOverlayEnabled: true,
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
-        <Stack.Screen name="SleepTime" component={SleepTimeScreen} />
+        {/* <Stack.Screen name="SleepTime" component={SleepTimeScreen} /> */}
+        <Stack.Screen name="SleepTime" component={SleepTimeScreen_New} />
         <Stack.Screen name="WakeUpScreen" component={WakeUpScreen} />
         <Stack.Screen
           name="NestedSleepStack"
           component={NestedSleepStackScreen}
+        />
+        <Stack.Screen
+          name={"NestedNapStackScreen"}
+          component={NestedNapStackScreen}
         />
         <Stack.Screen
           name="BreathingPractices"
@@ -223,14 +273,6 @@ export const AppNavigation = ({ navigation, route }) => {
           name="MantraModal"
           component={DailyMantraScreen}
           options={modalOptions}
-        />
-        <Stack.Screen
-          name="DaytimeSleepModal"
-          component={DaytimeSleepScreen}
-          options={{
-            ...modalOptions,
-            ...modalWithPicker,
-          }}
         />
       </Stack.Navigator>
     );

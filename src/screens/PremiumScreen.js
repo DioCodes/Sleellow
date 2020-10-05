@@ -18,7 +18,6 @@ export const PremiumScreen = ({ navigation }) => {
   const slides = [
     {
       key: "s1",
-      // image: <CoolSleellow height={250} width={275} />,
       image: <AppIcon height={220} width={250} />,
       header: t("premium_s1_header"),
       text: t("premium_s1_text"),

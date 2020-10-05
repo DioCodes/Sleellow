@@ -1,49 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Dimensions,
-  AsyncStorage,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import RBSheet from "react-native-raw-bottom-sheet";
 import theme from "../../theme";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { addMantra, resetMantra } from "../../store/actions/mantraActions";
+import { useSelector } from "react-redux";
 import { t } from "../../../assets/lang";
 
-export const DailyMantraButton = ({navigation}) => {
-  // const [isMantraWrited, setIsMantraWrited] = useState(false);
-  // const [mantraValue, setMantraValue] = useState("");
-  // const [inputValue, setInputValue] = useState("");
-
-  // const bs = useRef();
-  // const windowHeight = Dimensions.get("window").height;
-
-  // const dispatch = useDispatch();
+export const DailyMantraButton = ({ navigation }) => {
   const mantraText = useSelector((state) => state.mantra.mantra);
-
-  // useEffect(() => {
-  //   if (mantraValue != "") {
-  //     setIsMantraWrited(true);
-  //   }
-  // });
-
-  // const onCompletePress = () => {
-  //   dispatch(resetMantra());
-  //   dispatch(addMantra(mantraValue));
-  //   if (inputValue == "") {
-  //     dispatch(resetMantra());
-  //   }
-  //   setInputValue("");
-  //   bs.current.close();
-  // }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.push("MantraModal")}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => navigation.push("MantraModal")}
+      >
         <Text style={styles.mantraHeader}>{t("mantra_header")}:</Text>
         {mantraText != "" ? (
           <Text style={styles.mantra}>{mantraText}</Text>
@@ -51,78 +21,9 @@ export const DailyMantraButton = ({navigation}) => {
           <Text style={styles.text}>{t("mantra_button_text")}</Text>
         )}
       </TouchableOpacity>
-      {/* <RBSheet
-        ref={bs}
-        height={windowHeight > 800 ? 735 : 675}
-        openDuration={275}
-        closeDuration={275}
-        closeOnDragDown={true}
-        closeOnPressMask={true}
-        keyboardAvoidingViewEnabled={false}
-        customStyles={{
-          wrapper: {
-            backgroundColor: "#rgba(0, 0, 0, 0.85)",
-          },
-          draggableIcon: {
-            display: 'none'
-          },
-          container: {
-            backgroundColor: theme.MODAL_BGC_COLOR,
-            borderTopRightRadius: 10,
-            borderTopLeftRadius: 10,
-          },
-        }}
-        animationType="fade"
-      >
-        <View style={styles.top}>
-              <Text style={styles.topHeader}>Your daily mantra</Text>
-          </View>
-
-          <View style={styles.sheetContainerContent}>
-            <View
-              style={{
-                borderBottomWidth: 2,
-                borderBottomColor: "rgba(255, 255, 255, .5)",
-                width: "100%",
-                paddingBottom: 5,
-                marginBottom: 20
-              }}
-            >
-              <TextInput
-                style={{
-                  fontFamily: "norms-regular",
-                  color: "#fff",
-                  fontSize: 20,
-                }}
-                value={inputValue}
-                onChangeText={(text) => {
-                  setMantraValue(text);
-                  setInputValue(text);
-                }}
-                placeholder="Write your daily mantra here.."
-                maxLength={70}
-                returnKeyType="done"
-                blurOnSubmit={true}
-                autoCapitalize="sentences"
-                autoCorrect={false}
-              />
-            </View>
-
-            <View style={styles.completeBtnContainer}>
-              <TouchableOpacity activeOpacity={theme.ACTIVE_OPACITY} onPress={() => onCompletePress()}>
-                <View style={styles.completeBtn}>
-                  <Text style={styles.completeBtnText}>Complete</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-      </RBSheet> */}
     </View>
   );
 };
-
-const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
@@ -147,46 +48,4 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
   },
-  sheetContainerContent: {
-    // justifyContent: "center",
-    // width: "100%",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  top: {
-    width: '100%',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    // backgroundColor: "rgba(255, 255, 255, .1)",
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, .05)',
-    // flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15
-  },
-  topHeader: {
-    fontSize: 18,
-    color: theme.SECONDARY_COLOR,
-    fontFamily: 'norms-bold',
-  },
-  completeBtnContainer: {
-    width: '50%',
-    height: 50,
-    // marginTop: 25,
-    alignSelf: 'flex-end'
-  },
-  completeBtn: {
-    width: '100%',
-    height: "100%",
-    backgroundColor: "rgba(255, 255, 255, .1)",
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-  },
-  completeBtnText: {
-    color: "#fff",
-    fontSize: 20,
-    fontFamily: "norms-medium",
-  }
 });

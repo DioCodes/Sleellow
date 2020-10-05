@@ -145,9 +145,9 @@ const MainScreen = (props) => {
             }}
           />
           <Container
-            name={t("daytime_sleep")}
+            name={t("nap")}
             onPress={() => {
-              props.navigation.navigate("DaytimeSleepModal");
+              props.navigation.navigate("NestedNapStackScreen");
             }}
           />
         </ScrollView>

@@ -16,7 +16,7 @@
   "premium_s5_header": "Let's help each other",
   "premium_s5_text": "As we have already found out, poor sleep is the reason for the loss of control over life. But, you are able to take back control, feel better and do more!\n\nI will help you break the bad habits that are ruining your life. In return, I will ask you to support the developer.",
 
-  "premium_trial_text": "3 days free*",
+  "premium_trial_text": "7 days free*",
 
   "thanks_for_your_support": "Thanks for your support",
 
@@ -29,9 +29,9 @@
   "sleep_time-fall_asleep_now": "I want go to bed now",
   "sleep_time-fall_asleep_now-desc": "If you go to bed now, you should wake up at one of the following times:",
 
-  "sleep_time-wake_up": "I want to wake up at",
-  "sleep_time-wake_up-desc_1": "If you want to wake up at",
-  "sleep_time-wake_up-desc_2": ", you should fall asleep at one of the following times:",
+  "sleep_time-desc": "Choose time when you want to wake up or fall asleep.",
+  "sleep_time-desc_sun": "Below the following times when you should fall asleep to wake up at",
+  "sleep_time-desc_moon": "Below the following times when you should wake up, if you fall asleep at",
 
   "breathing_practices": "Breathing practices",
   "mantra_header": "Your mantra",
@@ -65,7 +65,8 @@
   "breathing_info-tip_1": "Lie on your back. Relax and focus on breathing. Repeat the mantra in your mind.",
   "breathing_info-tip_2": "If you feel dizzy, stop the exercise. Try to start with 4 reps and increase this amount over time.",
 
-  "daytime_sleep": "Daytime sleep",
+  "nap": "Nap",
+  "nap-desc": "Sleep shouldn't last more than 30 minutes, since after this time the second stage of sleep begins, during which it is difficult to wake up and you will feel overwhelmed and tired.",
 
   "sec": "sec",
   "min": "min",
@@ -74,6 +75,7 @@
   "cycles": "cycles",
   "cycles-2": "cycles",
   "or": "or",
+
   "description": "Description",
   "exercise": "Exercise",
   "tips": "Tips",
@@ -87,6 +89,8 @@
   "energy": "Energy",
   "awakening": "Awakening",
   "info": "Information",
+  "start_C": "Start",
+  "start": "start",
   "back_C": "Back",
   "back": "back",
   "time_C": "Time",

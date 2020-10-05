@@ -13,7 +13,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Easing } from "react-native-reanimated";
 import { useSelector } from "react-redux";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../../../theme";
@@ -21,6 +21,7 @@ import { AppHeaderIcon } from "../../../components/AppHeaderIcon";
 import { BreathAnimation } from "../../../components/BreathAnimation";
 import { t } from "../../../../assets/lang";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { ModalTimePicker } from "../../../components/ModalTimePicker";
 
 const SleepScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -39,7 +40,7 @@ const SleepScreen = ({ navigation }) => {
             }}
           />
         </HeaderButtons>
-      )
+      ),
     });
   }, []);
 
@@ -156,7 +157,7 @@ const SleepScreen = ({ navigation }) => {
 
   const showDescriptionAndSettings = () => {
     const easingOut = Easing.out;
-    
+
     Animated.sequence([
       Animated.parallel([
         Animated.timing(animatedBreathContainer, {
@@ -281,8 +282,7 @@ const SleepScreen = ({ navigation }) => {
       ? (setPaused(false),
         (timeOutBreathing.current = setTimeout(() => {
           setPaused(true);
-          clearTimeout(timeOutBreathing.current),
-          showDescriptionAndSettings();
+          clearTimeout(timeOutBreathing.current), showDescriptionAndSettings();
         }, time)),
         hideDescriptionAndSettings())
       : (setPaused(true),
@@ -325,7 +325,9 @@ const SleepScreen = ({ navigation }) => {
             </View>
           </TouchableOpacity>
 
-          <Animated.Text style={{ ...styles.description, opacity: animatedDescription }}>
+          <Animated.Text
+            style={{ ...styles.description, opacity: animatedDescription }}
+          >
             {t("tap_to_start")}
           </Animated.Text>
 
@@ -335,7 +337,9 @@ const SleepScreen = ({ navigation }) => {
               height: animatedMantraContainer,
             }}
           >
-            <Animated.Text style={{ ...styles.mantra, opacity: animatedMantra }}>
+            <Animated.Text
+              style={{ ...styles.mantra, opacity: animatedMantra }}
+            >
               {mantraText}
             </Animated.Text>
 
@@ -403,17 +407,12 @@ const SleepScreen = ({ navigation }) => {
         </Animated.View>
       </ScrollView>
 
-      <DateTimePickerModal
-        headerTextIOS={`${t("choose_C")} ${t("time")}`}
-        cancelTextIOS={t("cancel_C")}
-        confirmTextIOS={t("confirm_C")}
-        mode="time"
+      <ModalTimePicker
         isVisible={isDatePickerVisible}
+        date={pickerDate}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        isDarkModeEnabled={true}
-        customPickerIOS={minutesPicker}
-        is24Hour={false}
+        customPicker={minutesPicker}
       />
     </View>
   );
@@ -424,7 +423,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     width: "100%",
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: theme.PRIMARY_COLOR,
   },
   wrapper: {
@@ -486,7 +485,7 @@ const styles = StyleSheet.create({
     fontSize: theme.MANTRA_HEADER,
     fontFamily: "norms-bold",
     position: "absolute",
-    textAlign: 'center'
+    textAlign: "center",
   },
   time: {
     fontSize: theme.TEXT + 2,

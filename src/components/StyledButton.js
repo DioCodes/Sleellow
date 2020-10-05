@@ -10,6 +10,7 @@ export const StyledButton = ({
   borderColor = "transparent",
   alignSelf,
   borderWidth,
+  width = 125,
 }) => {
   const onPressHandler = () => {
     onPress();
@@ -17,7 +18,7 @@ export const StyledButton = ({
   };
 
   return (
-    <View style={{ ...styles.buttonContainer, alignSelf }}>
+    <View style={{ ...styles.buttonContainer, alignSelf, width }}>
       <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
         <View
           style={{
@@ -36,8 +37,6 @@ export const StyledButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    // width: "50%",
-    width: "50%",
     height: 50,
   },
   button: {
