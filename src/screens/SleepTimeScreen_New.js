@@ -19,8 +19,8 @@ export const SleepTimeScreen_New = ({ navigation }) => {
     <View style={styles.main}>
       <Slider tips={tips} />
       <ScrollView>
-        <FallAsleepNowCard />
         <SleepTimeCard />
+        <FallAsleepNowCard />
       </ScrollView>
     </View>
   );
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     backgroundColor: theme.PRIMARY_COLOR,
-    alignItems: "center",
     paddingHorizontal: 20,
   },
 });

@@ -31,7 +31,7 @@
 
   "sleep_time-desc": "Choose time when you want to wake up or fall asleep.",
   "sleep_time-desc_sun": "Below the following times when you should fall asleep to wake up at",
-  "sleep_time-desc_moon": "Below the following times when you should wake up, if you fall asleep at",
+  // "sleep_time-desc_moon": "Below the following times when you should wake up, if you fall asleep at",
 
   "breathing_practices": "Breathing practices",
   "mantra_header": "Your mantra",

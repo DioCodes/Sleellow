@@ -254,7 +254,7 @@ export const AppNavigation = ({ navigation, route }) => {
           component={NestedSleepStackScreen}
         />
         <Stack.Screen
-          name={"NestedNapStackScreen"}
+          name="NestedNapStackScreen"
           component={NestedNapStackScreen}
         />
         <Stack.Screen

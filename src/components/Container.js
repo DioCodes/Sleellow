@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Haptics from "expo-haptics";
-import theme from "../theme";
 import { Ionicons } from "@expo/vector-icons";
+
+import theme from "../theme";
 
 export const Container = ({ onPress, name, icon }) => {
   const onPressHandler = () => {

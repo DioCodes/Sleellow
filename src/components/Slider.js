@@ -90,6 +90,7 @@ export const Slider = ({ tips }) => {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width - 40,
+    alignSelf: 'center'
   },
   textContainer: {
     width: Dimensions.get("window").width - 40,

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, View, Text, Animated } from "react-native";
 import { t } from "../../../assets/lang";
 
-export const ShowSleepTime = ({ chosenTime, timeMode }) => {
+export const ShowSleepTime = ({ chosenTime, timeMode, showAnim = false }) => {
   const [time1, setTime1] = useState();
   const [time2, setTime2] = useState();
   const [time3, setTime3] = useState();
@@ -79,10 +79,10 @@ export const ShowSleepTime = ({ chosenTime, timeMode }) => {
 
     if (timeMode == "sun") {
       setTimeout(() => getFallAsleepTime(), 250);
-      hideAndShowAnimation();
+      showAnim ? hideAndShowAnimation() : null;
     } else {
       setTimeout(() => getWakeUpTime(), 250);
-      hideAndShowAnimation();
+      showAnim ? hideAndShowAnimation() : null;
     }
   }, [chosenTime, timeMode]);
 
@@ -195,12 +195,14 @@ export const ShowSleepTime = ({ chosenTime, timeMode }) => {
 
 const styles = StyleSheet.create({
   main: {
-    // width: "100%",
+    // flex: 1
   },
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    // alignItems: "flex-start",
+    // width: "100%",
+    // flex: 1
   },
   text: {
     color: "#fff",

@@ -124,7 +124,7 @@ export const SleepTimeCard = () => {
         </Text>
       </View>
 
-      <ShowSleepTime chosenTime={pickerDate} timeMode={mode} />
+      <ShowSleepTime chosenTime={pickerDate} timeMode={mode} showAnim />
 
       <ModalTimePicker
         isVisible={isDatePickerVisible}

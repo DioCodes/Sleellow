@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 export const mantraReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_MANTRA:
-      console.log(action.payload);
       return {
         ...state,
         mantra: action.payload,
